@@ -9,6 +9,8 @@ public class Barycentre extends Pt implements forme {
     Pt[] P;
 
 
+
+
     public Barycentre(Pt[] tab,int nb_point,int id)
     {
         super(0,0,id);

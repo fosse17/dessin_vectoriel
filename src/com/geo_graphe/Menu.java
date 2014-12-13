@@ -4,6 +4,11 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.util.LinkedList;
 
 public class Menu extends JMenuBar implements ActionListener{
 
@@ -127,12 +132,28 @@ public class Menu extends JMenuBar implements ActionListener{
         mprint.addActionListener(this);
         this.add(mprint);
 
+        JMenuItem msave = new JMenuItem("Save");
+        msave.addActionListener(this);
+        this.add(msave);
+
+        JMenuItem mclear = new JMenuItem("Clear");
+        mclear.addActionListener(this);
+        this.add(mclear);
+
+        JMenuItem mrestore = new JMenuItem("Restore");
+        mrestore.addActionListener(this);
+        this.add(mrestore);
+
         maction.add(mdeplacer);
         maction.add(mzoomplus);
         maction.add(mzoommoins);
         maction.add(mtranslate);
         maction.add(mcolor);
         maction.add(mprint);
+        maction.add(msave);
+        maction.add(mclear);
+        maction.add(mrestore);
+
 	}
 
 
@@ -162,6 +183,38 @@ public class Menu extends JMenuBar implements ActionListener{
         {
             canvas.do_print();
         }
+        if (e.getActionCommand() == "Clear") {
+            canvas.clear();
+        }
+
+        if (e.getActionCommand() == "Save") {
+            try {
+                FileOutputStream fos = new FileOutputStream("figure.txt");
+                ObjectOutputStream oos = new ObjectOutputStream(fos);
+                oos.writeObject(canvas.get_formes());
+                oos.flush();
+                oos.close();
+                fos.close();
+                canvas.G.save("graphe.txt");
+            } catch (Exception ex) {
+                System.out.println("he merde");
+            }
+        }
+        if (e.getActionCommand() == "Restore") {
+            forme f;
+            try {
+                ObjectInputStream oi = new ObjectInputStream(new FileInputStream("figure.txt"));
+                Object o = oi.readObject();
+                canvas.formes = (LinkedList<forme>) o;
+                oi.close();
+                canvas.G = new Graph("graphe.txt");
+                canvas.G.toString();
+                canvas.id_figure = canvas.G.V();
+                canvas.repaint();
+            } catch (Exception exc) {
+            }
+        }
+
 	}
 
 

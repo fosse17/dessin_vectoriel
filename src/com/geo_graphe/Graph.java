@@ -1,14 +1,15 @@
 package com.geo_graphe;
 
-import java.io.*;
-import java.net.URISyntaxException;
-import java.net.URL;
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.PrintWriter;
 import java.util.LinkedList;
 
 class Graph {
+    LinkedList<Integer>[] adj;
     private int V;
     private int E;
-    LinkedList<Integer>[] adj;
 
     /**
      * Creation d'un graphe vide avec <tt>V</tt> sommets sans arretes
@@ -27,6 +28,51 @@ class Graph {
         }
     }
 
+    /**
+     * Initialisation d'un graphe suivant un fichier au format pfg
+     *
+     * @throws java.lang.IndexOutOfBoundsException
+     * @throws java.lang.IllegalArgumentException
+     */
+    public Graph(String s) {
+
+        int num_ligne = 0;
+
+        LinkedList<String> arete = new LinkedList<String>();
+
+        try {
+            String ligne;
+            BufferedReader fichier = new BufferedReader(new FileReader(s));
+            while ((ligne = fichier.readLine()) != null) {
+                num_ligne += 1;
+                if (num_ligne == 1) this.V = Integer.parseInt(ligne);
+                else arete.add(ligne);
+            }
+            System.out.print(this.V);
+            fichier.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        System.out.print(arete.toString());
+        //creation des listes d'adjacences
+        adj = (LinkedList<Integer>[]) new LinkedList[100000000];
+        for (int v = 0; v < this.V; v++) {
+            adj[v] = new LinkedList<Integer>();
+        }
+
+        System.out.print("eeee" + arete.size());
+        //remplissages des listes d'ajdacences
+        for (int i = 0; i < arete.size(); i++) {
+
+            String[] tab = new String[2];
+            tab = (arete.get(i)).split(",");
+            System.out.print(tab[0] + " " + tab[1]);
+            this.addEdge(Integer.parseInt(tab[0]), Integer.parseInt(tab[1]));
+        }
+
+        System.out.println(this.toString());
+    }
+
     public void add_vertex()
     {
 
@@ -35,56 +81,21 @@ class Graph {
 
     }
 
-    /**
-     * Initialisation d'un graphe suivant un fichier au format pfg
-     *
-     * @throws URISyntaxException
-     * @throws IOException
-     * @throws java.lang.IndexOutOfBoundsException
-     *
-     * @throws java.lang.IllegalArgumentException
-     *
-     */
-    public Graph(String s) throws URISyntaxException, IOException {
-        //pour faciliter la localisation du fichier
-        URL path = ClassLoader.getSystemResource(s);
+    public void save(String url) {
+        try {
+            PrintWriter fichier = new PrintWriter(new FileWriter(url));
 
-        int num_ligne = 0;
+            fichier.println(this.V);
+            for (int v = 0; v < this.V; v++) {
+                for (int w : adj[v]) {
+                    fichier.println(v + "," + w);
+                }
+            }
 
-        LinkedList<String> arete = new LinkedList<String>();
-
-        File f = null;
-        if (path != null) {
-
-            f = new File(path.toURI());
-
+            fichier.close();
+        } catch (Exception e) {
+            e.printStackTrace();
         }
-
-        InputStream flux = new FileInputStream(f);
-        InputStreamReader lecture = new InputStreamReader(flux);
-        BufferedReader buff = new BufferedReader(lecture);
-        String ligne;
-        while ((ligne = buff.readLine()) != null) {
-            num_ligne += 1;
-            if (num_ligne == 1) this.V = Integer.parseInt(ligne);
-            else arete.add(ligne);
-        }
-        buff.close();
-        //creation des listes d'adjacences
-        adj = (LinkedList<Integer>[]) new LinkedList[V];
-        for (int v = 0; v < this.V; v++) {
-            adj[v] = new LinkedList<Integer>();
-        }
-
-
-        //remplissages des listes d'ajdacences
-        for (int i = 0; i < arete.size(); i++) {
-            String[] tab = new String[2];
-            tab = (arete.get(i)).split(" ");
-            this.addEdge(Integer.parseInt(tab[0]) - 1, Integer.parseInt(tab[1]) - 1);
-        }
-
-
     }
 
 

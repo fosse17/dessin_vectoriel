@@ -1,19 +1,20 @@
 package com.geo_graphe;
 
 import java.awt.*;
+import java.io.Serializable;
 
 
-public class Pt implements forme{
+public class Pt implements forme, Serializable {
 
     protected Color c=Color.BLACK;
     protected Color cover=Color.red;
-    private int x;
     protected int y;
     protected int taille=7;
     protected boolean over=false;
     protected boolean visible=true;
     protected boolean movable=true;
     protected int id=-1;
+    private int x;
 
 
 
@@ -69,13 +70,13 @@ public class Pt implements forme{
     public int getY(){return this.y;}
 
     @Override
-    public void set_id(int i) {
-          this.id=i;
+    public int get_id() {
+        return this.id;  //To change body of implemented methods use File | Settings | File Templates.
     }
 
     @Override
-    public int get_id() {
-        return this.id;  //To change body of implemented methods use File | Settings | File Templates.
+    public void set_id(int i) {
+        this.id = i;
     }
 
     @Override
@@ -84,13 +85,13 @@ public class Pt implements forme{
     }
 
     @Override
-    public void set_couleur(Color c) {
-        this.c=c;
+    public Color get_couleur() {
+        return this.c;
     }
 
     @Override
-    public Color get_couleur() {
-        return this.c;
+    public void set_couleur(Color c) {
+        this.c = c;
     }
 
     @Override

@@ -1,13 +1,14 @@
 package com.geo_graphe;
 
 import java.awt.*;
+import java.io.Serializable;
 
 
-public abstract class Forme2D {
+public abstract class Forme2D implements Serializable {
 
+    public int id;
     protected Color couleur =Color.BLACK;
     protected boolean visible=true;
-    public int id;
     protected int num_point;
     protected Pt P[];
 

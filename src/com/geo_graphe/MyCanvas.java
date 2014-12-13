@@ -11,53 +11,31 @@ import java.util.LinkedList;
 public class MyCanvas extends JPanel implements Printable {
 
 	protected LinkedList<forme> formes = new LinkedList<forme>();
-    Graph G = new Graph(0);
 	protected String mode;
 	protected Repere R;
     protected Pt O;
     protected int id_figure=0;//id de la figure a inserer dans le graphe et dans la lissLinked
-
-    public int getId_figure() {
-        return id_figure;
-    }
-
-    public void update_id_figure()
-    {
-        this.id_figure++;
-    }
-
-    public void setColor(Color color) {
-        this.color = color;
-    }
-
-    public Color getColor() {
-        return color;
-    }
-
     protected Color color;
+    Graph G = new Graph(0);
 
+    MyCanvas() {
 
-
-	
-	MyCanvas()
-	{
-
-		super();
+        super();
         this.setSize(800, 600);
-        this.setPreferredSize(new Dimension(800,600));
-        mode="Deplacer";
-        R=new Repere(-10,10,-10,10,this.getPreferredSize(),++this.id_figure);
+        this.setPreferredSize(new Dimension(800, 600));
+        mode = "Deplacer";
+        R = new Repere(-10, 10, -10, 10, this.getPreferredSize(), ++this.id_figure);
         R.setVisible(true);
-        O=new Pt(R.getOrigine(),0);
+        O = new Pt(R.getOrigine(), 0);
         this.addForme(O);
         this.addForme(R);
-        G.addEdge(O.get_id(),R.get_id());
+        G.addEdge(O.get_id(), R.get_id());
 
 
-        Pt test=new Pt(300,100,++this.id_figure);
-        Pt p=new Pt(100,100,++this.id_figure);
-        Pt p1=new Pt(150,150,++this.id_figure);
-        Pt p2=new Pt(150,150,++this.id_figure);/*
+        Pt test = new Pt(300, 100, ++this.id_figure);
+        Pt p = new Pt(100, 100, ++this.id_figure);
+        Pt p1 = new Pt(150, 150, ++this.id_figure);
+        Pt p2 = new Pt(150, 150, ++this.id_figure);/*
 
         Pt[] tabPt=new Pt[2];
         tabPt[0]=test;tabPt[1]=p;
@@ -88,10 +66,10 @@ public class MyCanvas extends JPanel implements Printable {
         Pt p=new Pt(100,100,++this.id_figure);
         Pt p1=new Pt(150,150,++this.id_figure);
         Segment s=new Segment(p,p1,++this.id_figure);*/
-        Cercle c= new Cercle(p,p1,++this.id_figure);
+        Cercle c = new Cercle(p, p1, ++this.id_figure);
 
-        PtCercle ptc=new PtCercle(c,0,0,++this.id_figure);
-        tangente ta=new tangente(c,ptc,test,++this.id_figure);
+        PtCercle ptc = new PtCercle(c, 0, 0, ++this.id_figure);
+        tangente ta = new tangente(c, ptc, test, ++this.id_figure);
         /*
 
         Rectangl Re=new Rectangl(p,p1,++this.id_figure);
@@ -136,15 +114,15 @@ public class MyCanvas extends JPanel implements Printable {
         G.addEdge(s.P[0].id,s.id);
         G.addEdge(s.P[1].id,s.id);
         */
-        G.addEdge(c.P[0].id,c.id);
-        G.addEdge(c.P[1].id,c.id);
+        G.addEdge(c.P[0].id, c.id);
+        G.addEdge(c.P[1].id, c.id);
 
-        G.addEdge(c.P[0].id,ptc.get_id());
-        G.addEdge(c.P[1].id,ptc.get_id());
-        G.addEdge(c.id,ptc.get_id());
+        G.addEdge(c.P[0].id, ptc.get_id());
+        G.addEdge(c.P[1].id, ptc.get_id());
+        G.addEdge(c.id, ptc.get_id());
 
-        G.addEdge(ta.P[0].id,ta.get_id());
-        G.addEdge(ptc.get_id(),ta.get_id());
+        G.addEdge(ta.P[0].id, ta.get_id());
+        G.addEdge(ptc.get_id(), ta.get_id());
 
         /*
         G.addEdge(Re.P[0].id,Re.id);
@@ -196,7 +174,23 @@ public class MyCanvas extends JPanel implements Printable {
         repaint();*/
     }
 
-	
+    public int getId_figure() {
+        return id_figure;
+    }
+
+    public void update_id_figure()
+    {
+        this.id_figure++;
+    }
+
+    public Color getColor() {
+        return color;
+    }
+
+    public void setColor(Color color) {
+        this.color = color;
+    }
+
 	public LinkedList<forme> get_formes()
 	{
 		return formes;
@@ -238,17 +232,25 @@ public class MyCanvas extends JPanel implements Printable {
 
 	public void clear() {
 		formes.clear();
-		repaint();
+        G = new Graph(0);
+        id_figure = 0;
+        mode = "Deplacer";
+        R = new Repere(-10, 10, -10, 10, this.getPreferredSize(), ++this.id_figure);
+        R.setVisible(true);
+        O = new Pt(R.getOrigine(), 0);
+        this.addForme(O);
+        this.addForme(R);
+        G.addEdge(O.get_id(), R.get_id());
+        repaint();
 	}
-	
+
+    public String getMode() {
+        return mode;
+    }
+
 	public void setMode(String mode)
 	{
 		this.mode=mode;
-	}
-
-	public String  getMode()
-	{
-		return mode;
 	}
 
 	public Repere getR() {

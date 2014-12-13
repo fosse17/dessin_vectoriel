@@ -1,9 +1,10 @@
 package com.geo_graphe;
 
 import java.awt.*;
+import java.io.Serializable;
 
 
-public class Repere implements forme {
+public class Repere implements forme, Serializable {
 	Pt origine;
 	int e_x,e_y,h,l;
 	boolean showgrille=true;
@@ -61,16 +62,15 @@ public class Repere implements forme {
 		return new Pt(a,b);
 	}
 
+    @Override
+	public int get_id() {
+		return this.id;
+	}
 
     @Override
-    public void set_id(int i) {
-               this.id=0;// par defaut methode a modifier
-    }
-
-    @Override
-    public int get_id() {
-        return this.id;
-    }
+	public void set_id(int i) {
+		this.id = 0;// par defaut methode a modifier
+	}
 
     @Override
     public void update(int x, int y, int id) {
@@ -78,14 +78,14 @@ public class Repere implements forme {
     }
 
     @Override
-    public void set_couleur(Color c) {
-        //To change body of implemented methods use File | Settings | File Templates.
-    }
+	public Color get_couleur() {
+		return null;  //To change body of implemented methods use File | Settings | File Templates.
+	}
 
     @Override
-    public Color get_couleur() {
-        return null;  //To change body of implemented methods use File | Settings | File Templates.
-    }
+	public void set_couleur(Color c) {
+		//To change body of implemented methods use File | Settings | File Templates.
+	}
 
     @Override
     public boolean is_movable() {

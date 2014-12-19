@@ -7,6 +7,7 @@ public class Barycentre extends Pt implements forme {
 
     int num_point;
     Pt[] P;
+    int test;
 
 
 

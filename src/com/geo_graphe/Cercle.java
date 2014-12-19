@@ -22,14 +22,15 @@ public class Cercle extends Forme2D implements forme{
         rayon=(int) Math.sqrt((dx)*(dx)+(dy)*(dy));
     }
 
-    public void update_rayon(int a,int b)
+    protected void update_rayon(int a, int b)
     {
         super.update_end(a,b);
         dx=P[1].getX()-P[0].getX();
         dy=P[1].getY()-P[0].getY();
         rayon=(int) Math.sqrt((dx)*(dx)+(dy)*(dy));
     }
-    public void update_centre(int a,int b)
+
+    protected void update_centre(int a, int b)
     {
         P[0].set_coord(a,b);
         dx=P[1].getX()-P[0].getX();
@@ -55,15 +56,14 @@ public class Cercle extends Forme2D implements forme{
          this.couleur=nover;return false;
      }
 
-
-    @Override
-    public void set_id(int i) {
-        this.id=i;
-    }
-
     @Override
     public int get_id() {
         return this.id;  //To change body of implemented methods use File | Settings | File Templates.
+    }
+
+    @Override
+    public void set_id(int i) {
+        this.id = i;
     }
 
     @Override
@@ -73,13 +73,13 @@ public class Cercle extends Forme2D implements forme{
     }
 
     @Override
-    public void set_couleur(Color c) {
-        super.setCouleur(c);
+    public Color get_couleur() {
+        return this.couleur;  //To change body of implemented methods use File | Settings | File Templates.
     }
 
     @Override
-    public Color get_couleur() {
-        return this.couleur;  //To change body of implemented methods use File | Settings | File Templates.
+    public void set_couleur(Color c) {
+        super.setCouleur(c);
     }
 
     @Override

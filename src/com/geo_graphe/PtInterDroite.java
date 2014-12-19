@@ -11,8 +11,8 @@ public class PtInterDroite extends Pt {
     PtInterDroite(Droite d,Droite d1,int i) {
         super(-10, -10, i);
         this.d=d;this.d1=d1;
-        System.out.println("coef "+this.d.coeff()[0]+" "+this.d.coeff()[1]+" "+this.d.coeff()[2]);
-        System.out.println("coef "+this.d1.coeff()[0]+" "+this.d1.coeff()[1]+" "+this.d1.coeff()[2]);
+        //System.out.println("coef "+this.d.coeff()[0]+" "+this.d.coeff()[1]+" "+this.d.coeff()[2]);
+        //System.out.println("coef "+this.d1.coeff()[0]+" "+this.d1.coeff()[1]+" "+this.d1.coeff()[2]);
         this.set_movable(false);
         create();
 
@@ -25,7 +25,7 @@ public class PtInterDroite extends Pt {
         int delta=t1[0]*t2[1]-t1[1]*t2[0];
         if(delta==0)   //les droite sont parallele
         {
-              System.out.print("allllllllerttttttttt");
+            //System.out.print("allllllllerttttttttt");
         }
         else
         {

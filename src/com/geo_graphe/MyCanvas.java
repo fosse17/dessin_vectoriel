@@ -24,7 +24,7 @@ public class MyCanvas extends JPanel implements Printable {
         this.setSize(800, 600);
         this.setPreferredSize(new Dimension(800, 600));
         mode = "Deplacer";
-        R = new Repere(-10, 10, -10, 10, this.getPreferredSize(), ++this.id_figure);
+        R = new Repere(-20, 10, -10, 10, this.getPreferredSize(), ++this.id_figure);
         R.setVisible(true);
         O = new Pt(R.getOrigine(), 0);
         this.addForme(O);
@@ -35,64 +35,13 @@ public class MyCanvas extends JPanel implements Printable {
         Pt test = new Pt(300, 100, ++this.id_figure);
         Pt p = new Pt(100, 100, ++this.id_figure);
         Pt p1 = new Pt(150, 150, ++this.id_figure);
-        Pt p2 = new Pt(150, 150, ++this.id_figure);/*
-
-        Pt[] tabPt=new Pt[2];
-        tabPt[0]=test;tabPt[1]=p;
-
-        Droite d=new Droite(test,p,++this.id_figure);
-        Droite d1=new Droite(test,p1,++this.id_figure);
-        Droite d2=new Droite(p,p1,++this.id_figure);
-        //Milieu m=new Milieu(tabPt,-1);
-        DroitePerp DP=new DroitePerp(d,p1,p2,++this.id_figure);
-        //Triangle tr=new Triangle(d,d1,d2,++this.id_figure);
-
-        this.addForme(test);
-        this.addForme(p);
-        this.addForme(p1);
-        this.addForme(p2);
-        this.addForme(d);
-        this.addForme(d1);
-        this.addForme(d2);//this.addForme(DP.P[1],false);
-        this.addForme(DP);
+        Pt p2 = new Pt(150, 150, ++this.id_figure);
 
 
-
-        //color=Color.BLACK;
-        //this.setBackground(color);
-        /*
-        Pt test=new Pt(300,100,++this.id_figure);
-        test.set_couleur(Color.blue);
-        Pt p=new Pt(100,100,++this.id_figure);
-        Pt p1=new Pt(150,150,++this.id_figure);
-        Segment s=new Segment(p,p1,++this.id_figure);*/
         Cercle c = new Cercle(p, p1, ++this.id_figure);
-
         PtCercle ptc = new PtCercle(c, 0, 0, ++this.id_figure);
         tangente ta = new tangente(c, ptc, test, ++this.id_figure);
-        /*
 
-        Rectangl Re=new Rectangl(p,p1,++this.id_figure);
-        Pt[] tabPt=new Pt[3];
-        tabPt[0]=test;tabPt[1]=p;tabPt[2]=p1;
-        Barycentre Bar=new Barycentre(tabPt,3,++this.id_figure);
-        //System.out.println("jlhvljhvljhvljhv"+Bar.P[0]);
-        tabPt[0]=test;tabPt[1]=p;tabPt[2]=Bar;
-        Barycentre Bar1=new Barycentre(tabPt,3,++this.id_figure);
-        Droite d=new Droite(test,p,++this.id_figure);
-        Droite d1=new Droite(Bar,p1,++this.id_figure);
-
-        PtInterDroite interd=new PtInterDroite(d,d1,++this.id_figure);
-
-        PtSegment ptd=new PtSegment(s,125,10,++this.id_figure);
-
-        Triangle T=new Triangle(test,p,p1,++this.id_figure);
-
-
-        tabPt=new Pt[2];
-        tabPt[0]=Bar;tabPt[1]=Bar1;
-        Milieu mil=new Milieu(tabPt,++this.id_figure);
-       */
         this.addForme(test);
         this.addForme(p);
         this.addForme(p1);
@@ -100,20 +49,7 @@ public class MyCanvas extends JPanel implements Printable {
         this.addForme(c);
         this.addForme(ptc);
         this.addForme(ta);
-        /*
-        this.addForme(Re);
-        this.addForme(Bar);
-        this.addForme(Bar1);
-        this.addForme(d);
-        this.addForme(d1);
-        this.addForme(interd);
-        this.addForme(ptd);
-        this.addForme(T);
-        this.addForme(mil);
 
-        G.addEdge(s.P[0].id,s.id);
-        G.addEdge(s.P[1].id,s.id);
-        */
         G.addEdge(c.P[0].id, c.id);
         G.addEdge(c.P[1].id, c.id);
 
@@ -124,54 +60,6 @@ public class MyCanvas extends JPanel implements Printable {
         G.addEdge(ta.P[0].id, ta.get_id());
         G.addEdge(ptc.get_id(), ta.get_id());
 
-        /*
-        G.addEdge(Re.P[0].id,Re.id);
-        G.addEdge(Re.P[1].id,Re.id);
-
-        G.addEdge(Bar.P[0].id,Bar.id);
-        G.addEdge(Bar.P[1].id,Bar.id);
-        G.addEdge(Bar.P[2].id,Bar.id);
-
-        G.addEdge(Bar1.P[0].id,Bar1.id);
-        G.addEdge(Bar1.P[1].id,Bar1.id);
-        G.addEdge(Bar1.P[2].id,Bar1.id);
-
-        G.addEdge(d.P[0].id,d.id);
-        G.addEdge(d.P[1].id,d.id);
-        G.addEdge(d1.P[0].id,d1.id);
-        G.addEdge(d1.P[1].id,d1.id);
-        G.addEdge(d2.P[0].id,d2.id);
-        G.addEdge(d2.P[1].id,d2.id);
-
-        //G.addEdge(p1.id,DP.id);
-        G.addEdge(d.P[0].id,DP.id);
-        G.addEdge(d.P[1].id,DP.id);
-        G.addEdge(d.P[0].id,DP.P[0].id);
-        G.addEdge(d.P[1].id,DP.P[1].id);
-        G.addEdge(DP.P[0].id,DP.id);
-        G.addEdge(DP.P[1].id,DP.id);
-        //G.addEdge(p1.id,DP.id);
-        /*
-        G.addEdge(d.P[0].id,interd.id);
-        G.addEdge(d.P[1].id,interd.id);
-        G.addEdge(d1.P[0].id,interd.id);
-        G.addEdge(d1.P[1].id,interd.id);
-
-        G.addEdge(s.P[0].id,ptd.id);
-        G.addEdge(s.P[1].id,ptd.id);
-
-
-        G.addEdge(T.P[0].id, T.id);
-        G.addEdge(T.P[1].id,T.id);
-        G.addEdge(T.P[2].id,T.id);
-
-
-        G.addEdge(mil.P[0].id,mil.id);
-        G.addEdge(mil.P[1].id,mil.id);
-        //System.out.println(G.toString());
-
-
-        repaint();*/
     }
 
     public int getId_figure() {
@@ -199,8 +87,8 @@ public class MyCanvas extends JPanel implements Printable {
 	public void paint(Graphics g)
 	{
         Graphics2D g2 = (Graphics2D) g;
-        //g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON );
-        g2.setStroke(new BasicStroke(1.1f));
+        g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+        g2.setStroke(new BasicStroke(1.3f));
 
         //g2.setRenderingHint(RenderingHints.KEY_TEXT_ANTIALIASING, RenderingHints.VALUE_TEXT_ANTIALIAS_ON);
         for(forme p:formes)
@@ -215,19 +103,13 @@ public class MyCanvas extends JPanel implements Printable {
 	public void addForme(forme p) {
 		formes.add(p);
         G.add_vertex();
-       // System.out.println(G.toString());
 		repaint();
 	}
-    public void addForme(forme p,boolean b) {
-        formes.add(p);
-        if(b) G.add_vertex();
-        // System.out.println(G.toString());
-        repaint();
-    }
 
-	public void removeForme(forme p) {
-		formes.remove(p);
-		repaint();
+
+    public void removeForme(forme p) {
+        formes.remove(p);
+        repaint();
 	}
 
 	public void clear() {

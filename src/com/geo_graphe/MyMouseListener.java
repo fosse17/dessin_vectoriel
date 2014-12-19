@@ -9,17 +9,23 @@ import java.util.LinkedList;
 public class MyMouseListener implements MouseListener,MouseMotionListener {
 	
 	MyCanvas canvas;
+    String mode;
+    forme f = null;
     private Triangle T;
     private Cercle C;
-    private Rectangl R; private PtCercle ptc=null; private PtDroite psd; private PtSegment pss=null;
+    private Rectangl R;
+    private PtCercle ptc = null;
+    private PtDroite psd;
+    private PtSegment pss = null;
     private Pt pt2;
-    private Segment Seg;private Droite D;private Droite D1;private PtInterDroite Pinter;
+    private Segment Seg;
+    private Droite D;
+    private Droite D1;
+    private PtInterDroite Pinter;
     private Pt[] ptb;
 	private Pt init;
     private DroitePerp Drperp;
     private DroitePara Dpara;
-	String mode;
-    forme f=null;
     private int num;
     private int nb_click;//num1 est utile pour les triangles et pour les barycentres, milieu
     private BreadthFirstPaths Bfs;
@@ -55,7 +61,7 @@ public class MyMouseListener implements MouseListener,MouseMotionListener {
 	}
 
 	protected void leftClickAction(MouseEvent e) {
-        System.out.println(e.getSource());
+        //System.out.println(e.getSource());
 
 		}
 
@@ -88,7 +94,7 @@ public class MyMouseListener implements MouseListener,MouseMotionListener {
             Pt pt=new Pt(x, y,++canvas.id_figure);
             pt.set_couleur(canvas.getColor());
             canvas.addForme(pt);
-            System.out.print("mode point");
+            //System.out.print("mode point");
         }
         if(mode.equals("Ptcercle"))
         {
@@ -200,7 +206,7 @@ public class MyMouseListener implements MouseListener,MouseMotionListener {
             if(nb_click==0) {ptb=new Pt[nb_point_total]; }
             if(nb_click<nb_point_total)
             {
-                System.out.println("je compte les points : "+nb_click);
+                //System.out.println("je compte les points : "+nb_click);
                 f=assign(x,y,-1);
                 if(f==null) {ptb[nb_click]=new Pt(x,y,++this.canvas.id_figure);canvas.addForme(ptb[nb_click]);}
                 else {
@@ -292,7 +298,7 @@ public class MyMouseListener implements MouseListener,MouseMotionListener {
 
                     canvas.G.addEdge(Drperp.P[0].get_id(), Drperp.get_id());
                     canvas.G.addEdge(Drperp.P[1].get_id(), Drperp.get_id());
-                    System.out.print(canvas.G.toString());
+                    //System.out.print(canvas.G.toString());
 
                 }
                 nb_click=0;
@@ -360,7 +366,7 @@ public class MyMouseListener implements MouseListener,MouseMotionListener {
                     }
                 }
                 if((D != null) && (D1 != null) && (!D.paralelle(D1))) {
-                    System.out.println("je cre un point d'intersection");
+                    //System.out.println("je cre un point d'intersection");
                     Pinter= new PtInterDroite(D, D1, ++this.canvas.id_figure);
                     System.out.println("x"+Pinter.getX()+" y:"+Pinter.getY());
                     canvas.addForme(Pinter);
@@ -414,7 +420,7 @@ public class MyMouseListener implements MouseListener,MouseMotionListener {
                 canvas.addForme(t1);
                 Pt t2=new Pt(-10,10,++this.canvas.id_figure);
                 canvas.addForme(t2);
-                mediatrice med=new mediatrice(ptb[0],ptb[1],t1,t2,++this.canvas.id_figure);
+                Mediatrice med = new Mediatrice(ptb[0], ptb[1], t1, t2, ++this.canvas.id_figure);
                 canvas.addForme(med);
                 canvas.G.addEdge(ptb[0].get_id(), med.get_id());
                 canvas.G.addEdge(ptb[1].get_id(), med.get_id());
@@ -617,7 +623,7 @@ public class MyMouseListener implements MouseListener,MouseMotionListener {
             //else C.update(x,y,pt2.get_id());
             canvas.G.addEdge(R.P[0].get_id(), R.get_id());
             canvas.G.addEdge(R.P[1].get_id(), R.get_id());
-            System.out.println("lien entre " + R.P[0].get_id() + " , " + R.P[1].get_id() + " et " + R.get_id());
+            //System.out.println("lien entre " + R.P[0].get_id() + " , " + R.P[1].get_id() + " et " + R.get_id());
         }
         if (mode.equals("Segment"))
         {

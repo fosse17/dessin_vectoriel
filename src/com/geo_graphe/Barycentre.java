@@ -25,7 +25,7 @@ public class Barycentre extends Pt implements forme {
         }
         this.set_coord(a/nb_point, b/nb_point);
         this.setMovable(false);
-        for(int i=0;i<this.num_point;i++) System.out.print(P[i].get_id()+"  ");
+        // for(int i=0;i<this.num_point;i++) System.out.print(P[i].get_id()+"  ");
         System.out.println();
 
     }
@@ -44,7 +44,7 @@ public class Barycentre extends Pt implements forme {
     public void update(int x,int y,int i1)
     {
         int pos=check_in(i1);
-        System.out.println("Il faut bouger le point n°"+pos);
+        //System.out.println("Il faut bouger le point n°"+pos);
         P[pos].set_coord(x,y);
         int a=0;
         int b=0;
@@ -56,23 +56,23 @@ public class Barycentre extends Pt implements forme {
     }
 
     @Override
-    public void set_id(int i) {
-
-    }
-
-    @Override
     public int get_id() {
         return this.id;
     }
 
     @Override
-    public void set_couleur(Color c) {
-        //todo dans la classe Pt
+    public void set_id(int i) {
+
     }
 
     @Override
     public Color get_couleur() {
         return super.get_couleur();  //To change body of implemented methods use File | Settings | File Templates.
+    }
+
+    @Override
+    public void set_couleur(Color c) {
+        //todo dans la classe Pt
     }
 
     @Override

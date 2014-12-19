@@ -10,32 +10,39 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.util.LinkedList;
 
+/**
+ * The type Menu.
+ */
 public class Menu extends JMenuBar implements ActionListener{
 
-	
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = -3463461593675449969L;
-	protected MyCanvas canvas;
-	MyMouseListener m;
-	
-	private JMenuBar menuBar;
+    /**
+     * The Canvas.
+     */
+    protected MyCanvas canvas;
+    /**
+     * The M.
+     */
+    MyMouseListener m;
+
+    private JMenuBar menuBar;
 
 
     /**
-	 * Create the panel.
-	 */
-	public Menu(MyCanvas canvas) {
-		super();
-		this.canvas=canvas;
+     * Create the panel.
+     * @param canvas the canvas
+     */
+    public Menu(MyCanvas canvas) {
+        super();
+        this.canvas=canvas;
 		init();
 		
 	}
-	
-	
-	public void init()
-	{
+
+
+    /**
+     * Init void.
+     */
+    public void init() {
 
         JMenu mdessiner = new JMenu("Dessiner");
 		this.add(mdessiner);
@@ -161,7 +168,7 @@ public class Menu extends JMenuBar implements ActionListener{
 	public void actionPerformed(ActionEvent e) {
 		System.out.println(e.getActionCommand());
 		canvas.setMode(e.getActionCommand());
-        if(e.getActionCommand()=="Color")
+        if (e.getActionCommand().equals("Color"))
         {
             Color C =JColorChooser.showDialog(canvas,
                 "choix de la couleur", Color.BLACK);
@@ -197,7 +204,7 @@ public class Menu extends JMenuBar implements ActionListener{
                 fos.close();
                 canvas.G.save("graphe.txt");
             } catch (Exception ex) {
-                System.out.println("he merde");
+                System.out.println("");
             }
         }
         if (e.getActionCommand() == "Restore") {

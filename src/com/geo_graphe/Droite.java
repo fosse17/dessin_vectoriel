@@ -22,7 +22,6 @@ public class Droite extends Forme2D implements forme {
         int ABy=(P[1].getY()-P[0].getY());
         int c=ABy*P[0].getX()-ABx*P[0].getY();
         double dist=Math.abs(-ABy*a+ABx*b+c) / Math.sqrt(ABx*ABx+ABy*ABy);
-        //System.out.println("distance : "+dist);
         if(dist<5) {couleur=over;return true;} else {  couleur=nover;return false;}
     }
 
@@ -52,13 +51,13 @@ public class Droite extends Forme2D implements forme {
     }
 
     @Override
-    public void set_id(int i) {
-        super.id=i;
+    public int get_id() {
+        return super.id;
     }
 
     @Override
-    public int get_id() {
-        return super.id;
+    public void set_id(int i) {
+        super.id = i;
     }
 
     @Override
@@ -68,13 +67,13 @@ public class Droite extends Forme2D implements forme {
     }
 
     @Override
-    public void set_couleur(Color c) {
-        super.setCouleur(c);
+    public Color get_couleur() {
+        return super.couleur;
     }
 
     @Override
-    public Color get_couleur() {
-        return super.couleur;
+    public void set_couleur(Color c) {
+        super.setCouleur(c);
     }
 
     @Override

@@ -13,12 +13,14 @@ public class MyMouseListener implements MouseListener,MouseMotionListener {
     forme f = null;
     private Triangle T;
     private Cercle C;
+    private Texte text;
     private Rectangl R;
     private PtCercle ptc = null;
     private PtDroite psd;
     private PtSegment pss = null;
     private Pt pt2;
     private Segment Seg;
+    private vecteur Vec;
     private Droite D;
     private Droite D1;
     private PtInterDroite Pinter;
@@ -178,6 +180,18 @@ public class MyMouseListener implements MouseListener,MouseMotionListener {
             C.set_couleur(canvas.getColor());
             canvas.addForme(C);
         }
+
+        if(mode.equals("Texte"))
+        {
+            String tt = JOptionPane.showInputDialog("Entrez votre texte:");
+            if(tt!=null) {
+                init=assign(x,y,-1);
+                if(init==null) {init=new Pt(x,y,++this.canvas.id_figure);canvas.addForme(init);}
+                text = new Texte(tt, init, ++this.canvas.id_figure);
+                canvas.addForme(text);
+                canvas.G.addEdge(init.get_id(),text.get_id());
+            }
+        }
         if(mode.equals("Rectangle"))
         {
             init=assign(x,y,-1);
@@ -198,6 +212,18 @@ public class MyMouseListener implements MouseListener,MouseMotionListener {
             Seg=new Segment(init,pt2,++canvas.id_figure);
             Seg.set_couleur(canvas.getColor());
             canvas.addForme(Seg);
+        }
+
+        if(mode.equals("Vecteur"))
+        {
+            String input = JOptionPane.showInputDialog("Enter in some text:");
+            init=assign(x,y,-1);
+            if(init==null) {init=new Pt(x,y,++this.canvas.id_figure);canvas.addForme(init);}
+            pt2=new Pt(x, y,++this.canvas.id_figure);
+            canvas.addForme(pt2);
+            Vec=new vecteur(init,pt2,++canvas.id_figure);
+            Vec.set_couleur(canvas.getColor());
+            canvas.addForme(Vec);
         }
 
         if(mode.equals("B3"))
@@ -519,9 +545,10 @@ public class MyMouseListener implements MouseListener,MouseMotionListener {
         {
              C.update_rayon(x,y);
         }
-        if (mode.equals("Segment"))
+
+        if (mode.equals("Vecteur"))
         {
-            Seg.update(x,y,pt2.get_id());
+            Vec.update(x,y,pt2.get_id());
         }
         if (mode.equals("Rectangle"))
         {
@@ -637,6 +664,18 @@ public class MyMouseListener implements MouseListener,MouseMotionListener {
             canvas.G.addEdge(Seg.P[0].get_id(), Seg.get_id());
             canvas.G.addEdge(Seg.P[1].get_id(), Seg.get_id());
             System.out.println("lien entre " + Seg.P[0].get_id() + " , " + Seg.P[1].get_id() + " et " + Seg.get_id());
+        }
+        if (mode.equals("Vecteur"))
+        {
+            f=assign (x,y,pt2.get_id());
+            if(f!=null)
+            {
+                Vec.P[1]=(Pt)f;
+                pt2.set_coord(-10,-10);
+            }
+            //else C.update(x,y,pt2.get_id());
+            canvas.G.addEdge(Vec.P[0].get_id(), Vec.get_id());
+            canvas.G.addEdge(Vec.P[1].get_id(), Vec.get_id());
         }
         if (mode.equals("Droite"))
         {

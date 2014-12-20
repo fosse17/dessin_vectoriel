@@ -42,7 +42,7 @@ public class Pt implements forme, Serializable {
         this.y=A.y;
         this.id=i;
     }
-    Pt(int a, int b,int i)
+    public Pt(int a, int b,int i)
     {
         this.x=a;
         this.y=b;
@@ -140,7 +140,7 @@ public class Pt implements forme, Serializable {
 
         Color cl=g.getColor();
         if(!movable)g.setColor(cover);else g.setColor(c);
-        g.drawString(Integer.toString(this.id),x,y);
+        //g.drawString(Integer.toString(this.id),x,y);
         g.fillOval(x- (taille-1)/2, y- (taille-1)/2, taille, taille);
         g.setColor(cl);
     }

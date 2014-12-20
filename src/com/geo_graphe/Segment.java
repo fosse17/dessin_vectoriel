@@ -7,7 +7,7 @@ public class Segment extends Forme2D implements forme {
     Color over=Color.BLUE ;
     Color nover=couleur;
 
-    Segment(Pt A, Pt B,int id)
+    public Segment(Pt A, Pt B,int id)
     {
         super(A,B,id);
     }

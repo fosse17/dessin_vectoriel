@@ -35,12 +35,14 @@ public class MyCanvas extends JPanel implements Printable {
         Pt test = new Pt(300, 100, ++this.id_figure);
         Pt p = new Pt(100, 100, ++this.id_figure);
         Pt p1 = new Pt(150, 150, ++this.id_figure);
-        Pt p2 = new Pt(150, 150, ++this.id_figure);
+        Pt p2 = new Pt(350, 250, ++this.id_figure);
 
 
         Cercle c = new Cercle(p, p1, ++this.id_figure);
         PtCercle ptc = new PtCercle(c, 0, 0, ++this.id_figure);
         tangente ta = new tangente(c, ptc, test, ++this.id_figure);
+        vecteur v=new vecteur(p,p1,++this.id_figure);
+        Texte tt=new Texte("jhfl",test,++this.id_figure);
 
         this.addForme(test);
         this.addForme(p);
@@ -49,6 +51,8 @@ public class MyCanvas extends JPanel implements Printable {
         this.addForme(c);
         this.addForme(ptc);
         this.addForme(ta);
+        this.addForme(v);
+        this.addForme(tt);
 
         G.addEdge(c.P[0].id, c.id);
         G.addEdge(c.P[1].id, c.id);
@@ -59,6 +63,12 @@ public class MyCanvas extends JPanel implements Printable {
 
         G.addEdge(ta.P[0].id, ta.get_id());
         G.addEdge(ptc.get_id(), ta.get_id());
+
+        G.addEdge(v.P[0].id, v.get_id());
+        G.addEdge(v.P[1].id, v.get_id());
+
+        G.addEdge(test.get_id(), tt.get_id());
+
 
     }
 
@@ -87,7 +97,7 @@ public class MyCanvas extends JPanel implements Printable {
 	public void paint(Graphics g)
 	{
         Graphics2D g2 = (Graphics2D) g;
-        g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+        //g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
         g2.setStroke(new BasicStroke(1.3f));
         g2.clearRect(0,0,this.getWidth(),this.getHeight());
         //g2.setRenderingHint(RenderingHints.KEY_TEXT_ANTIALIASING, RenderingHints.VALUE_TEXT_ANTIALIAS_ON);

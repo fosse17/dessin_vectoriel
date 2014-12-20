@@ -70,9 +70,17 @@ public class Menu extends JMenuBar implements ActionListener{
 		mcercle.addActionListener(this);
 		mdessiner.add(mcercle);
 
+        JMenuItem mtexte = new JMenuItem("Texte");
+        mtexte.addActionListener(this);
+        mdessiner.add(mtexte);
+
         JMenuItem msegment = new JMenuItem("Segment");
 		msegment.addActionListener(this);
 		mdessiner.add(msegment);
+
+        JMenuItem mvecteur = new JMenuItem("Vecteur");
+        mvecteur.addActionListener(this);
+        mdessiner.add(mvecteur);
 
         JMenuItem mdroite = new JMenuItem("Droite");
         mdroite.addActionListener(this);

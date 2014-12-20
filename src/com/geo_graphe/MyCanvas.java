@@ -31,7 +31,7 @@ public class MyCanvas extends JPanel implements Printable {
         this.addForme(R);
         G.addEdge(O.get_id(), R.get_id());
 
-
+        //classe de constructeur
         Pt test = new Pt(300, 100, ++this.id_figure);
         Pt p = new Pt(100, 100, ++this.id_figure);
         Pt p1 = new Pt(150, 150, ++this.id_figure);

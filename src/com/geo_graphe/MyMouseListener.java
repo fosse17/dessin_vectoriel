@@ -18,6 +18,7 @@ public class MyMouseListener implements MouseListener,MouseMotionListener {
     private PtCercle ptc = null;
     private PtDroite psd;
     private PtSegment pss = null;
+    private PolyRegulier pr;
     private Pt pt2;
     private Segment Seg;
     private vecteur Vec;
@@ -214,9 +215,20 @@ public class MyMouseListener implements MouseListener,MouseMotionListener {
             canvas.addForme(Seg);
         }
 
+        if(mode.equals("Polyreg"))
+        {
+
+            init=assign(x,y,-1);
+            if(init==null) {init=new Pt(x,y,++this.canvas.id_figure);canvas.addForme(init);}
+            pt2=new Pt(x, y,++this.canvas.id_figure);
+            canvas.addForme(pt2);
+            pr=new PolyRegulier(init,pt2,Menu.nbcote,++canvas.id_figure);
+            pr.set_couleur(canvas.getColor());
+            canvas.addForme(pr);
+        }
+
         if(mode.equals("Vecteur"))
         {
-            String input = JOptionPane.showInputDialog("Enter in some text:");
             init=assign(x,y,-1);
             if(init==null) {init=new Pt(x,y,++this.canvas.id_figure);canvas.addForme(init);}
             pt2=new Pt(x, y,++this.canvas.id_figure);
@@ -545,7 +557,10 @@ public class MyMouseListener implements MouseListener,MouseMotionListener {
         {
              C.update_rayon(x,y);
         }
-
+        if (mode.equals("Polyreg"))
+        {
+            pr.update(x, y, pt2.get_id());
+        }
         if (mode.equals("Vecteur"))
         {
             Vec.update(x,y,pt2.get_id());
@@ -569,12 +584,6 @@ public class MyMouseListener implements MouseListener,MouseMotionListener {
                     ((Pt) p).set_coord(((Pt) p).getX()+(x-init.getX()), ((Pt) p).getY()+(y-init.getY()));
 
                 }
-                /*if (p instanceof DroitePerp)
-                {
-                    Pt vv=((DroitePerp) p).P[1];
-                    vv.set_coord(vv.getX() + (x - init.getX()), vv.getY() + (y - init.getY()));
-
-                }*/
                 if(p instanceof Repere)
                     p.update(((Pt) canvas.get_formes().get(0)).getX(), ((Pt) canvas.get_formes().get(0)).getY(), -1);
             }
@@ -664,6 +673,19 @@ public class MyMouseListener implements MouseListener,MouseMotionListener {
             canvas.G.addEdge(Seg.P[0].get_id(), Seg.get_id());
             canvas.G.addEdge(Seg.P[1].get_id(), Seg.get_id());
             System.out.println("lien entre " + Seg.P[0].get_id() + " , " + Seg.P[1].get_id() + " et " + Seg.get_id());
+        }
+        if (mode.equals("Polyreg"))
+        {
+            f=assign (x,y,pt2.get_id());
+            if(f!=null)
+            {
+                pr.B=(Pt)f;
+                pt2.set_coord(-10,-10);
+            }
+            //else C.update(x,y,pt2.get_id());
+            canvas.G.addEdge(init.get_id(), pr.get_id());
+            canvas.G.addEdge(pt2.get_id(), pr.get_id());
+           // System.out.println("lien entre " + Seg.P[0].get_id() + " , " + Seg.P[1].get_id() + " et " + Seg.get_id());
         }
         if (mode.equals("Vecteur"))
         {

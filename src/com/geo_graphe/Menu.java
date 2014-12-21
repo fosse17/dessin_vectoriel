@@ -19,6 +19,7 @@ public class Menu extends JMenuBar implements ActionListener{
      * The Canvas.
      */
     protected MyCanvas canvas;
+    protected static int nbcote=0;
     /**
      * The M.
      */
@@ -73,6 +74,10 @@ public class Menu extends JMenuBar implements ActionListener{
         JMenuItem mtexte = new JMenuItem("Texte");
         mtexte.addActionListener(this);
         mdessiner.add(mtexte);
+
+        JMenuItem mpoly = new JMenuItem("Polyreg");
+        mpoly.addActionListener(this);
+        mdessiner.add(mpoly);
 
         JMenuItem msegment = new JMenuItem("Segment");
 		msegment.addActionListener(this);
@@ -201,7 +206,11 @@ public class Menu extends JMenuBar implements ActionListener{
         if (e.getActionCommand() == "Clear") {
             canvas.clear();
         }
+        if (e.getActionCommand() == "Polyreg") {
+            String tt = JOptionPane.showInputDialog("nombre de cotés:");
+            nbcote=Integer.parseInt(tt);
 
+        }
         if (e.getActionCommand() == "Save") {
             try {
                 FileOutputStream fos = new FileOutputStream("figure.txt");

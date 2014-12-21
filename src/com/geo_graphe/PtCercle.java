@@ -22,12 +22,12 @@ public class PtCercle extends Pt implements forme {
         cosa=this.cosangle(x,y);
     }
 
-    public double cosangle(int x,int y)
+    private double cosangle(int x,int y)
     {
         return (cercle.P[0].getX()-x)/(cercle.P[0].distance(x,y));
     }
 
-    public double sinangle(int x,int y)
+    private double sinangle(int x,int y)
     {
         return -(cercle.P[0].getY()-y)/(cercle.P[0].distance(x,y));
     }

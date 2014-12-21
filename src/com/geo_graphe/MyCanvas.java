@@ -43,6 +43,7 @@ public class MyCanvas extends JPanel implements Printable {
         tangente ta = new tangente(c, ptc, test, ++this.id_figure);
         vecteur v=new vecteur(p,p1,++this.id_figure);
         Texte tt=new Texte("jhfl",test,++this.id_figure);
+        PolyRegulier pr=new PolyRegulier(p,p1,6,++this.id_figure);
 
         this.addForme(test);
         this.addForme(p);
@@ -53,6 +54,7 @@ public class MyCanvas extends JPanel implements Printable {
         this.addForme(ta);
         this.addForme(v);
         this.addForme(tt);
+        this.addForme(pr);
 
         G.addEdge(c.P[0].id, c.id);
         G.addEdge(c.P[1].id, c.id);
@@ -68,6 +70,9 @@ public class MyCanvas extends JPanel implements Printable {
         G.addEdge(v.P[1].id, v.get_id());
 
         G.addEdge(test.get_id(), tt.get_id());
+
+        G.addEdge(p.get_id(), pr.get_id());
+        G.addEdge(p1.get_id(), pr.get_id());
 
 
     }
@@ -195,7 +200,7 @@ public class MyCanvas extends JPanel implements Printable {
         if ( page >= 1 )
             return(Printable.NO_SUCH_PAGE);
         Graphics2D g2 =(Graphics2D) g;
-        g2.setStroke(new BasicStroke(1.1f));
+        g2.setStroke(new BasicStroke(1.3f));
         for(forme p:formes)
         {
             if(p.isVisible())

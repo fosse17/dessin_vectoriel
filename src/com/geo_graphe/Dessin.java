@@ -2,6 +2,7 @@ package com.geo_graphe;
 
 import javax.swing.*;
 import java.awt.*;
+import javax.swing.JComponent;
 
 public class Dessin {
 
@@ -40,9 +41,11 @@ public class Dessin {
 		frame = new JFrame();
 		frame.setBounds(100, 100, 450, 300);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frame.setTitle("dessin vectoriel");
 		
 		Canvas = new MyCanvas();
-		frame.getContentPane().add(Canvas, BorderLayout.CENTER);
+		frame.getContentPane().add(Canvas);
+
 
 		frame.setJMenuBar(new Menu(Canvas));
 		m= new MyMouseListener(Canvas);

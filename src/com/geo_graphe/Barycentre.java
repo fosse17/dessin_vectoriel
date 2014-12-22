@@ -1,6 +1,6 @@
 package com.geo_graphe;
 
-
+/* J'essaie de mettre des commentaires */
 import java.awt.*;
 
 public class Barycentre extends Pt implements forme {

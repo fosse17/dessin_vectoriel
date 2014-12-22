@@ -3,15 +3,46 @@ package com.geo_graphe;
 import java.awt.*;
 
 
+/**
+ * The type Cercle.
+ */
 public class Cercle extends Forme2D implements forme{
 
-    int rayon,dx,dy;
+    /**
+     * The Rayon.
+     */
+    int rayon, /**
+     * The Dx.
+     */
+    dx, /**
+     * The Dy.
+     */
+    dy;
+    /**
+     * The Move.
+     */
     boolean move=false;
+    /**
+     * The Id.
+     */
     int id=0;
-    //Color couleur=Color.DARK_GRAY;
+    /**
+     * The Over.
+     */
+//Color couleur=Color.DARK_GRAY;
     Color over=Color.BLUE;
+    /**
+     * The Nover.
+     */
     Color nover=couleur;
 
+    /**
+     * Instantiates a new Cercle.
+     *
+     * @param A the a
+     * @param B the b
+     * @param i the i
+     */
     public Cercle(Pt A, Pt B,int i)
     {
         super(A,B,i);
@@ -22,6 +53,12 @@ public class Cercle extends Forme2D implements forme{
         rayon=(int) Math.sqrt((dx)*(dx)+(dy)*(dy));
     }
 
+    /**
+     * Update _ rayon.
+     *
+     * @param a the a
+     * @param b the b
+     */
     protected void update_rayon(int a, int b)
     {
         super.update_end(a,b);
@@ -30,6 +67,12 @@ public class Cercle extends Forme2D implements forme{
         rayon=(int) Math.sqrt((dx)*(dx)+(dy)*(dy));
     }
 
+    /**
+     * Update _ centre.
+     *
+     * @param a the a
+     * @param b the b
+     */
     protected void update_centre(int a, int b)
     {
         P[0].set_coord(a,b);
@@ -41,6 +84,9 @@ public class Cercle extends Forme2D implements forme{
     }
 
 
+    /**
+     * Update _ zoom.
+     */
     public void update_zoom()
     {
         dx=P[1].getX()-P[0].getX();
@@ -48,7 +94,14 @@ public class Cercle extends Forme2D implements forme{
         rayon=(int) Math.sqrt((dx)*(dx)+(dy)*(dy));
     }
 
-     public boolean isNear(int x,int y)
+    /**
+     * Is near.
+     *
+     * @param x the x
+     * @param y the y
+     * @return the boolean
+     */
+    public boolean isNear(int x,int y)
      {
          if((this.P[0].distance(x, y) < (this.rayon + 5)) && (this.P[0].distance(x, y) > (this.rayon - 5))) {
              this.couleur=over; return true;
@@ -96,10 +149,7 @@ public class Cercle extends Forme2D implements forme{
     public void draw(Graphics g) {
         Color a=g.getColor();
         g.setColor(couleur);
-        try {
-            g.drawOval(P[0].getX()-rayon,P[0].getY()-rayon,2*rayon,2*rayon);
-        } catch (NullPointerException e) {
-        }
+        g.drawOval(P[0].getX()-rayon,P[0].getY()-rayon,2*rayon,2*rayon);
         g.setColor(a);
 
     }

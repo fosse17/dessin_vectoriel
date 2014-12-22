@@ -44,6 +44,7 @@ public class MyCanvas extends JPanel implements Printable {
         vecteur v=new vecteur(p,p1,++this.id_figure);
         Texte tt=new Texte("jhfl",test,++this.id_figure);
         PolyRegulier pr=new PolyRegulier(p,p1,6,++this.id_figure);
+        PtTrans ptTrans=new PtTrans(p2,v,++this.id_figure);
 
         this.addForme(test);
         this.addForme(p);
@@ -55,6 +56,7 @@ public class MyCanvas extends JPanel implements Printable {
         this.addForme(v);
         this.addForme(tt);
         this.addForme(pr);
+        this.addForme(ptTrans);
 
         G.addEdge(c.P[0].id, c.id);
         G.addEdge(c.P[1].id, c.id);
@@ -73,6 +75,11 @@ public class MyCanvas extends JPanel implements Printable {
 
         G.addEdge(p.get_id(), pr.get_id());
         G.addEdge(p1.get_id(), pr.get_id());
+
+        G.addEdge(p2.get_id(), ptTrans.get_id());
+        G.addEdge(v.P[0].get_id(), ptTrans.get_id());
+        G.addEdge(v.P[1].get_id(), ptTrans.get_id());
+        G.addEdge(v.get_id(), ptTrans.get_id());
 
 
     }

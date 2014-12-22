@@ -19,6 +19,9 @@ public class Menu extends JMenuBar implements ActionListener{
      * The Canvas.
      */
     protected MyCanvas canvas;
+    /**
+     * The constant nbcote.
+     */
     protected static int nbcote=0;
     /**
      * The M.

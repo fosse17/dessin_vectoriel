@@ -1,11 +1,21 @@
 package com.geo_graphe;
 
 
-
+/**
+ * The type Tangente.
+ */
 class tangente extends Droite {
 
     private Cercle c;
 
+    /**
+     * Instantiates a new Tangente.
+     *
+     * @param c the c
+     * @param A the a
+     * @param B the b
+     * @param id the id
+     */
     tangente(Cercle c,Pt A, Pt B, int id) {
         super(A, B, id);
         this.c=c;

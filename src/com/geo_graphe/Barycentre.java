@@ -1,13 +1,28 @@
 package com.geo_graphe;
 
-/* J'essaie de mettre des commentaires */
 import java.awt.*;
 
+/**
+ * The type Barycentre.
+ */
 public class Barycentre extends Pt implements forme {
 
+    /**
+     * The Num _ point.
+     */
     int num_point;
+    /**
+     * The P.
+     */
     Pt[] P;
 
+    /**
+     * Instancie un nouveau Barycentre.
+     *
+     * @param tab tableau de points
+     * @param nb_point the nb _ point
+     * @param id the id
+     */
     public Barycentre(Pt[] tab,int nb_point,int id)
     {
         super(0,0,id);
@@ -22,13 +37,18 @@ public class Barycentre extends Pt implements forme {
         }
         this.set_coord(a/nb_point, b/nb_point);
         this.setMovable(false);
-        // for(int i=0;i<this.num_point;i++) System.out.print(P[i].get_id()+"  ");
         System.out.println();
 
     }
 
 
-    public int check_in(int id1)  //verfie sir le Pt passer en paramettre appartiens à l'ensemble des piints du barycentre
+    /**
+     * Verifie si le point passé en parametre appartient a l'ensemble des points du barycentre.
+     *
+     * @param id de l'ensemble des points
+     * @return l'id s'ilappartient, -1 sinon
+     */
+    public int check_in(int id1)
     {
         for(int i=0;i<this.num_point;i++)
         {
@@ -37,6 +57,13 @@ public class Barycentre extends Pt implements forme {
         }
         return -1;
     }
+
+    /**
+     *La méthode update associé qui est appelé lorsque l'on déplace l'ensemble des points du barycentre
+     * @param x
+     * @param y
+     * @param i1
+     */
 
     public void update(int x,int y,int i1)
     {

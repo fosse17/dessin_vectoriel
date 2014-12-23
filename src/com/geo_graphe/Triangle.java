@@ -42,13 +42,13 @@ public class Triangle extends Forme2D implements forme{
     }
 
     @Override
-    public void set_id(int i) {
-
+    public int get_id() {
+        return this.id;  //To change body of implemented methods use File | Settings | File Templates.
     }
 
     @Override
-    public int get_id() {
-        return this.id;  //To change body of implemented methods use File | Settings | File Templates.
+    public void set_id(int i) {
+
     }
 
     @Override
@@ -58,13 +58,13 @@ public class Triangle extends Forme2D implements forme{
     }
 
     @Override
-    public void set_couleur(Color c) {
-        couleur=new Color(c.getRed(),c.getGreen(),c.getBlue(),50);
+    public Color get_couleur() {
+        return this.couleur;  //To change body of implemented methods use File | Settings | File Templates.
     }
 
     @Override
-    public Color get_couleur() {
-        return null;  //To change body of implemented methods use File | Settings | File Templates.
+    public void set_couleur(Color c) {
+        couleur = new Color(c.getRed(), c.getGreen(), c.getBlue(), 50);
     }
 
     @Override
@@ -74,7 +74,7 @@ public class Triangle extends Forme2D implements forme{
 
     @Override
     public void set_movable(Boolean c) {
-        //To change body of implemented methods use File | Settings | File Templates.
+
     }
 
     public void draw(Graphics g) {

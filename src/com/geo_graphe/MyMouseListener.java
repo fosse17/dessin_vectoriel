@@ -820,6 +820,10 @@ public class MyMouseListener implements MouseListener,MouseMotionListener {
             if(f instanceof Cercle){ if(((Cercle) f).isNear(x,y)) {}}
             if(f instanceof Droite){ if(((Droite) f).isNear(x,y)) {}}
             if(f instanceof Segment){ if(((Segment) f).isNear(x,y)) {}}
+            if (f instanceof PolyRegulier) {
+                if (((PolyRegulier) f).isNear(x, y)) {
+                }
+            }
         }
 
 

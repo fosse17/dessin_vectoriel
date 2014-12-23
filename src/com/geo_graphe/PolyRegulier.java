@@ -8,8 +8,12 @@ import java.awt.*;
 public class PolyRegulier implements forme {
 
     int id,nbcote,rayon,dx,dy;
+    Polygon p;
     double angle;
     Pt O,B;
+    Color couleur = new Color(123, 123, 12, 50);
+    int tranparence = 50;
+    int tranparence_over = 70;
 
 
     public PolyRegulier(Pt A,Pt B,int nbcote,int id)
@@ -22,17 +26,31 @@ public class PolyRegulier implements forme {
         dx = B.getX() - A.getX();
         dy=B.getY() - A.getY();
         angle = Math.atan2(dy, dx);
+        p = new Polygon();
+        for (int i = 0; i < this.nbcote; i++)
+            p.addPoint((int)
+                            (this.O.getX() + this.rayon * Math.cos(angle + i * 2 * Math.PI / this.nbcote)),
+                    (int) (this.O.getY() + this.rayon * Math.sin(angle + i * 2 * Math.PI / this.nbcote)));
     }
 
-
-    @Override
-    public void set_id(int i) {
-
+    public boolean isNear(int x, int y) {
+        if (p.contains(x, y)) {
+            couleur = new Color(couleur.getRed(), couleur.getGreen(), couleur.getBlue(), this.tranparence_over);
+            return true;
+        } else {
+            couleur = new Color(couleur.getRed(), couleur.getGreen(), couleur.getBlue(), this.tranparence);
+            return false;
+        }
     }
 
     @Override
     public int get_id() {
         return this.id;
+    }
+
+    @Override
+    public void set_id(int i) {
+
     }
 
     @Override
@@ -51,22 +69,27 @@ public class PolyRegulier implements forme {
             dy = B.getY() - O.getY();
             angle = Math.atan2(dy, dx);
         }
-
-    }
-
-    @Override
-    public void set_couleur(Color c) {
+        p = new Polygon();
+        for (int i = 0; i < this.nbcote; i++)
+            p.addPoint((int)
+                            (this.O.getX() + this.rayon * Math.cos(angle + i * 2 * Math.PI / this.nbcote)),
+                    (int) (this.O.getY() + this.rayon * Math.sin(angle + i * 2 * Math.PI / this.nbcote)));
 
     }
 
     @Override
     public Color get_couleur() {
-        return null;
+        return this.couleur;
+    }
+
+    @Override
+    public void set_couleur(Color c) {
+        this.couleur = new Color(c.getRed(), c.getGreen(), c.getBlue(), this.tranparence);
     }
 
     @Override
     public boolean is_movable() {
-        return false;
+        return true;
     }
 
     @Override
@@ -76,12 +99,16 @@ public class PolyRegulier implements forme {
 
     @Override
     public void draw(Graphics g) {
-        Polygon p=new Polygon();
-        for (int i = 0; i < this.nbcote; i++)
-            p.addPoint((int)
-                            (this.O.getX() + this.rayon * Math.cos(angle+i * 2 * Math.PI / this.nbcote)),
-                    (int) (this.O.getY() + this.rayon * Math.sin(angle+i * 2 * Math.PI /this.nbcote)));
+
+        Color c = g.getColor();
+
+        g.setColor(new Color(couleur.getRed(), couleur.getGreen(), couleur.getBlue()));
         g.drawPolygon(p);
+
+        g.setColor(couleur);
+        g.fillPolygon(p);
+
+        g.setColor(c);
     }
 
     @Override

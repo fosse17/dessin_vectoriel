@@ -30,6 +30,7 @@ public class MyCanvas extends JPanel implements Printable {
         this.addForme(O);
         this.addForme(R);
         G.addEdge(O.get_id(), R.get_id());
+        color = Color.BLACK;
 
         //classe de constructeur
         Pt test = new Pt(300, 100, ++this.id_figure);
@@ -37,19 +38,26 @@ public class MyCanvas extends JPanel implements Printable {
         Pt p1 = new Pt(150, 150, ++this.id_figure);
         Pt p2 = new Pt(350, 250, ++this.id_figure);
 
+        Pt pp1 = new Pt(-10, -10, ++this.id_figure);
+        Pt pp2 = new Pt(-10, -10, ++this.id_figure);
+
 
         Cercle c = new Cercle(p, p1, ++this.id_figure);
         PtCercle ptc = new PtCercle(c, 0, 0, ++this.id_figure);
         tangente ta = new tangente(c, ptc, test, ++this.id_figure);
-        vecteur v=new vecteur(p,p1,++this.id_figure);
+        vecteur v=new vecteur(p,p2,++this.id_figure);
         Texte tt=new Texte("jhfl",test,++this.id_figure);
         PolyRegulier pr=new PolyRegulier(p,p1,6,++this.id_figure);
         PtTrans ptTrans=new PtTrans(p2,v,++this.id_figure);
+        //CercleTrans cTrans=new CercleTrans(c,v,pp1,pp2,++this.id_figure);
+        DroiteTrans droiteTrans=new DroiteTrans(ta,v,pp1,pp2,++this.id_figure);
 
         this.addForme(test);
         this.addForme(p);
         this.addForme(p1);
         this.addForme(p2);
+        this.addForme(pp1);
+        this.addForme(pp2);
         this.addForme(c);
         this.addForme(ptc);
         this.addForme(ta);
@@ -57,6 +65,8 @@ public class MyCanvas extends JPanel implements Printable {
         this.addForme(tt);
         this.addForme(pr);
         this.addForme(ptTrans);
+        //this.addForme(cTrans);
+        this.addForme(droiteTrans);
 
         G.addEdge(c.P[0].id, c.id);
         G.addEdge(c.P[1].id, c.id);
@@ -80,6 +90,18 @@ public class MyCanvas extends JPanel implements Printable {
         G.addEdge(v.P[0].get_id(), ptTrans.get_id());
         G.addEdge(v.P[1].get_id(), ptTrans.get_id());
         G.addEdge(v.get_id(), ptTrans.get_id());
+
+        /*G.addEdge(c.P[0].get_id(), cTrans.get_id());
+        G.addEdge(c.P[1].get_id(), cTrans.get_id());
+        G.addEdge(c.get_id(), cTrans.get_id());
+        G.addEdge(v.P[0].get_id(), cTrans.get_id());
+        G.addEdge(v.P[1].get_id(), cTrans.get_id());*/
+
+        G.addEdge(ta.P[0].get_id(), droiteTrans.get_id());
+        G.addEdge(ta.P[1].get_id(), droiteTrans.get_id());
+        G.addEdge(ta.get_id(), droiteTrans.get_id());
+        G.addEdge(v.P[0].get_id(), droiteTrans.get_id());
+        G.addEdge(v.P[1].get_id(), droiteTrans.get_id());
 
 
     }
@@ -109,8 +131,8 @@ public class MyCanvas extends JPanel implements Printable {
 	public void paint(Graphics g)
 	{
         Graphics2D g2 = (Graphics2D) g;
-        //g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
-        g2.setStroke(new BasicStroke(1.3f));
+        g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+        g2.setStroke(new BasicStroke(1.5f));
         g2.clearRect(0,0,this.getWidth(),this.getHeight());
         //g2.setRenderingHint(RenderingHints.KEY_TEXT_ANTIALIASING, RenderingHints.VALUE_TEXT_ANTIALIAS_ON);
         for(forme p:formes)

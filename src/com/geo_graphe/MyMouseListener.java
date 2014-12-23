@@ -10,10 +10,14 @@ public class MyMouseListener implements MouseListener,MouseMotionListener {
 	
 	MyCanvas canvas;
     String mode;
+    String sous_mode;
     forme f = null;
     private Triangle T;
     private Cercle C;
     private Texte text;
+    private CercleTrans cercleTrans;
+    private DroiteTrans droiteTrans;
+    private SegmentTrans segmentTrans;
     private Rectangl R;
     private PtCercle ptc = null;
     private PtDroite psd;
@@ -39,6 +43,7 @@ public class MyMouseListener implements MouseListener,MouseMotionListener {
 		this.canvas.addMouseListener(this);
 		this.canvas.addMouseMotionListener(this);
 		mode=this.canvas.getMode();
+        sous_mode="";
         nb_click=0;
 		
 	}
@@ -163,7 +168,6 @@ public class MyMouseListener implements MouseListener,MouseMotionListener {
             }
             if(pss!=null)
             {
-                System.out.println("nouveau poin sur segment");
                 canvas.addForme(pss);
                 canvas.G.addEdge(((Segment) f).P[0].get_id(),pss.get_id());
                 canvas.G.addEdge(((Segment) f).P[1].get_id(),pss.get_id());
@@ -338,6 +342,91 @@ public class MyMouseListener implements MouseListener,MouseMotionListener {
                     canvas.G.addEdge(Drperp.P[1].get_id(), Drperp.get_id());
                     //System.out.print(canvas.G.toString());
 
+                }
+                nb_click=0;
+            }
+        }
+        if(mode.equals("Translation"))
+        {
+            if (nb_click == 0) {
+                C=null;Vec=null;sous_mode="";
+            }
+            if (nb_click == 0) {
+                for (forme p : canvas.get_formes()) {
+                    if (p instanceof Cercle) {
+                        if (((Cercle) p).isNear(x, y)) {C = (Cercle) p;nb_click++;sous_mode="cercle";}
+                    }
+                    if (p instanceof Droite) {
+                        if (((Droite) p).isNear(x, y)) { D= (Droite) p;nb_click++; sous_mode="droite";}
+                    }
+                    if (p instanceof Segment) {
+                        if (((Segment) p).isNear(x, y)) {
+                            Seg = (Segment) p;
+                            nb_click++;
+                            sous_mode = "segment";
+                        }
+                    }
+                }
+            }
+            else if (nb_click == 1)
+            {
+                for (forme p : canvas.get_formes()) {
+                    if (p instanceof vecteur) {
+                        if (((vecteur) p).isNear(x, y)) {Vec = (vecteur) p;nb_click++;}
+                    }
+                }
+                if(sous_mode.equals("cercle")) {
+                    if ((C != null) && (Vec != null)) {
+                        init=new Pt(-10,-10,++this.canvas.id_figure);
+                        pt2=new Pt(-10,-10,++this.canvas.id_figure);
+                        canvas.addForme(init);
+                        canvas.addForme(pt2);
+                        cercleTrans = new CercleTrans(C, Vec,init,pt2, ++this.canvas.id_figure);
+                        canvas.addForme(cercleTrans);
+                        //System.out.println(D.P[0].id+" "+D.P[1].id+" "+init.get_id()+" "+Drperp.get_id());
+                        canvas.G.addEdge(C.P[0].id, cercleTrans.get_id());
+                        canvas.G.addEdge(C.P[1].id, cercleTrans.get_id());
+                        canvas.G.addEdge(Vec.P[0].id, cercleTrans.get_id());
+                        canvas.G.addEdge(Vec.P[1].id, cercleTrans.get_id());
+                    }
+                }
+                if(sous_mode.equals("droite")) {
+                    if ((D != null) && (Vec != null)) {
+                        init=new Pt(-10,-10,++this.canvas.id_figure);
+                        pt2=new Pt(-10,-10,++this.canvas.id_figure);
+                        canvas.addForme(init);
+                        canvas.addForme(pt2);
+                         droiteTrans= new DroiteTrans(D, Vec,init,pt2, ++this.canvas.id_figure);
+                        canvas.addForme(droiteTrans);
+                        //System.out.println(D.P[0].id+" "+D.P[1].id+" "+init.get_id()+" "+Drperp.get_id());
+                        canvas.G.addEdge(D.P[0].id, droiteTrans.get_id());
+                        canvas.G.addEdge(D.P[1].id, droiteTrans.get_id());
+                        canvas.G.addEdge(D.P[0].id, droiteTrans.P[0].get_id());
+                        canvas.G.addEdge(D.P[0].id, droiteTrans.P[1].get_id());
+                        canvas.G.addEdge(D.P[1].id, droiteTrans.P[0].get_id());
+                        canvas.G.addEdge(D.P[1].id, droiteTrans.P[1].get_id());
+                        canvas.G.addEdge(Vec.P[0].id, droiteTrans.get_id());
+                        canvas.G.addEdge(Vec.P[1].id, droiteTrans.get_id());
+                    }
+                }
+                if (sous_mode.equals("segment")) {
+                    if ((Seg != null) && (Vec != null)) {
+                        init = new Pt(-10, -10, ++this.canvas.id_figure);
+                        pt2 = new Pt(-10, -10, ++this.canvas.id_figure);
+                        canvas.addForme(init);
+                        canvas.addForme(pt2);
+                        segmentTrans = new SegmentTrans(Seg, Vec, init, pt2, ++this.canvas.id_figure);
+                        canvas.addForme(segmentTrans);
+                        //System.out.println(D.P[0].id+" "+D.P[1].id+" "+init.get_id()+" "+Drperp.get_id());
+                        canvas.G.addEdge(Seg.P[0].id, segmentTrans.get_id());
+                        canvas.G.addEdge(Seg.P[1].id, segmentTrans.get_id());
+                        canvas.G.addEdge(Seg.P[0].id, segmentTrans.P[0].get_id());
+                        canvas.G.addEdge(Seg.P[0].id, segmentTrans.P[1].get_id());
+                        canvas.G.addEdge(Seg.P[1].id, segmentTrans.P[0].get_id());
+                        canvas.G.addEdge(Seg.P[1].id, segmentTrans.P[1].get_id());
+                        canvas.G.addEdge(Vec.P[0].id, segmentTrans.get_id());
+                        canvas.G.addEdge(Vec.P[1].id, segmentTrans.get_id());
+                    }
                 }
                 nb_click=0;
             }
@@ -573,6 +662,9 @@ public class MyMouseListener implements MouseListener,MouseMotionListener {
         {
             D.update(x,y,pt2.get_id());
         }
+        if (mode.equals("Segment")) {
+            Seg.update(x, y, pt2.get_id());
+        }
 
         canvas.repaint();
         if(mode.equals("Translate"))
@@ -582,6 +674,9 @@ public class MyMouseListener implements MouseListener,MouseMotionListener {
                 if (p instanceof Pt)
                 {
                     ((Pt) p).set_coord(((Pt) p).getX()+(x-init.getX()), ((Pt) p).getY()+(y-init.getY()));
+                    for (forme f : canvas.get_formes()) {
+                        f.update(((Pt) p).getX(), ((Pt) p).getY(), ((Pt) p).get_id());
+                    }
 
                 }
                 if(p instanceof Repere)
@@ -679,7 +774,7 @@ public class MyMouseListener implements MouseListener,MouseMotionListener {
             f=assign (x,y,pt2.get_id());
             if(f!=null)
             {
-                pr.B=(Pt)f;
+                pr.P[1] = (Pt) f;
                 pt2.set_coord(-10,-10);
             }
             //else C.update(x,y,pt2.get_id());
@@ -728,6 +823,10 @@ public class MyMouseListener implements MouseListener,MouseMotionListener {
             if(f instanceof Cercle){ if(((Cercle) f).isNear(x,y)) {}}
             if(f instanceof Droite){ if(((Droite) f).isNear(x,y)) {}}
             if(f instanceof Segment){ if(((Segment) f).isNear(x,y)) {}}
+            if (f instanceof PolyRegulier) {
+                if (((PolyRegulier) f).isNear(x, y)) {
+                }
+            }
         }
 
 

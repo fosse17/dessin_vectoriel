@@ -151,10 +151,7 @@ public class Pt implements forme, Serializable {
 
     public boolean isNear(int X, int Y)
     {
-        if (this.distance(x, y, X, Y) < 10)
-            return(true);
-        else
-            return(false);
+        return this.distance(x, y, X, Y) < 10 && this.is_movable();
     }
 
     public double distance(int x1, int y1, int x2, int y2)

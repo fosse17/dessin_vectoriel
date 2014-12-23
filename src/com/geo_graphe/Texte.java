@@ -7,9 +7,19 @@ import java.awt.*;
  */
 public class Texte implements forme{
 
-    private String text;
     Pt A;
     int id;
+    private String text;
+    private int fontSize;
+    private Color col;
+
+    public Texte(String t, Pt A, int id) {
+        this.A = A;
+        this.id = id;
+        this.text = t;
+        fontSize = 20;
+        col = Color.black;
+    }
 
     public int getFontSize() {
         return fontSize;
@@ -27,19 +37,6 @@ public class Texte implements forme{
         this.col = col;
     }
 
-    private int fontSize;
-    private Color col;
-
-
-
-    public Texte(String t,Pt A, int id) {
-        this.A=A;
-        this.id=id;
-        this.text=t;
-        fontSize=20;
-        col=Color.black;
-    }
-
     public void draw(Graphics g)
     {
         //super.draw(g);
@@ -47,7 +44,7 @@ public class Texte implements forme{
         g.setFont(new Font("TimesRoman", Font.BOLD, fontSize));
 
         g.setColor(col);
-        g.drawString(text,this.A.getX()+5,this.A.getY());
+        g.drawString(text, this.A.getX() + 7, this.A.getY());
         g.setColor(anc);
     }
 
@@ -62,13 +59,13 @@ public class Texte implements forme{
     }
 
     @Override
-    public void set_id(int i) {
-
+    public int get_id() {
+        return this.id;
     }
 
     @Override
-    public int get_id() {
-        return this.id;
+    public void set_id(int i) {
+
     }
 
     public void update(int x,int y,int id)
@@ -80,13 +77,13 @@ public class Texte implements forme{
     }
 
     @Override
-    public void set_couleur(Color c) {
-
+    public Color get_couleur() {
+        return null;
     }
 
     @Override
-    public Color get_couleur() {
-        return null;
+    public void set_couleur(Color c) {
+
     }
 
     @Override

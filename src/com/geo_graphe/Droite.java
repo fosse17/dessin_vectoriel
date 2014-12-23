@@ -88,7 +88,7 @@ public class Droite extends Forme2D implements forme {
 
     @Override
     public void draw(Graphics g) {
-        int m=100000;
+        int m = 1000;
         int vectx=(P[1].getX()-P[0].getX())*m;
         Color a=g.getColor();
         int vecty=(P[1].getY()-P[0].getY())*m;

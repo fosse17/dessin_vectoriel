@@ -5,12 +5,11 @@ import java.awt.*;
 /**
  * Created by Stephane on 21/12/14.
  */
-public class PolyRegulier implements forme {
+public class PolyRegulier extends Forme2D implements forme {
 
     int id,nbcote,rayon,dx,dy;
     Polygon p;
     double angle;
-    Pt O,B;
     Color couleur = new Color(123, 123, 12, 50);
     int tranparence = 50;
     int tranparence_over = 70;
@@ -18,8 +17,7 @@ public class PolyRegulier implements forme {
 
     public PolyRegulier(Pt A,Pt B,int nbcote,int id)
     {
-         this.O=A;
-        this.B=B;
+        super(A, B, id);
         this.id=id;
         this.nbcote=nbcote;
         this.rayon=(int)A.distance(B.getX(),B.getY());
@@ -29,8 +27,8 @@ public class PolyRegulier implements forme {
         p = new Polygon();
         for (int i = 0; i < this.nbcote; i++)
             p.addPoint((int)
-                            (this.O.getX() + this.rayon * Math.cos(angle + i * 2 * Math.PI / this.nbcote)),
-                    (int) (this.O.getY() + this.rayon * Math.sin(angle + i * 2 * Math.PI / this.nbcote)));
+                            (this.P[0].getX() + this.rayon * Math.cos(angle + i * 2 * Math.PI / this.nbcote)),
+                    (int) (this.P[0].getY() + this.rayon * Math.sin(angle + i * 2 * Math.PI / this.nbcote)));
     }
 
     public boolean isNear(int x, int y) {
@@ -55,25 +53,25 @@ public class PolyRegulier implements forme {
 
     @Override
     public void update(int x, int y, int id) {
-       if(id==B.get_id()) {
-           B.set_coord(x, y);
-           this.rayon = (int) O.distance(B.getX(), B.getY());
-           dx = B.getX() - O.getX();
-           dy = B.getY() - O.getY();
+        if (id == P[1].get_id()) {
+            P[1].set_coord(x, y);
+            this.rayon = (int) P[0].distance(P[1].getX(), P[1].getY());
+            dx = P[1].getX() - P[0].getX();
+            dy = P[1].getY() - P[0].getY();
            angle = Math.atan2(dy, dx);
        }
-        if(id==O.get_id()) {
-            O.set_coord(x, y);
-            this.rayon = (int) O.distance(B.getX(), B.getY());
-            dx = B.getX() - O.getX();
-            dy = B.getY() - O.getY();
+        if (id == P[0].get_id()) {
+            P[0].set_coord(x, y);
+            this.rayon = (int) P[0].distance(P[1].getX(), P[1].getY());
+            dx = P[1].getX() - P[0].getX();
+            dy = P[1].getY() - P[0].getY();
             angle = Math.atan2(dy, dx);
         }
         p = new Polygon();
         for (int i = 0; i < this.nbcote; i++)
             p.addPoint((int)
-                            (this.O.getX() + this.rayon * Math.cos(angle + i * 2 * Math.PI / this.nbcote)),
-                    (int) (this.O.getY() + this.rayon * Math.sin(angle + i * 2 * Math.PI / this.nbcote)));
+                            (this.P[0].getX() + this.rayon * Math.cos(angle + i * 2 * Math.PI / this.nbcote)),
+                    (int) (this.P[0].getY() + this.rayon * Math.sin(angle + i * 2 * Math.PI / this.nbcote)));
 
     }
 

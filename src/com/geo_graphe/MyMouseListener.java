@@ -674,6 +674,9 @@ public class MyMouseListener implements MouseListener,MouseMotionListener {
                 if (p instanceof Pt)
                 {
                     ((Pt) p).set_coord(((Pt) p).getX()+(x-init.getX()), ((Pt) p).getY()+(y-init.getY()));
+                    for (forme f : canvas.get_formes()) {
+                        f.update(((Pt) p).getX(), ((Pt) p).getY(), ((Pt) p).get_id());
+                    }
 
                 }
                 if(p instanceof Repere)
@@ -771,7 +774,7 @@ public class MyMouseListener implements MouseListener,MouseMotionListener {
             f=assign (x,y,pt2.get_id());
             if(f!=null)
             {
-                pr.B=(Pt)f;
+                pr.P[1] = (Pt) f;
                 pt2.set_coord(-10,-10);
             }
             //else C.update(x,y,pt2.get_id());

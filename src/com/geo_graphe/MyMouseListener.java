@@ -17,6 +17,7 @@ public class MyMouseListener implements MouseListener,MouseMotionListener {
     private Texte text;
     private CercleTrans cercleTrans;
     private DroiteTrans droiteTrans;
+    private SegmentTrans segmentTrans;
     private Rectangl R;
     private PtCercle ptc = null;
     private PtDroite psd;
@@ -358,6 +359,13 @@ public class MyMouseListener implements MouseListener,MouseMotionListener {
                     if (p instanceof Droite) {
                         if (((Droite) p).isNear(x, y)) { D= (Droite) p;nb_click++; sous_mode="droite";}
                     }
+                    if (p instanceof Segment) {
+                        if (((Segment) p).isNear(x, y)) {
+                            Seg = (Segment) p;
+                            nb_click++;
+                            sous_mode = "segment";
+                        }
+                    }
                 }
             }
             else if (nb_click == 1)
@@ -399,6 +407,25 @@ public class MyMouseListener implements MouseListener,MouseMotionListener {
                         canvas.G.addEdge(D.P[1].id, droiteTrans.P[1].get_id());
                         canvas.G.addEdge(Vec.P[0].id, droiteTrans.get_id());
                         canvas.G.addEdge(Vec.P[1].id, droiteTrans.get_id());
+                    }
+                }
+                if (sous_mode.equals("segment")) {
+                    if ((Seg != null) && (Vec != null)) {
+                        init = new Pt(-10, -10, ++this.canvas.id_figure);
+                        pt2 = new Pt(-10, -10, ++this.canvas.id_figure);
+                        canvas.addForme(init);
+                        canvas.addForme(pt2);
+                        segmentTrans = new SegmentTrans(Seg, Vec, init, pt2, ++this.canvas.id_figure);
+                        canvas.addForme(segmentTrans);
+                        //System.out.println(D.P[0].id+" "+D.P[1].id+" "+init.get_id()+" "+Drperp.get_id());
+                        canvas.G.addEdge(Seg.P[0].id, segmentTrans.get_id());
+                        canvas.G.addEdge(Seg.P[1].id, segmentTrans.get_id());
+                        canvas.G.addEdge(Seg.P[0].id, segmentTrans.P[0].get_id());
+                        canvas.G.addEdge(Seg.P[0].id, segmentTrans.P[1].get_id());
+                        canvas.G.addEdge(Seg.P[1].id, segmentTrans.P[0].get_id());
+                        canvas.G.addEdge(Seg.P[1].id, segmentTrans.P[1].get_id());
+                        canvas.G.addEdge(Vec.P[0].id, segmentTrans.get_id());
+                        canvas.G.addEdge(Vec.P[1].id, segmentTrans.get_id());
                     }
                 }
                 nb_click=0;
@@ -634,6 +661,9 @@ public class MyMouseListener implements MouseListener,MouseMotionListener {
         if (mode.equals("Droite"))
         {
             D.update(x,y,pt2.get_id());
+        }
+        if (mode.equals("Segment")) {
+            Seg.update(x, y, pt2.get_id());
         }
 
         canvas.repaint();

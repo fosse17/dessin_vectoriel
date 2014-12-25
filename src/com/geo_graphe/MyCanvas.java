@@ -42,6 +42,8 @@ public class MyCanvas extends JPanel implements Printable {
         Pt pp2 = new Pt(-10, -10, ++this.id_figure);
 
         PtSymCentrale ptSymCentrale = new PtSymCentrale(p, p1, ++this.id_figure);
+        Droite d = new Droite(p, p1, ++this.id_figure);
+        DroiteSymCentrale droiteSymCentrale = new DroiteSymCentrale(d, p2, pp1, pp2, ++this.id_figure);
 
 
         this.addForme(test);
@@ -51,10 +53,24 @@ public class MyCanvas extends JPanel implements Printable {
         this.addForme(pp1);
         this.addForme(pp2);
         this.addForme(ptSymCentrale);
+        this.addForme(d);
+        this.addForme(droiteSymCentrale);
 
 
         G.addEdge(p.get_id(), ptSymCentrale.get_id());
         G.addEdge(p1.get_id(), ptSymCentrale.get_id());
+
+        G.addEdge(p.get_id(), droiteSymCentrale.get_id());
+        G.addEdge(p.get_id(), droiteSymCentrale.P[0].get_id());
+        G.addEdge(p.get_id(), droiteSymCentrale.P[1].get_id());
+
+        G.addEdge(p1.get_id(), droiteSymCentrale.get_id());
+        G.addEdge(p1.get_id(), droiteSymCentrale.P[0].get_id());
+        G.addEdge(p1.get_id(), droiteSymCentrale.P[1].get_id());
+
+        G.addEdge(p2.get_id(), droiteSymCentrale.get_id());
+        G.addEdge(p2.get_id(), droiteSymCentrale.P[0].get_id());
+        G.addEdge(p2.get_id(), droiteSymCentrale.P[1].get_id());
 
     }
 

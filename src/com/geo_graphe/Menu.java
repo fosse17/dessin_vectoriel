@@ -16,13 +16,13 @@ import java.util.LinkedList;
 public class Menu extends JMenuBar implements ActionListener{
 
     /**
-     * The Canvas.
-     */
-    protected MyCanvas canvas;
-    /**
      * The constant nbcote.
      */
     protected static int nbcote=0;
+    /**
+     * The Canvas.
+     */
+    protected MyCanvas canvas;
     /**
      * The M.
      */
@@ -85,6 +85,11 @@ public class Menu extends JMenuBar implements ActionListener{
         JMenuItem mtranscercle = new JMenuItem("Translation");
         mtranscercle.addActionListener(this);
         mdessiner.add(mtranscercle);
+
+        JMenuItem msymcentrale = new JMenuItem("Symétrie Centrale");
+        msymcentrale.setActionCommand("Symcentrale");
+        msymcentrale.addActionListener(this);
+        mdessiner.add(msymcentrale);
 
         JMenuItem msegment = new JMenuItem("Segment");
 		msegment.addActionListener(this);

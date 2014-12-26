@@ -47,6 +47,29 @@ public class Menu extends JMenuBar implements ActionListener{
      * Init void.
      */
     public void init() {
+        JMenu mfichier = new JMenu("Fichier");
+        this.add(mfichier);
+
+        JMenuItem mnew = new JMenuItem("Nouveau");
+        mnew.addActionListener(this);
+        mfichier.add(mnew);
+
+        JMenuItem mopen = new JMenuItem("Ouvrir");
+        mopen.addActionListener(this);
+        mfichier.add(mopen);
+
+        JMenuItem msauve = new JMenuItem("Enregistrer");
+        msauve.addActionListener(this);
+        mfichier.add(msauve);
+
+        JMenuItem msauve2 = new JMenuItem("Enregistrer sous");
+        msauve2.addActionListener(this);
+        mfichier.add(msauve2);
+
+        JMenuItem mimprim = new JMenuItem("Imprimer");
+        mimprim.addActionListener(this);
+        mfichier.add(mimprim);
+
 
         JMenu mdessiner = new JMenu("Dessiner");
 		this.add(mdessiner);
@@ -160,13 +183,13 @@ public class Menu extends JMenuBar implements ActionListener{
         mcolor.addActionListener(this);
         this.add(maction);
 
-        JMenuItem mprint = new JMenuItem("Print");
+        /*JMenuItem mprint = new JMenuItem("Print");
         mprint.addActionListener(this);
         this.add(mprint);
 
         JMenuItem msave = new JMenuItem("Save");
         msave.addActionListener(this);
-        this.add(msave);
+        this.add(msave);*/
 
         JMenuItem mclear = new JMenuItem("Clear");
         mclear.addActionListener(this);
@@ -181,8 +204,8 @@ public class Menu extends JMenuBar implements ActionListener{
         maction.add(mzoommoins);
         maction.add(mtranslate);
         maction.add(mcolor);
-        maction.add(mprint);
-        maction.add(msave);
+        /*maction.add(mprint);
+        maction.add(msave);*/
         maction.add(mclear);
         maction.add(mrestore);
 
@@ -212,11 +235,11 @@ public class Menu extends JMenuBar implements ActionListener{
             canvas.Zoom(0.8);
             canvas.repaint();
         }
-        if(e.getActionCommand()=="Print")
+        if(e.getActionCommand()=="Imprimer")
         {
             canvas.do_print();
         }
-        if (e.getActionCommand() == "Clear") {
+        if (e.getActionCommand() == "Nouveau") {
             canvas.clear();
         }
         if (e.getActionCommand() == "Polyreg") {
@@ -224,7 +247,7 @@ public class Menu extends JMenuBar implements ActionListener{
             nbcote=Integer.parseInt(tt);
 
         }
-        if (e.getActionCommand() == "Save") {
+        if (e.getActionCommand() == "Enregistrer") {
             try {
                 FileOutputStream fos = new FileOutputStream("figure.txt");
                 ObjectOutputStream oos = new ObjectOutputStream(fos);
@@ -237,7 +260,7 @@ public class Menu extends JMenuBar implements ActionListener{
                 System.out.println("");
             }
         }
-        if (e.getActionCommand() == "Restore") {
+        if (e.getActionCommand() == "Ouvrir") {
             forme f;
             try {
                 ObjectInputStream oi = new ObjectInputStream(new FileInputStream("figure.txt"));

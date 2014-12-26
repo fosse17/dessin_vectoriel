@@ -151,7 +151,7 @@ public class Pt implements forme, Serializable {
 
     public boolean isNear(int X, int Y)
     {
-        return this.distance(x, y, X, Y) < 10 && this.is_movable();
+        return this.distance(x, y, X, Y) < 10 && this.isVisible();
     }
 
     public double distance(int x1, int y1, int x2, int y2)

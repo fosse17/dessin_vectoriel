@@ -41,16 +41,10 @@ public class MyCanvas extends JPanel implements Printable {
         Pt pp1 = new Pt(-10, -10, ++this.id_figure);
         Pt pp2 = new Pt(-10, -10, ++this.id_figure);
 
+        PtSymCentrale ptSymCentrale = new PtSymCentrale(p, p1, ++this.id_figure);
+        Droite d = new Droite(p, p1, ++this.id_figure);
+        DroiteSymCentrale droiteSymCentrale = new DroiteSymCentrale(d, p2, pp1, pp2, ++this.id_figure);
 
-        Cercle c = new Cercle(p, p1, ++this.id_figure);
-        PtCercle ptc = new PtCercle(c, 0, 0, ++this.id_figure);
-        tangente ta = new tangente(c, ptc, test, ++this.id_figure);
-        vecteur v=new vecteur(p,p2,++this.id_figure);
-        Texte tt=new Texte("jhfl",test,++this.id_figure);
-        PolyRegulier pr=new PolyRegulier(p,p1,6,++this.id_figure);
-        PtTrans ptTrans=new PtTrans(p2,v,++this.id_figure);
-        //CercleTrans cTrans=new CercleTrans(c,v,pp1,pp2,++this.id_figure);
-        DroiteTrans droiteTrans=new DroiteTrans(ta,v,pp1,pp2,++this.id_figure);
 
         this.addForme(test);
         this.addForme(p);
@@ -58,51 +52,25 @@ public class MyCanvas extends JPanel implements Printable {
         this.addForme(p2);
         this.addForme(pp1);
         this.addForme(pp2);
-        this.addForme(c);
-        this.addForme(ptc);
-        this.addForme(ta);
-        this.addForme(v);
-        this.addForme(tt);
-        this.addForme(pr);
-        this.addForme(ptTrans);
-        //this.addForme(cTrans);
-        this.addForme(droiteTrans);
+        this.addForme(ptSymCentrale);
+        this.addForme(d);
+        this.addForme(droiteSymCentrale);
 
-        G.addEdge(c.P[0].id, c.id);
-        G.addEdge(c.P[1].id, c.id);
 
-        G.addEdge(c.P[0].id, ptc.get_id());
-        G.addEdge(c.P[1].id, ptc.get_id());
-        G.addEdge(c.id, ptc.get_id());
+        G.addEdge(p.get_id(), ptSymCentrale.get_id());
+        G.addEdge(p1.get_id(), ptSymCentrale.get_id());
 
-        G.addEdge(ta.P[0].id, ta.get_id());
-        G.addEdge(ptc.get_id(), ta.get_id());
+        G.addEdge(p.get_id(), droiteSymCentrale.get_id());
+        G.addEdge(p.get_id(), droiteSymCentrale.P[0].get_id());
+        G.addEdge(p.get_id(), droiteSymCentrale.P[1].get_id());
 
-        G.addEdge(v.P[0].id, v.get_id());
-        G.addEdge(v.P[1].id, v.get_id());
+        G.addEdge(p1.get_id(), droiteSymCentrale.get_id());
+        G.addEdge(p1.get_id(), droiteSymCentrale.P[0].get_id());
+        G.addEdge(p1.get_id(), droiteSymCentrale.P[1].get_id());
 
-        G.addEdge(test.get_id(), tt.get_id());
-
-        G.addEdge(p.get_id(), pr.get_id());
-        G.addEdge(p1.get_id(), pr.get_id());
-
-        G.addEdge(p2.get_id(), ptTrans.get_id());
-        G.addEdge(v.P[0].get_id(), ptTrans.get_id());
-        G.addEdge(v.P[1].get_id(), ptTrans.get_id());
-        G.addEdge(v.get_id(), ptTrans.get_id());
-
-        /*G.addEdge(c.P[0].get_id(), cTrans.get_id());
-        G.addEdge(c.P[1].get_id(), cTrans.get_id());
-        G.addEdge(c.get_id(), cTrans.get_id());
-        G.addEdge(v.P[0].get_id(), cTrans.get_id());
-        G.addEdge(v.P[1].get_id(), cTrans.get_id());*/
-
-        G.addEdge(ta.P[0].get_id(), droiteTrans.get_id());
-        G.addEdge(ta.P[1].get_id(), droiteTrans.get_id());
-        G.addEdge(ta.get_id(), droiteTrans.get_id());
-        G.addEdge(v.P[0].get_id(), droiteTrans.get_id());
-        G.addEdge(v.P[1].get_id(), droiteTrans.get_id());
-
+        G.addEdge(p2.get_id(), droiteSymCentrale.get_id());
+        G.addEdge(p2.get_id(), droiteSymCentrale.P[0].get_id());
+        G.addEdge(p2.get_id(), droiteSymCentrale.P[1].get_id());
 
     }
 

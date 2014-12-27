@@ -114,6 +114,11 @@ public class Menu extends JMenuBar implements ActionListener{
         msymcentrale.addActionListener(this);
         mdessiner.add(msymcentrale);
 
+        JMenuItem msymaxiale = new JMenuItem("Symétrie Axiale");
+        msymaxiale.setActionCommand("Symaxiale");
+        msymaxiale.addActionListener(this);
+        mdessiner.add(msymaxiale);
+
         JMenuItem msegment = new JMenuItem("Segment");
 		msegment.addActionListener(this);
 		mdessiner.add(msegment);

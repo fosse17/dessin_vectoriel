@@ -2,20 +2,43 @@ package com.geo_graphe;
 
 import java.awt.*;
 
+/**
+ * The type Droite.
+ */
 public class Droite extends Forme2D implements forme {
-    private Color over=Color.BLUE;
+    private Color over=Color.BLUE;//si l'on passe à coté d'une droite, elle devient bleu.
     private Color nover=couleur;
 
+    /**
+     * Instancie une nouvelle droite
+     *
+     * @param A un point A
+     * @param B un point B
+     * @param id l'id de la droite
+     */
     Droite(Pt A, Pt B,int id)
     {
         super(A,B,id);
     }
 
+    /**
+     * Updade _ end.
+     *
+     * @param x the x
+     * @param y the y
+     */
     public void updade_end(int x,int y)
     {
         super.update_end(x,y);
     }
 
+    /**
+     * Fonction permettant de savoir si la souris se trouve près ou non d'une droite.
+     *
+     * @param a the a
+     * @param b the b
+     * @return vrai si la souris est proche, faux sinon.
+     */
     public boolean isNear(int a,int b)
     {
         int ABx=P[1].getX()-P[0].getX();
@@ -27,7 +50,7 @@ public class Droite extends Forme2D implements forme {
 
     /**
      * retourne les coef a,b,c de la droite d'équation ax+by+c=0;
-     * @return   le tableau d'entiers
+     * @return le tableau d'entiers
      */
     public int[] coeff()
     {
@@ -38,6 +61,12 @@ public class Droite extends Forme2D implements forme {
         return t;
     }
 
+    /**
+     * Determine si deux droites sont parallèles ou non.
+     *
+     * @param d La droite D
+     * @return vrai si parallele (coefficient directeur egaux), faux sinon.
+     */
     public boolean paralelle(Droite d)
     {
         int[] t=new int[3];

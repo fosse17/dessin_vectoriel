@@ -12,14 +12,15 @@ class Graph {
     private int E;
 
     /**
-     * Creation d'un graphe vide avec <tt>V</tt> sommets sans arretes
-     * param V le nombre de sommet
+     * Creation d'un graphe vide avec V sommets sans aretes
+     * param V le nombre de sommets
      *
      * @throws java.lang.IllegalArgumentException
      *          si <tt>V</tt> < 0
      */
     public Graph(int V) {
-        if (V < 0) throw new IllegalArgumentException("Number of vertices must be nonnegative");
+        if (V < 0) throw new IllegalArgumentException("Le nombre d'aretes ne peut pas être negatif.");
+        if (V < 0) throw new IllegalArgumentException("Le nombre d'aretes ne peut pas être negatif.");
         this.V = V;
         this.E = 0;
         adj = (LinkedList<Integer>[]) new LinkedList[10000000];
@@ -61,7 +62,7 @@ class Graph {
         }
 
         System.out.print("eeee" + arete.size());
-        //remplissages des listes d'ajdacences
+        //remplissage des listes d'adjacences
         for (int i = 0; i < arete.size(); i++) {
 
             String[] tab = new String[2];
@@ -124,7 +125,7 @@ class Graph {
      */
     private void validateVertex(int v) {
         if (v < 0 || v >= V)
-            throw new IndexOutOfBoundsException("vertex " + v + " is not between 0 and " + (V - 1));
+            throw new IndexOutOfBoundsException("le sommet " + v + " n'est pas entre 0 et " + (V - 1));
     }
 
     /**
@@ -140,99 +141,13 @@ class Graph {
         validateVertex(w);
         E++;
         adj[v].add(w);
-        //if(w!=0) adj[0].add(w);
     }
 
 
-    /**
-     * Retourne les sommets adjacents au sommet <tt>v</tt>
-     *
-     * @param v le sommet
-     * @return les sommets adjacents au sommet <tt>v</tt> comme un Iterable
-     * @throws java.lang.IndexOutOfBoundsException
-     *          unless 0 <= v < V
-     */
     public Iterable<Integer> adj(int v) {
         validateVertex(v);
         return adj[v];
     }
-
-
-    /**
-     * Retourne l'exentricite du sommet <tt>v</tt> ainsi qu'un sommet ( le premier ) pour
-     * lequel cette distance est atteinte sous forme de tableau
-     *
-     * @param v le sommet
-     * @return R un tableau 0=>sommet, 1=>exentricite pour un sommet <tt>v</tt>
-
-
-    public int[] eccentricity(int v) {
-        int[] R = new int[2];
-        validateVertex(v);
-        BreadthFirstPaths bfs;
-        int max = 0, pos = -1;
-        for (int i = 0; i < this.V; i++) {
-            bfs = new BreadthFirstPaths(this, i);
-            int b = bfs.distTo(v);
-            if (max < b) {
-                max = b;
-                pos = i;
-            }
-            //System.out.println("distance entre "+i+" et "+v+" : "+bfs.distTo(v));
-        }
-        System.out.println("exentricite de " + v + " : " + max + " atteind pour " + pos);
-        R[0] = pos;
-        R[1] = max;
-        return R;
-    }*/
-
-    /**
-     * Retourne lle diametre du graphe
-     *
-     * @return un entier ( le diametre du graphe)
-
-    public int diametre() {
-        int max = 0;
-        for (int i = 0; i < this.V; i++) {
-            int e = this.eccentricity(i)[1];
-            if (max < e) max = e;
-        }
-        return max;
-    }*/
-
-    /**
-     * Retourne une estimation du diametre du graphe par l'heuristique de HABIB
-     *
-     * @return un entier ( heuristique de Habib pour le diametre du graphe )
-
-    public int Habib() {
-        int k, balise;
-        int x4 = 0;
-        int x1 = 0;
-        balise = 0;
-        int x2 = this.eccentricity(x1)[0];
-        int x3 = this.eccentricity(x2)[0];
-        BreadthFirstPaths bfs = new BreadthFirstPaths(this, x2);
-        for (int x : bfs.pathTo(x3)) {
-            System.out.print(x + " ");
-        }
-        System.out.println();
-        System.out.println(bfs.distTo(x3));
-        if (bfs.distTo(x3) % 2 == 0) k = (int) (bfs.distTo(x3) / 2);
-        else k = (int) ((bfs.distTo(x3) + 1) / 2);
-        for (int x : bfs.pathTo(x3)) {
-            if (balise <= k) {
-                System.out.print(x + " ");
-                balise++;
-                x4 = x;
-            }
-        }
-        System.out.println();
-        System.out.println(x4);
-        int x5 = this.eccentricity(x4)[0];
-        int l = this.eccentricity(x5)[1];
-        return l;
-    }*/
 
     /**
      * Retourne un affichage du graphe.
@@ -242,7 +157,7 @@ class Graph {
     public String toString() {
         StringBuilder s = new StringBuilder();
         String NEWLINE = System.getProperty("line.separator");
-        s.append(V + " vertices, " + E + " edges " + NEWLINE);
+        s.append(V + " sommets, " + E + " aretes " + NEWLINE);
         for (int v = 0; v < this.V; v++) {
             s.append(v + ": ");
             for (int w : adj[v]) {

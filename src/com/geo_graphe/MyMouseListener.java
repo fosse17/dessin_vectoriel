@@ -27,6 +27,7 @@ public class MyMouseListener implements MouseListener,MouseMotionListener {
     private SegmentTrans segmentTrans;
     private SegmentSymCentrale segmentSymCentrale;
     private SegmentSymAxiale segmentSymAxiale;
+    private Polygone polygone;
     private PolyRegulierTrans polyRegulierTrans;
     private PolyRegulierSymCentrale polyRegulierSymCentrale;
     private PolyRegulierSymAxiale polyRegulierSymAxiale;
@@ -254,9 +255,56 @@ public class MyMouseListener implements MouseListener,MouseMotionListener {
             canvas.addForme(Vec);
         }
 
+        if (mode.equals("Poly") || mode.equals("Polyindef")) {
+
+            if (nb_click == 0) {
+                ptb = new Pt[100];
+                polygone = new Polygone(ptb, 0, ++this.canvas.id_figure);
+                if (mode.equals("Polyindef")) polygone.set_deformable(false);//pas ecore implémenter
+                canvas.addForme(polygone);
+            }
+            if (nb_click == 0) {
+                //System.out.println("je compte les points : "+nb_click);
+                f = assign(x, y, -1);
+                if (f == null) {
+                    ptb[nb_click] = new Pt(x, y, ++this.canvas.id_figure);
+                    canvas.addForme(ptb[nb_click]);
+                } else {
+                    ptb[nb_click] = (Pt) f;
+                }
+                init = ptb[nb_click];
+                polygone.add(init);
+                nb_click += 1;
+            } else if (!init.isNear(x, y)) {
+                f = assign(x, y, -1);
+                if (f == null) {
+                    ptb[nb_click] = new Pt(x, y, ++this.canvas.id_figure);
+                    canvas.addForme(ptb[nb_click]);
+                } else {
+                    ptb[nb_click] = (Pt) f;
+                }
+                polygone.add(ptb[nb_click]);
+                pt2 = new Pt(x, y, ++this.canvas.id_figure);
+                canvas.addForme(pt2);
+
+                polygone.add(pt2);
+                nb_click += 1;
+            } else {
+                polygone.minus();
+                polygone.add(init);
+                for (int i = 0; i < nb_click + 2; i++) {
+                    if (!polygone.get_deformable()) polygone.P[i].set_movable(false);
+                    canvas.G.addEdge(polygone.P[i].get_id(), polygone.get_id());
+                    pt2.set_coord(-10000, -10000);
+                }
+                nb_click = 0;
+            }
+
+        }
+
         if(mode.equals("B3"))
         {
-            int nb_point_total=3;//demande
+            int nb_point_total = Menu.nb_point_bary;
             if(nb_click==0) {ptb=new Pt[nb_point_total]; }
             if(nb_click<nb_point_total)
             {
@@ -1056,6 +1104,7 @@ public class MyMouseListener implements MouseListener,MouseMotionListener {
             Seg.update(x, y, pt2.get_id());
         }
 
+
         canvas.repaint();
         if(mode.equals("Translate"))
         {
@@ -1215,10 +1264,14 @@ public class MyMouseListener implements MouseListener,MouseMotionListener {
                 if (((PolyRegulier) f).isNear(x, y)) {
                 }
             }
+            if (f instanceof Polygone) {
+                if (((Polygone) f).isNear(x, y)) {
+                }
+            }
         }
-
-
-
+        if (mode.equals("Poly") || mode.equals("Polyindef")) {
+            if (nb_click > 1) polygone.updatelast(x, y);
+        }
         if (mode.equals("Triangle"))
         {
             if(nb_click==1) T.update1(x, y);

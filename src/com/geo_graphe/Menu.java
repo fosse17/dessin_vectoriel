@@ -19,6 +19,7 @@ public class Menu extends JMenuBar implements ActionListener{
      * The constant nbcote.
      */
     protected static int nbcote=0;
+    protected static int nb_point_bary = 0;
     /**
      * The Canvas.
      */
@@ -78,7 +79,7 @@ public class Menu extends JMenuBar implements ActionListener{
 		mrectangl.addActionListener(this);
 		mdessiner.add(mrectangl);
 
-        JMenuItem mbary = new JMenuItem("Barycentre3");
+        JMenuItem mbary = new JMenuItem("Barycentre");
         mbary.setActionCommand("B3");//penser a utiliser les action commande pour les autres partie du menu
         mbary.addActionListener(this);
         mdessiner.add(mbary);
@@ -93,6 +94,16 @@ public class Menu extends JMenuBar implements ActionListener{
         mmil.addActionListener(this);
         mdessiner.add(mmil);
 
+        JMenuItem mpoly = new JMenuItem("Polygone");
+        mpoly.setActionCommand("Poly");//penser a utiliser les action commande pour les autres partie du menu
+        mpoly.addActionListener(this);
+        mdessiner.add(mpoly);
+
+        JMenuItem mpolyindef = new JMenuItem("Polygone indeformable");
+        mpolyindef.setActionCommand("Polyindef");//penser a utiliser les action commande pour les autres partie du menu
+        mpolyindef.addActionListener(this);
+        mdessiner.add(mpolyindef);
+
         JMenuItem mcercle = new JMenuItem("Cercle");
 		mcercle.addActionListener(this);
 		mdessiner.add(mcercle);
@@ -101,9 +112,9 @@ public class Menu extends JMenuBar implements ActionListener{
         mtexte.addActionListener(this);
         mdessiner.add(mtexte);
 
-        JMenuItem mpoly = new JMenuItem("Polyreg");
-        mpoly.addActionListener(this);
-        mdessiner.add(mpoly);
+        JMenuItem mpolyreg = new JMenuItem("Polyreg");
+        mpolyreg.addActionListener(this);
+        mdessiner.add(mpolyreg);
 
         JMenuItem mtranscercle = new JMenuItem("Translation");
         mtranscercle.addActionListener(this);
@@ -246,6 +257,9 @@ public class Menu extends JMenuBar implements ActionListener{
         }
         if (e.getActionCommand() == "Nouveau") {
             canvas.clear();
+        }
+        if (e.getActionCommand() == "B3") {
+            nb_point_bary = Integer.parseInt(JOptionPane.showInputDialog("nombre de points:"));
         }
         if (e.getActionCommand() == "Polyreg") {
             String tt = JOptionPane.showInputDialog("nombre de cotés:");

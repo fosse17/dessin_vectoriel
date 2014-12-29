@@ -40,10 +40,11 @@ public class MyCanvas extends JPanel implements Printable {
 
         Pt pp1 = new Pt(-10, -10, ++this.id_figure);
         Pt pp2 = new Pt(-10, -10, ++this.id_figure);
-
-        Droite d = new Droite(p, p1, ++this.id_figure);
-        Droite d1 = new Droite(test, p2, ++this.id_figure);
-        DroiteSymAxiale droiteSymAxiale = new DroiteSymAxiale(d, d1, pp1, pp2, ++this.id_figure);
+        Pt[] pts = new Pt[100];
+        Polygone polygone = new Polygone(pts, 0, ++this.id_figure);
+        polygone.add(p);
+        polygone.add(p1);
+        polygone.add(p2);
 
 
 
@@ -53,29 +54,12 @@ public class MyCanvas extends JPanel implements Printable {
         this.addForme(p2);
         this.addForme(pp1);
         this.addForme(pp2);
-        this.addForme(d);
-        this.addForme(d1);
-        this.addForme(droiteSymAxiale);
+        this.addForme(polygone);
 
-        G.addEdge(p.get_id(), d.get_id());
-        G.addEdge(p1.get_id(), d.get_id());
 
-        G.addEdge(p.get_id(), droiteSymAxiale.get_id());
-        G.addEdge(p.get_id(), droiteSymAxiale.P[0].get_id());
-        G.addEdge(p.get_id(), droiteSymAxiale.P[1].get_id());
-
-        G.addEdge(p1.get_id(), droiteSymAxiale.get_id());
-        G.addEdge(p1.get_id(), droiteSymAxiale.P[0].get_id());
-        G.addEdge(p1.get_id(), droiteSymAxiale.P[1].get_id());
-
-        G.addEdge(p2.get_id(), droiteSymAxiale.get_id());
-        G.addEdge(p2.get_id(), droiteSymAxiale.P[0].get_id());
-        G.addEdge(p2.get_id(), droiteSymAxiale.P[1].get_id());
-
-        G.addEdge(test.get_id(), droiteSymAxiale.get_id());
-        G.addEdge(test.get_id(), droiteSymAxiale.P[0].get_id());
-        G.addEdge(test.get_id(), droiteSymAxiale.P[1].get_id());
-
+        G.addEdge(p.get_id(), polygone.get_id());
+        G.addEdge(p1.get_id(), polygone.get_id());
+        G.addEdge(p2.get_id(), polygone.get_id());
 
 
     }
@@ -108,7 +92,7 @@ public class MyCanvas extends JPanel implements Printable {
         g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
         g2.setStroke(new BasicStroke(1.5f));
         g2.clearRect(0,0,this.getWidth(),this.getHeight());
-        //g2.setRenderingHint(RenderingHints.KEY_TEXT_ANTIALIASING, RenderingHints.VALUE_TEXT_ANTIALIAS_ON);
+        g2.setRenderingHint(RenderingHints.KEY_TEXT_ANTIALIASING, RenderingHints.VALUE_TEXT_ANTIALIAS_ON);
         for(forme p:formes)
         {
             if(p.isVisible())

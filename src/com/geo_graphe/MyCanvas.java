@@ -44,11 +44,7 @@ public class MyCanvas extends JPanel implements Printable {
 
         Pt pp1 = new Pt(-10, -10, ++this.id_figure);
         Pt pp2 = new Pt(-10, -10, ++this.id_figure);
-        Pt[] pts = new Pt[100];
-        Polygone polygone = new Polygone(pts, 0, ++this.id_figure);
-        polygone.add(p);
-        polygone.add(p1);
-        polygone.add(p2);
+
 
 
 
@@ -58,12 +54,7 @@ public class MyCanvas extends JPanel implements Printable {
         this.addForme(p2);
         this.addForme(pp1);
         this.addForme(pp2);
-        this.addForme(polygone);
 
-
-        G.addEdge(p.get_id(), polygone.get_id());
-        G.addEdge(p1.get_id(), polygone.get_id());
-        G.addEdge(p2.get_id(), polygone.get_id());
 
 
     }

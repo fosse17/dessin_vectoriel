@@ -2,17 +2,43 @@ package com.geo_graphe;
 
 import java.awt.*;
 
+/**
+ * Classe pour créer un triangle
+ */
 public class Triangle extends Forme2D implements forme{
 
+    /**
+     * Couleur du triangle
+     */
     Color couleur=new Color(123,123,12,50);
+    /**
+     * The Visible.
+     */
     boolean visible=true;
+    /**
+     * initialise le mode à point
+     */
     private String mode="point";
 
+    /**
+     * Instancie un nouveau triangle à partir de 3 points
+     *
+     * @param A the a
+     * @param B the b
+     * @param C the c
+     * @param id the id
+     */
     Triangle(Pt A,Pt B,Pt C,int id)
     {
         super(A,B,C,id);
     }
 
+    /**
+     * Instancie un nouveau triangle à partir d'un tableau de points
+     *
+     * @param pt the pt
+     * @param id the id
+     */
     Triangle(Pt[] pt,int id)
     {
         super(pt,3,id);
@@ -26,57 +52,100 @@ public class Triangle extends Forme2D implements forme{
 
     }*/
 
-    @Override
+    /**
+     *
+     * @return
+     */
     public String toString() {
         return "("+P[0].getX()+","+P[0].getY()+")"+"("+P[1].getX()+","+P[1].getY()+")"+"("+P[2].getX()+","+P[2].getY()+")";
     }
 
+    /**
+     * Update 1.
+     *
+     * @param x the x
+     * @param y the y
+     */
     public void update1(int x,int y)
     {
         P[1].set_coord(x,y);
         //P[2].set_coord(x,y);
     }
+
+    /**
+     * Update 2.
+     *
+     * @param x the x
+     * @param y the y
+     */
     public void update2(int x,int y)
     {
         P[2].set_coord(x,y);
     }
 
-    @Override
+    /**
+     *
+     * @return retourne l'id du triangle
+     */
     public int get_id() {
         return this.id;  //To change body of implemented methods use File | Settings | File Templates.
     }
 
-    @Override
+    /**
+     *défini un id au triangle
+     * @param i l'id à définir
+     */
     public void set_id(int i) {
 
     }
 
-    @Override
+    /**
+     *
+     * @param x the x
+     * @param y the y
+     * @param id the id
+     */
     public void update(int x, int y, int id) {
         int pos=super.to_update(id);
         P[pos].set_coord(x,y);
     }
 
-    @Override
+    /**
+     *
+     * @return la couleur actuelle de la figure
+     */
     public Color get_couleur() {
         return this.couleur;  //To change body of implemented methods use File | Settings | File Templates.
     }
 
-    @Override
+    /**
+     *
+     * @param c la couleur à définir
+     */
     public void set_couleur(Color c) {
         couleur = new Color(c.getRed(), c.getGreen(), c.getBlue(), 50);
     }
 
-    @Override
+    /**
+     *
+     * @return true si movable, false sinon.
+     */
     public boolean is_movable() {
-        return true;  //To change body of implemented methods use File | Settings | File Templates.
+        return true;
     }
 
-    @Override
+    /**
+     *
+     * @param c true si deplacable, false sinon
+     */
     public void set_movable(Boolean c) {
 
     }
 
+    /**
+     * Dessine le triangle dans la canvas
+     * @param g
+     */
     public void draw(Graphics g) {
         Color a=g.getColor();
         g.setColor(couleur);
@@ -93,9 +162,12 @@ public class Triangle extends Forme2D implements forme{
 
     }
 
-    @Override
+    /**
+     *
+     * @return rend le triangle visible
+     */
     public boolean isVisible() {
-        return true;  //To change body of implemented methods use File | Settings | File Templates.
+        return true;
     }
 
     public void setVisible(Boolean visible) {

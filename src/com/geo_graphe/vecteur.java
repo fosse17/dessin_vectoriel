@@ -3,9 +3,6 @@ package com.geo_graphe;
 import java.awt.*;
 import java.awt.geom.AffineTransform;
 
-/**
- * Created by Stephane on 20/12/14.
- */
 public class vecteur extends Segment {
 
     private final int ARR_SIZE = 6;

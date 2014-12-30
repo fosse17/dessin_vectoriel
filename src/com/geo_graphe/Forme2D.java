@@ -5,33 +5,33 @@ import java.io.Serializable;
 
 
 /**
- * The type Forme 2 d.
+ * La classe Forme2D
  */
 public abstract class Forme2D implements Serializable {
 
     /**
-     * The Id.
+     *id de la forme
      */
     public int id;
     /**
-     * The Couleur.
+     * Couleur de la forme
      */
     protected Color couleur =Color.BLACK;
     /**
-     * The Visible.
+     * On initialise la variable visible à true
      */
     protected boolean visible=true;
     /**
-     * The Num _ point.
+     * variable entier num_point
      */
     protected int num_point;
     /**
-     * The P.
+     * Un tableau de points P
      */
     protected Pt P[];
 
     /**
-     * Instantiates a new Forme 2 d.
+     * Instancie une nouvelle forme Forme2D à partir de deux tableaux de points.
      *
      * @param A the a
      * @param B the b
@@ -47,7 +47,7 @@ public abstract class Forme2D implements Serializable {
     }
 
     /**
-     * Instantiates a new Forme 2 d.
+     * Instancie une nouvelle forme Forme2D à partir de trois tableaux de points.
      *
      * @param A the a
      * @param B the b
@@ -65,11 +65,11 @@ public abstract class Forme2D implements Serializable {
     }
 
     /**
-     * Instantiates a new Forme 2 d.
+     * Instancie une nouvelle forme Forme2D à partir d'un tableau de points et d'un nombre n de points
      *
-     * @param pts the pts
-     * @param n the n
-     * @param id the id
+     * @param pts le tableau de points
+     * @param n le nombre de points
+     * @param id id de la forme à créer
      */
     Forme2D(Pt[] pts,int n,int id)
     {
@@ -83,7 +83,7 @@ public abstract class Forme2D implements Serializable {
     }
 
     /**
-     * To _ update.
+     * Retourne la position à modifier dans le tableau de points
      *
      * @param num the num
      * @return the int
@@ -99,9 +99,9 @@ public abstract class Forme2D implements Serializable {
     }
 
     /**
-     * Is visible.
      *
-     * @return the boolean
+     *
+     * @return true si visible, false sinon.
      */
     public boolean isVisible() {
         return visible;
@@ -109,7 +109,7 @@ public abstract class Forme2D implements Serializable {
 
 
     /**
-     * Sets visible.
+     * Défini si le triangle est visible ou non.
      *
      * @param visible the visible
      */
@@ -129,7 +129,7 @@ public abstract class Forme2D implements Serializable {
     }
 
     /**
-     * Sets couleur.
+     * Défini la couleur du triangle.
      *
      * @param couleur the couleur
      */

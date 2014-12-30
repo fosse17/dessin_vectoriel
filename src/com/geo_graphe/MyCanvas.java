@@ -14,10 +14,14 @@ public class MyCanvas extends JPanel implements Printable {
 	protected String mode;
 	protected Repere R;
     protected Pt O;
-    protected int id_figure=0;//id de la figure a inserer dans le graphe et dans la lissLinked
+    protected int id_figure=0;//id de la figure a inserer dans le graphe et dans la LinkedList
     protected Color color;
     Graph G = new Graph(0);
 
+    /**
+     * Constructeur de la classe MyCanvas.
+     * Définit la zone de dessin et le repère.
+     */
     MyCanvas() {
 
         super();
@@ -64,19 +68,34 @@ public class MyCanvas extends JPanel implements Printable {
 
     }
 
+    /**
+     *
+     * @return id de la figure
+     */
     public int getId_figure() {
         return id_figure;
     }
 
+    /**
+     * incremente l'id de la figure
+     */
     public void update_id_figure()
     {
         this.id_figure++;
     }
 
+    /**
+     *
+     * @return la couleur de la figure
+     */
     public Color getColor() {
         return color;
     }
 
+    /**
+     * Défini la couleur de la figure
+     * @param color
+     */
     public void setColor(Color color) {
         this.color = color;
     }
@@ -85,7 +104,11 @@ public class MyCanvas extends JPanel implements Printable {
 	{
 		return formes;
 	}
-	
+
+    /**
+     * Dessine dans la zone de dessin l'ensemble des figures
+     * @param g
+     */
 	public void paint(Graphics g)
 	{
         Graphics2D g2 = (Graphics2D) g;
@@ -101,19 +124,29 @@ public class MyCanvas extends JPanel implements Printable {
             }
         }
 	}
-	
+
+    /**
+     * Ajoute une forme à la LinkedList et actualise l'affichage
+     * @param p la forme
+     */
 	public void addForme(forme p) {
 		formes.add(p);
         G.add_vertex();
 		repaint();
 	}
 
-
+    /**
+     * Enleve la forme de la LinkedList et  actualise l'affichage
+     * @param p la forme
+     */
     public void removeForme(forme p) {
         formes.remove(p);
         repaint();
 	}
 
+    /**
+     * Efface toutes les formes de la zone de dessin et recrée le repère
+     */
 	public void clear() {
 		formes.clear();
         G = new Graph(0);
@@ -128,21 +161,37 @@ public class MyCanvas extends JPanel implements Printable {
         repaint();
 	}
 
+    /**
+     *
+     * @return le mode de sélection
+     */
     public String getMode() {
         return mode;
     }
 
+    /**
+     * Défini le mode de sélection
+     * @param mode
+     */
 	public void setMode(String mode)
 	{
 		this.mode=mode;
 	}
 
+    /**
+     * Retourne le repère
+     * @return le repère
+     */
 	public Repere getR() {
 
 
 		return R;
 	}
 
+    /**
+     *
+     * @param facteur : coefficient d'agrandissement
+     */
     void Zoom(double facteur)
     {
         for(forme f:formes) {
@@ -170,6 +219,9 @@ public class MyCanvas extends JPanel implements Printable {
         repaint();
     }
 
+    /**
+     * Fonction pour imprimer
+     */
     public void do_print()
     {
         PrinterJob pj = PrinterJob.getPrinterJob();

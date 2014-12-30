@@ -8,11 +8,11 @@ import java.awt.*;
 public class Barycentre extends Pt implements forme {
 
     /**
-     * The Num _ point.
+     * num_point : le numéro du point
      */
     int num_point;
     /**
-     * The P.
+     * Un tableau de point P
      */
     Pt[] P;
 
@@ -45,7 +45,7 @@ public class Barycentre extends Pt implements forme {
     /**
      * Verifie si le point passé en parametre appartient a l'ensemble des points du barycentre.
      *
-     * @param id de l'ensemble des points
+     * @param id1 de l'ensemble des points
      * @return l'id s'ilappartient, -1 sinon
      */
     public int check_in(int id1)
@@ -59,7 +59,7 @@ public class Barycentre extends Pt implements forme {
     }
 
     /**
-     *La méthode update associé qui est appelé lorsque l'on déplace l'ensemble des points du barycentre
+     *La méthode update associée qui est appelée lorsque l'on déplace l'ensemble des points du barycentre
      * @param x
      * @param y
      * @param i1

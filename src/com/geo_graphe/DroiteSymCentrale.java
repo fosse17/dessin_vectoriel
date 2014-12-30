@@ -1,8 +1,5 @@
 package com.geo_graphe;
 
-/**
- * Created by Stephane on 25/12/14.
- */
 public class DroiteSymCentrale extends Droite {
     Droite d;
     Pt O;

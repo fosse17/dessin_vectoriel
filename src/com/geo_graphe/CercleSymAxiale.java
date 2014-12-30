@@ -1,19 +1,28 @@
 package com.geo_graphe;
 
 /**
- * Created by Stephane on 27/12/14.
+ * The type Cercle sym axiale.
  */
 public class CercleSymAxiale extends Cercle {
 
+    /**
+     * Un cercle C
+     */
     Cercle c;
+    /**
+     * Une droite axe
+     */
     Droite axe;
 
     /**
-     * Instantiates a new Cercle.
+     * Instancie un nouveau cercle qui sera le symétrique du cercle selectionné par rapport à une droite.
+     * Ce nouveau cercle ne sera pas déplacable.
      *
-     * @param A the a
-     * @param B the b
-     * @param i the i
+     * @param c Un cercle
+     * @param axe Une droite pour la symétrie
+     * @param A Un point A
+     * @param B Un point B
+     * @param i un id i
      */
     public CercleSymAxiale(Cercle c, Droite axe, Pt A, Pt B, int i) {
         super(c.P[0], c.P[1], i);
@@ -31,7 +40,12 @@ public class CercleSymAxiale extends Cercle {
         P[1].set_movable(false);
     }
 
-    @Override
+    /**
+     *
+     * @param x nouvelle abscisse
+     * @param y nouvelle ordonnée
+     * @param id the id
+     */
     public void update(int x, int y, int id) {
         c.update(x, y, id);
         axe.update(x, y, id);

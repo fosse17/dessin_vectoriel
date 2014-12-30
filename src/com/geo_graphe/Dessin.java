@@ -4,16 +4,31 @@ import javax.swing.*;
 import java.awt.*;
 import javax.swing.JComponent;
 
+/**
+ * Classe Principale du projet contenant le main
+ */
 public class Dessin {
-
-	private JFrame frame;
-	protected MyCanvas Canvas;
-	protected Menu menu;
-	MyMouseListener m;
-	
 	/**
-	 * Launch the application.
+	 * Création de la Frame
 	 */
+	private JFrame frame;
+	/**
+	 * MyCanvas
+     */
+	protected MyCanvas Canvas;
+	/**
+	 * Menu
+     */
+	protected Menu menu;
+	/**
+	 * m un écouteur d'événement de la souris
+     */
+	MyMouseListener m;
+
+	/**
+	 * Lance l'application
+	 * @param args Les arguments entrant
+     */
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
             public void run() {
@@ -28,20 +43,20 @@ public class Dessin {
 	}
 
 	/**
-	 * Create the application.
-	 */
+	 * Crée l'application
+     */
 	public Dessin() {
 		initialize();
 	}
 
 	/**
-	 * Initialize the contents of the frame.
+	 * Initialise le contenu de la frame
 	 */
 	private void initialize() {
 		frame = new JFrame();
 		frame.setBounds(100, 100, 450, 300);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		frame.setTitle("dessin vectoriel");
+		frame.setTitle("Dessin Vectoriel");
 		
 		Canvas = new MyCanvas();
 		frame.getContentPane().add(Canvas);

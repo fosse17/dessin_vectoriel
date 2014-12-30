@@ -88,7 +88,7 @@ public abstract class Forme2D implements Serializable {
      * @param num the num
      * @return the int
      */
-//retourne la position a update dans la tableau de points
+//retourne la position a update dans le tableau de points
     public int to_update(int num)
     {
         for(int a=0;a<num_point;a++)

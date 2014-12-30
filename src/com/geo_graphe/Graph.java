@@ -20,7 +20,7 @@ class Graph {
      */
     public Graph(int V) {
         if (V < 0) throw new IllegalArgumentException("Le nombre d'aretes ne peut pas être negatif.");
-        if (V < 0) throw new IllegalArgumentException("Le nombre d'aretes ne peut pas être negatif.");
+        //if (V < 0) throw new IllegalArgumentException("Le nombre d'aretes ne peut pas être negatif.");
         this.V = V;
         this.E = 0;
         adj = (LinkedList<Integer>[]) new LinkedList[10000000];

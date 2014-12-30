@@ -1,18 +1,27 @@
 package com.geo_graphe;
 
 /**
- * Created by Stephane on 25/12/14.
+ * Classe pour créer le symétrique d'un cercle par rapport à un point
  */
 public class CercleSymCentrale extends Cercle {
 
+    /**
+     * Le cercle C a symétrisé
+     */
     Cercle c;
+    /**
+     * Un point O pour la symétrie
+     */
     Pt O;
 
     /**
-     * Instantiates a new Cercle.
+     * Instancie un nouveau cercle qui sera le symétrique du cercle selectionné par rapport à une point.
+     * Ce nouveau cercle ne sera pas déplacable.
      *
-     * @param c
-     * @param O  the b
+     * @param c the c
+     * @param O the b
+     * @param A the a
+     * @param B the b
      * @param id the i
      */
     public CercleSymCentrale(Cercle c, Pt O, Pt A, Pt B, int id) {
@@ -31,7 +40,12 @@ public class CercleSymCentrale extends Cercle {
         P[1].set_movable(false);
     }
 
-    @Override
+    /**
+     *
+     * @param x nouvelle abscisse
+     * @param y nouvelle ordonnée
+     * @param id the id
+     */
     public void update(int x, int y, int id) {
         c.update(x, y, id);
         if (O.get_id() == id) O.update(x, y, id);

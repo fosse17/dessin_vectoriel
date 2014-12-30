@@ -1,18 +1,29 @@
 package com.geo_graphe;
 
+
 /**
- * Created by Stephane on 22/12/14.
+ * Classe pour créer la transposée d'un Cercle par rapport à un vecteur
  */
 public class CercleTrans extends Cercle {
 
-    Cercle c;
-    vecteur v;
     /**
-     * Instantiates a new Cercle.
+     * Un cercle C
+     */
+    Cercle c;
+    /**
+     * Un vecteur V
+     */
+    vecteur v;
+
+    /**
+     *  Instancie un nouveau cercle qui sera le symétrique du cercle selectionné par rapport à un vecteur.
+     * Ce nouveau cercle ne sera pas déplacable.
      *
-     * @param  c
-     * @param v the b
-     * @param id the i
+     * @param c le cercle C a transposé
+     * @param v le vecteur V
+     * @param A Un point A
+     * @param B Un point B
+     * @param id l'id du cercle
      */
     public CercleTrans(Cercle c, vecteur v,Pt A, Pt B, int id) {
         super(c.P[0], c.P[1], id);
@@ -30,7 +41,12 @@ public class CercleTrans extends Cercle {
         P[1].set_movable(false);
     }
 
-    @Override
+    /**
+     * Modifie les coordonnées du cercle
+     * @param x nouvelle abscisse
+     * @param y nouvelle ordonnée
+     * @param id the id
+     */
     public void update(int x, int y, int id) {
         c.update(x,y,id);
         v.update(x,y,id);

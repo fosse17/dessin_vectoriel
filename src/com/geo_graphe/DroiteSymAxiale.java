@@ -1,11 +1,27 @@
 package com.geo_graphe;
 
 /**
- * Created by Stephane on 27/12/14.
+ * The type Droite sym axiale.
  */
 public class DroiteSymAxiale extends Droite {
-    Droite d, axe;
+    /**
+     * La droite d
+     */
+    Droite d,
+    /**
+     * La droite axe
+     */
+    axe;
 
+    /**
+     * Instancie une nouvelle droite pour la sysmétrie axiale
+     *
+     * @param d the d
+     * @param axe the axe
+     * @param A the a
+     * @param B the b
+     * @param id the id
+     */
     DroiteSymAxiale(Droite d, Droite axe, Pt A, Pt B, int id) {
         super(A, B, id);
         Pt X = new PtSymAxiale(d.P[0], axe, -1);
@@ -22,7 +38,12 @@ public class DroiteSymAxiale extends Droite {
         P[1].set_movable(false);
     }
 
-    @Override
+    /**
+     *
+     * @param x
+     * @param y
+     * @param id
+     */
     public void update(int x, int y, int id) {
         d.update(x, y, id);
         axe.update(x, y, id);

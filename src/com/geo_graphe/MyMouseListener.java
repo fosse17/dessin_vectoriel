@@ -17,14 +17,20 @@ public class MyMouseListener implements MouseListener,MouseMotionListener {
     private Texte text;
     private PtTrans ptTrans;
     private PtSymCentrale ptSymCentrale;
+    private PtSymAxiale ptSymAxiale;
     private CercleTrans cercleTrans;
     private CercleSymCentrale cercleSymCentrale;
+    private CercleSymAxiale cercleSymAxiale;
     private DroiteTrans droiteTrans;
+    private DroiteSymAxiale droiteSymAxiale;
     private DroiteSymCentrale droiteSymCentrale;
     private SegmentTrans segmentTrans;
     private SegmentSymCentrale segmentSymCentrale;
+    private SegmentSymAxiale segmentSymAxiale;
+    private Polygone polygone;
     private PolyRegulierTrans polyRegulierTrans;
     private PolyRegulierSymCentrale polyRegulierSymCentrale;
+    private PolyRegulierSymAxiale polyRegulierSymAxiale;
     private Rectangl R;
     private PtCercle ptc = null;
     private PtDroite psd;
@@ -249,9 +255,56 @@ public class MyMouseListener implements MouseListener,MouseMotionListener {
             canvas.addForme(Vec);
         }
 
+        if (mode.equals("Poly") || mode.equals("Polyindef")) {
+
+            if (nb_click == 0) {
+                ptb = new Pt[100];
+                polygone = new Polygone(ptb, 0, ++this.canvas.id_figure);
+                if (mode.equals("Polyindef")) polygone.set_deformable(false);//pas ecore implémenter
+                canvas.addForme(polygone);
+            }
+            if (nb_click == 0) {
+                //System.out.println("je compte les points : "+nb_click);
+                f = assign(x, y, -1);
+                if (f == null) {
+                    ptb[nb_click] = new Pt(x, y, ++this.canvas.id_figure);
+                    canvas.addForme(ptb[nb_click]);
+                } else {
+                    ptb[nb_click] = (Pt) f;
+                }
+                init = ptb[nb_click];
+                polygone.add(init);
+                nb_click += 1;
+            } else if (!init.isNear(x, y)) {
+                f = assign(x, y, -1);
+                if (f == null) {
+                    ptb[nb_click] = new Pt(x, y, ++this.canvas.id_figure);
+                    canvas.addForme(ptb[nb_click]);
+                } else {
+                    ptb[nb_click] = (Pt) f;
+                }
+                polygone.add(ptb[nb_click]);
+                pt2 = new Pt(x, y, ++this.canvas.id_figure);
+                canvas.addForme(pt2);
+
+                polygone.add(pt2);
+                nb_click += 1;
+            } else {
+                polygone.minus();
+                polygone.add(init);
+                for (int i = 0; i < nb_click + 2; i++) {
+                    if (!polygone.get_deformable()) polygone.P[i].set_movable(false);
+                    canvas.G.addEdge(polygone.P[i].get_id(), polygone.get_id());
+                    pt2.set_coord(-10000, -10000);
+                }
+                nb_click = 0;
+            }
+
+        }
+
         if(mode.equals("B3"))
         {
-            int nb_point_total=3;//demande
+            int nb_point_total = Menu.nb_point_bary;
             if(nb_click==0) {ptb=new Pt[nb_point_total]; }
             if(nb_click<nb_point_total)
             {
@@ -353,6 +406,168 @@ public class MyMouseListener implements MouseListener,MouseMotionListener {
                 nb_click=0;
             }
         }
+
+        if (mode.equals("Symaxiale")) {
+            if (nb_click == 0) {
+                sous_mode = "";
+            }
+            if (nb_click == 0) {
+                for (forme p : canvas.get_formes()) {
+                    if (p instanceof Pt) {
+                        if (((Pt) p).isNear(x, y)) {
+                            init = (Pt) p;
+                            nb_click++;
+                            sous_mode = "point";
+                            System.out.println("point " + init.get_id());
+                        }
+                    } else if (p instanceof Cercle) {
+                        if (((Cercle) p).isNear(x, y)) {
+                            C = (Cercle) p;
+                            nb_click++;
+                            sous_mode = "cercle";
+                        }
+                    } else if (p instanceof Droite) {
+                        if (((Droite) p).isNear(x, y)) {
+                            D = (Droite) p;
+                            nb_click++;
+                            sous_mode = "droite";
+                        }
+                    } else if (p instanceof Segment) {
+                        if (((Segment) p).isNear(x, y)) {
+                            Seg = (Segment) p;
+                            nb_click++;
+                            sous_mode = "segment";
+                        }
+                    } else if (p instanceof PolyRegulier) {
+                        if (((PolyRegulier) p).isNear(x, y)) {
+                            pr = (PolyRegulier) p;
+                            nb_click++;
+                            sous_mode = "polyregulier";
+                        }
+                    }
+                }
+            } else if (nb_click == 1) {
+                for (forme p : canvas.get_formes()) {
+                    if (p instanceof Droite) {
+                        if (((Droite) p).isNear(x, y)) {
+                            D1 = (Droite) p;
+                            nb_click++;
+                            System.out.println("jai la droite");
+                        }
+                    }
+                }
+                if (sous_mode.equals("point")) {
+                    if ((init != null) && (D1 != null)) {
+                        ptSymAxiale = new PtSymAxiale(init, D1, ++this.canvas.id_figure);
+                        canvas.addForme(ptSymAxiale);
+                        canvas.G.addEdge(init.get_id(), ptSymAxiale.get_id());
+                        canvas.G.addEdge(D1.P[0].id, ptSymAxiale.get_id());
+                        canvas.G.addEdge(D1.P[1].id, ptSymAxiale.get_id());
+                    }
+                }
+                if (sous_mode.equals("cercle")) {
+                    if ((C != null) && (D1 != null)) {
+                        init = new Pt(-10, -10, ++this.canvas.id_figure);
+                        pt3 = new Pt(-10, -10, ++this.canvas.id_figure);
+                        canvas.addForme(init);
+                        canvas.addForme(pt3);
+                        cercleSymAxiale = new CercleSymAxiale(C, D1, init, pt3, ++this.canvas.id_figure);
+                        canvas.addForme(cercleSymAxiale);
+                        canvas.G.addEdge(C.P[0].id, cercleSymAxiale.get_id());
+                        canvas.G.addEdge(C.P[0].id, cercleSymAxiale.P[0].get_id());
+                        canvas.G.addEdge(C.P[0].id, cercleSymAxiale.P[1].get_id());
+                        canvas.G.addEdge(C.P[1].id, cercleSymAxiale.get_id());
+                        canvas.G.addEdge(C.P[1].id, cercleSymAxiale.P[0].get_id());
+                        canvas.G.addEdge(C.P[1].id, cercleSymAxiale.P[1].get_id());
+
+                        canvas.G.addEdge(D1.P[0].id, cercleSymAxiale.get_id());
+                        canvas.G.addEdge(D1.P[0].id, cercleSymAxiale.P[0].get_id());
+                        canvas.G.addEdge(D1.P[0].id, cercleSymAxiale.P[1].get_id());
+                        canvas.G.addEdge(D1.P[1].id, cercleSymAxiale.get_id());
+                        canvas.G.addEdge(D1.P[1].id, cercleSymAxiale.P[0].get_id());
+                        canvas.G.addEdge(D1.P[1].id, cercleSymAxiale.P[1].get_id());
+                        canvas.repaint();
+                    }
+                }
+                if (sous_mode.equals("droite")) {
+                    if ((D != null) && (D1 != null)) {
+                        init = new Pt(-10, -10, ++this.canvas.id_figure);
+                        pt3 = new Pt(-10, -10, ++this.canvas.id_figure);
+                        canvas.addForme(init);
+                        canvas.addForme(pt3);
+                        droiteSymAxiale = new DroiteSymAxiale(D, D1, init, pt3, ++this.canvas.id_figure);
+                        canvas.addForme(droiteSymAxiale);
+                        //System.out.println(D.P[0].id+" "+D.P[1].id+" "+init.get_id()+" "+Drperp.get_id());
+                        canvas.G.addEdge(D.P[0].id, droiteSymAxiale.get_id());
+                        canvas.G.addEdge(D.P[1].id, droiteSymAxiale.get_id());
+                        canvas.G.addEdge(D.P[0].id, droiteSymAxiale.P[0].get_id());
+                        canvas.G.addEdge(D.P[0].id, droiteSymAxiale.P[1].get_id());
+                        canvas.G.addEdge(D.P[1].id, droiteSymAxiale.P[0].get_id());
+                        canvas.G.addEdge(D.P[1].id, droiteSymAxiale.P[1].get_id());
+
+                        canvas.G.addEdge(D1.P[0].id, droiteSymAxiale.get_id());
+                        canvas.G.addEdge(D1.P[1].id, droiteSymAxiale.get_id());
+                        canvas.G.addEdge(D1.P[0].id, droiteSymAxiale.P[0].get_id());
+                        canvas.G.addEdge(D1.P[0].id, droiteSymAxiale.P[1].get_id());
+                        canvas.G.addEdge(D1.P[1].id, droiteSymAxiale.P[0].get_id());
+                        canvas.G.addEdge(D1.P[1].id, droiteSymAxiale.P[1].get_id());
+                    }
+                }
+                if (sous_mode.equals("segment")) {
+                    if ((Seg != null) && (D1 != null)) {
+                        init = new Pt(-10, -10, ++this.canvas.id_figure);
+                        pt3 = new Pt(-10, -10, ++this.canvas.id_figure);
+                        canvas.addForme(init);
+                        canvas.addForme(pt3);
+                        segmentSymAxiale = new SegmentSymAxiale(Seg, D1, init, pt3, ++this.canvas.id_figure);
+                        canvas.addForme(segmentSymAxiale);
+
+                        canvas.G.addEdge(Seg.P[0].id, segmentSymAxiale.get_id());
+                        canvas.G.addEdge(Seg.P[1].id, segmentSymAxiale.get_id());
+                        canvas.G.addEdge(Seg.P[0].id, segmentSymAxiale.P[0].get_id());
+                        canvas.G.addEdge(Seg.P[0].id, segmentSymAxiale.P[1].get_id());
+                        canvas.G.addEdge(Seg.P[1].id, segmentSymAxiale.P[0].get_id());
+                        canvas.G.addEdge(Seg.P[1].id, segmentSymAxiale.P[1].get_id());
+
+                        canvas.G.addEdge(D1.P[0].id, segmentSymAxiale.get_id());
+                        canvas.G.addEdge(D1.P[1].id, segmentSymAxiale.get_id());
+                        canvas.G.addEdge(D1.P[0].id, segmentSymAxiale.P[0].get_id());
+                        canvas.G.addEdge(D1.P[0].id, segmentSymAxiale.P[1].get_id());
+                        canvas.G.addEdge(D1.P[1].id, segmentSymAxiale.P[0].get_id());
+                        canvas.G.addEdge(D1.P[1].id, segmentSymAxiale.P[1].get_id());
+
+
+                    }
+                }
+                if (sous_mode.equals("polyregulier")) {
+                    if ((pr != null) && (D1 != null)) {
+                        init = new Pt(-10, -10, ++this.canvas.id_figure);
+                        pt3 = new Pt(-10, -10, ++this.canvas.id_figure);
+                        canvas.addForme(init);
+                        canvas.addForme(pt3);
+                        polyRegulierSymAxiale = new PolyRegulierSymAxiale(pr, D1, init, pt3, ++this.canvas.id_figure);
+                        canvas.addForme(polyRegulierSymAxiale);
+                        //System.out.println(D.P[0].id+" "+D.P[1].id+" "+init.get_id()+" "+Drperp.get_id());
+                        canvas.G.addEdge(pr.P[0].id, polyRegulierSymAxiale.get_id());
+                        canvas.G.addEdge(pr.P[1].id, polyRegulierSymAxiale.get_id());
+                        canvas.G.addEdge(pr.P[0].id, polyRegulierSymAxiale.P[0].get_id());
+                        canvas.G.addEdge(pr.P[0].id, polyRegulierSymAxiale.P[1].get_id());
+                        canvas.G.addEdge(pr.P[1].id, polyRegulierSymAxiale.P[0].get_id());
+                        canvas.G.addEdge(pr.P[1].id, polyRegulierSymAxiale.P[1].get_id());
+
+                        canvas.G.addEdge(D1.P[0].id, polyRegulierSymAxiale.get_id());
+                        canvas.G.addEdge(D1.P[1].id, polyRegulierSymAxiale.get_id());
+                        canvas.G.addEdge(D1.P[0].id, polyRegulierSymAxiale.P[0].get_id());
+                        canvas.G.addEdge(D1.P[0].id, polyRegulierSymAxiale.P[1].get_id());
+                        canvas.G.addEdge(D1.P[1].id, polyRegulierSymAxiale.P[0].get_id());
+                        canvas.G.addEdge(D1.P[1].id, polyRegulierSymAxiale.P[1].get_id());
+                    }
+                }
+                nb_click = 0;
+            }
+        }
+
+
 
         if (mode.equals("Symcentrale")) {
             if (nb_click == 0) {
@@ -496,7 +711,9 @@ public class MyMouseListener implements MouseListener,MouseMotionListener {
                 nb_click = 0;
             }
         }
-
+        /***********************************
+         MODE TRANSLATION
+         ***********************************/
         if(mode.equals("Translation"))
         {
             if (nb_click == 0) {
@@ -887,6 +1104,7 @@ public class MyMouseListener implements MouseListener,MouseMotionListener {
             Seg.update(x, y, pt2.get_id());
         }
 
+
         canvas.repaint();
         if(mode.equals("Translate"))
         {
@@ -900,8 +1118,6 @@ public class MyMouseListener implements MouseListener,MouseMotionListener {
                     }
 
                 }
-                if(p instanceof Repere)
-                    p.update(((Pt) canvas.get_formes().get(0)).getX(), ((Pt) canvas.get_formes().get(0)).getY(), -1);
             }
             canvas.repaint();
             init.set_coord(x,y);
@@ -1048,10 +1264,14 @@ public class MyMouseListener implements MouseListener,MouseMotionListener {
                 if (((PolyRegulier) f).isNear(x, y)) {
                 }
             }
+            if (f instanceof Polygone) {
+                if (((Polygone) f).isNear(x, y)) {
+                }
+            }
         }
-
-
-
+        if (mode.equals("Poly") || mode.equals("Polyindef")) {
+            if (nb_click > 1) polygone.updatelast(x, y);
+        }
         if (mode.equals("Triangle"))
         {
             if(nb_click==1) T.update1(x, y);

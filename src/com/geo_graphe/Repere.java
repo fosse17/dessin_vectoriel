@@ -74,8 +74,10 @@ public class Repere implements forme, Serializable {
 
     @Override
     public void update(int x, int y, int id) {
-        this.origine.set_coord(x,y);
-    }
+		if (id == origine.get_id()) {
+			this.origine.set_coord(x, y);
+		}
+	}
 
     @Override
 	public Color get_couleur() {

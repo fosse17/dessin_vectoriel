@@ -40,10 +40,12 @@ public class MyCanvas extends JPanel implements Printable {
 
         Pt pp1 = new Pt(-10, -10, ++this.id_figure);
         Pt pp2 = new Pt(-10, -10, ++this.id_figure);
+        Pt[] pts = new Pt[100];
+        Polygone polygone = new Polygone(pts, 0, ++this.id_figure);
+        polygone.add(p);
+        polygone.add(p1);
+        polygone.add(p2);
 
-        PtSymCentrale ptSymCentrale = new PtSymCentrale(p, p1, ++this.id_figure);
-        Droite d = new Droite(p, p1, ++this.id_figure);
-        DroiteSymCentrale droiteSymCentrale = new DroiteSymCentrale(d, p2, pp1, pp2, ++this.id_figure);
 
 
         this.addForme(test);
@@ -52,25 +54,13 @@ public class MyCanvas extends JPanel implements Printable {
         this.addForme(p2);
         this.addForme(pp1);
         this.addForme(pp2);
-        this.addForme(ptSymCentrale);
-        this.addForme(d);
-        this.addForme(droiteSymCentrale);
+        this.addForme(polygone);
 
 
-        G.addEdge(p.get_id(), ptSymCentrale.get_id());
-        G.addEdge(p1.get_id(), ptSymCentrale.get_id());
+        G.addEdge(p.get_id(), polygone.get_id());
+        G.addEdge(p1.get_id(), polygone.get_id());
+        G.addEdge(p2.get_id(), polygone.get_id());
 
-        G.addEdge(p.get_id(), droiteSymCentrale.get_id());
-        G.addEdge(p.get_id(), droiteSymCentrale.P[0].get_id());
-        G.addEdge(p.get_id(), droiteSymCentrale.P[1].get_id());
-
-        G.addEdge(p1.get_id(), droiteSymCentrale.get_id());
-        G.addEdge(p1.get_id(), droiteSymCentrale.P[0].get_id());
-        G.addEdge(p1.get_id(), droiteSymCentrale.P[1].get_id());
-
-        G.addEdge(p2.get_id(), droiteSymCentrale.get_id());
-        G.addEdge(p2.get_id(), droiteSymCentrale.P[0].get_id());
-        G.addEdge(p2.get_id(), droiteSymCentrale.P[1].get_id());
 
     }
 
@@ -102,7 +92,7 @@ public class MyCanvas extends JPanel implements Printable {
         g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
         g2.setStroke(new BasicStroke(1.5f));
         g2.clearRect(0,0,this.getWidth(),this.getHeight());
-        //g2.setRenderingHint(RenderingHints.KEY_TEXT_ANTIALIASING, RenderingHints.VALUE_TEXT_ANTIALIAS_ON);
+        g2.setRenderingHint(RenderingHints.KEY_TEXT_ANTIALIASING, RenderingHints.VALUE_TEXT_ANTIALIAS_ON);
         for(forme p:formes)
         {
             if(p.isVisible())
@@ -163,9 +153,12 @@ public class MyCanvas extends JPanel implements Printable {
                 double abs=R.getabs(((Pt) f).getX())*facteur;
                 double ord=R.getord(((Pt) f).getY())*facteur*(-1);
                 ((Pt) f).set_coord(R.convert(abs, ord).getX(), R.convert(abs, ord).y);
+                for (forme p : this.get_formes()) {
+                    p.update(((Pt) f).getX(), ((Pt) f).getY(), ((Pt) f).get_id());
+                }
             }
-            if(f instanceof Repere)
-                f.update(((Pt)formes.get(0)).getX(),((Pt)formes.get(0)).getY(),-1);
+            //if(f instanceof Repere)
+            //f.update(((Pt)formes.get(0)).getX(),((Pt)formes.get(0)).getY(),-1);
 
         }
         for(int i=0;i<formes.size() ;i++) {

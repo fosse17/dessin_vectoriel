@@ -42,10 +42,12 @@ public class MyCanvas extends JPanel implements Printable {
         Pt p1 = new Pt(150, 150, ++this.id_figure);
         Pt p2 = new Pt(350, 250, ++this.id_figure);
 
+        Pt[] pts = {test, p, p1, p2};
+
         Pt pp1 = new Pt(-10, -10, ++this.id_figure);
         Pt pp2 = new Pt(-10, -10, ++this.id_figure);
 
-
+        Lagrange lagrange = new Lagrange(pts, 4, +this.id_figure);
 
 
         this.addForme(test);
@@ -54,8 +56,12 @@ public class MyCanvas extends JPanel implements Printable {
         this.addForme(p2);
         this.addForme(pp1);
         this.addForme(pp2);
+        this.addForme(lagrange);
 
-
+        G.addEdge(p.get_id(), lagrange.get_id());
+        G.addEdge(p1.get_id(), lagrange.get_id());
+        G.addEdge(test.get_id(), lagrange.get_id());
+        G.addEdge(p2.get_id(), lagrange.get_id());
 
     }
 

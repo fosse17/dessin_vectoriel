@@ -130,6 +130,11 @@ public class Menu extends JMenuBar implements ActionListener{
         msymaxiale.addActionListener(this);
         mdessiner.add(msymaxiale);
 
+        JMenuItem mlagrange = new JMenuItem("Lagrange");
+        mlagrange.setActionCommand("lagrange");
+        mlagrange.addActionListener(this);
+        mdessiner.add(mlagrange);
+
         JMenuItem msegment = new JMenuItem("Segment");
 		msegment.addActionListener(this);
 		mdessiner.add(msegment);

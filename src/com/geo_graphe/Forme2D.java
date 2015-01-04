@@ -74,7 +74,7 @@ public abstract class Forme2D implements Serializable {
     Forme2D(Pt[] pts,int n,int id)
     {
         this.num_point=n;
-        P=new Pt[n];
+        P = new Pt[pts.length];
         for (int i=0;i<this.num_point;i++)
         {
             this.P[i]=pts[i];
@@ -91,9 +91,9 @@ public abstract class Forme2D implements Serializable {
 //retourne la position a update dans le tableau de points
     public int to_update(int num)
     {
-        for(int a=0;a<num_point;a++)
+        for (int a = 0; a < this.num_point; a++)
         {
-            if (P[a].id==num) return a;
+            if (P[a].id == num && num != -1) return a;
         }
         return -1;
     }

@@ -15,12 +15,8 @@ public class Polygone extends Forme2D implements forme {
     boolean deformable;
 
     Polygone(Pt[] pts, int n, int id) {
-        super(pts, pts.length, id);
+        super(pts, n, id);
         this.num_pts = n;
-        p = new Polygon();
-        for (int i = 0; i < this.num_pts; i++) {
-            p.addPoint(this.P[i].getX(), this.P[i].getY());
-        }
         this.deformable = true;
     }
 
@@ -46,23 +42,15 @@ public class Polygone extends Forme2D implements forme {
 
         this.P[num_pts] = A;
         this.num_pts++;
-        p.addPoint(A.getX(), A.getY());
     }
 
     public void minus() {
         this.num_pts--;
-        p = new Polygon();
-        for (int i = 0; i < this.num_pts; i++) {
-            p.addPoint(P[i].getX(), P[i].getY());
-        }
     }
 
     public void updatelast(int x, int y) {
         this.P[num_pts - 1].set_coord(x, y);
-        p = new Polygon();
-        for (int i = 0; i < this.num_pts; i++) {
-            p.addPoint(P[i].getX(), P[i].getY());
-        }
+
     }
 
     @Override
@@ -77,13 +65,11 @@ public class Polygone extends Forme2D implements forme {
 
     @Override
     public void update(int x, int y, int id) {
-        int t = this.to_update(id);
-        if (t != -1) P[t].update(x, y, id);
-        System.out.println("up du point " + t);
-        p = new Polygon();
+
         for (int i = 0; i < this.num_pts; i++) {
-            p.addPoint(P[i].getX(), P[i].getY());
+            if (P[i].get_id() == id) P[i].set_coord(x, y);
         }
+
     }
 
     @Override
@@ -109,7 +95,10 @@ public class Polygone extends Forme2D implements forme {
     @Override
     public void draw(Graphics g) {
         Color c = g.getColor();
-
+        p = new Polygon();
+        for (int i = 0; i < this.num_pts; i++) {
+            p.addPoint(P[i].getX(), P[i].getY());
+        }
         g.setColor(new Color(couleur.getRed(), couleur.getGreen(), couleur.getBlue()));
         g.drawPolygon(p);
 

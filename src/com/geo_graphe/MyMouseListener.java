@@ -14,6 +14,7 @@ public class MyMouseListener implements MouseListener,MouseMotionListener {
     forme f = null;
     private Triangle T;
     private Cercle C;
+    private Lagrange lagrange;
     private Texte text;
     private PtTrans ptTrans;
     private PtSymCentrale ptSymCentrale;
@@ -108,6 +109,8 @@ public class MyMouseListener implements MouseListener,MouseMotionListener {
         int x = evt.getX();
         int y = evt.getY();
 
+        int click = evt.getClickCount();
+
         num=-1;
 
         if(mode.equals("Point"))
@@ -159,7 +162,6 @@ public class MyMouseListener implements MouseListener,MouseMotionListener {
                 canvas.addForme(psd);
                 canvas.G.addEdge(((Droite) f).P[0].get_id(),psd.get_id());
                 canvas.G.addEdge(((Droite) f).P[1].get_id(),psd.get_id());
-                //canvas.G.addEdge(((Cercle) f).get_id(),ptc.get_id());
             }
 
         }
@@ -172,7 +174,6 @@ public class MyMouseListener implements MouseListener,MouseMotionListener {
                 {
                     if(((Segment) p).isNear(x,y))
                     {
-                        //System.out.println("je suis bien proche pourtant");
                         pss=new PtSegment((Segment)p,x,y,++this.canvas.id_figure);
                         this.f=p;
 
@@ -254,14 +255,43 @@ public class MyMouseListener implements MouseListener,MouseMotionListener {
             Vec.set_couleur(canvas.getColor());
             canvas.addForme(Vec);
         }
+        if (mode.equals("lagrange")) {
+            click = evt.getClickCount();
+            if (nb_click == 0) {
+                ptb = new Pt[100];
+                lagrange = new Lagrange(ptb, 0, ++canvas.id_figure);
+                canvas.addForme(lagrange);
+                nb_click++;
 
+            }
+            if (click != 2) {
+                f = assign(x, y, -1);
+                if (f == null) {
+                    ptb[nb_click] = new Pt(x, y, ++this.canvas.id_figure);
+                    canvas.addForme(ptb[nb_click]);
+                } else {
+                    ptb[nb_click] = (Pt) f;
+                }
+                lagrange.add(ptb[nb_click]);
+                nb_click++;
+
+            } else {
+                System.out.println("double");
+                nb_click = 0;
+                for (int i = 0; i < lagrange.num_point; i++)
+                    canvas.G.addEdge(lagrange.P[i].get_id(), lagrange.get_id());
+                canvas.mode = "Deplacer";
+            }
+        }
         if (mode.equals("Poly") || mode.equals("Polyindef")) {
 
             if (nb_click == 0) {
                 ptb = new Pt[100];
                 polygone = new Polygone(ptb, 0, ++this.canvas.id_figure);
-                if (mode.equals("Polyindef")) polygone.set_deformable(false);//pas ecore implémenter
+                if (mode.equals("Polyindef")) polygone.set_deformable(false);
                 canvas.addForme(polygone);
+                System.out.println("idpol" + polygone.get_id());
+
             }
             if (nb_click == 0) {
                 //System.out.println("je compte les points : "+nb_click);
@@ -276,6 +306,7 @@ public class MyMouseListener implements MouseListener,MouseMotionListener {
                 polygone.add(init);
                 nb_click += 1;
             } else if (!init.isNear(x, y)) {
+                if (nb_click > 1) polygone.minus();
                 f = assign(x, y, -1);
                 if (f == null) {
                     ptb[nb_click] = new Pt(x, y, ++this.canvas.id_figure);
@@ -284,20 +315,22 @@ public class MyMouseListener implements MouseListener,MouseMotionListener {
                     ptb[nb_click] = (Pt) f;
                 }
                 polygone.add(ptb[nb_click]);
-                pt2 = new Pt(x, y, ++this.canvas.id_figure);
-                canvas.addForme(pt2);
+                pt2 = new Pt(x, y, -1);
+                //canvas.addForme(pt2);
 
                 polygone.add(pt2);
                 nb_click += 1;
             } else {
                 polygone.minus();
-                polygone.add(init);
-                for (int i = 0; i < nb_click + 2; i++) {
+                //polygone.add(init);
+                for (int i = 0; i < polygone.num_pts; i++) {
+                    System.out.println("id" + i + " :" + polygone.P[i].get_id());
                     if (!polygone.get_deformable()) polygone.P[i].set_movable(false);
                     canvas.G.addEdge(polygone.P[i].get_id(), polygone.get_id());
-                    pt2.set_coord(-10000, -10000);
+                    //pt2.set_coord(-10000, -10000);
                 }
                 nb_click = 0;
+                canvas.mode = "Deplacer";
             }
 
         }
@@ -1141,9 +1174,12 @@ public class MyMouseListener implements MouseListener,MouseMotionListener {
                         for(LinkedList<Integer>a:Bfs.path())
                         {
                             forme obj=canvas.get_formes().get(a.get(1));
-                            Pt init=(Pt)canvas.get_formes().get(a.get(0));
+                            try {
+                                Pt init = (Pt) canvas.get_formes().get(a.get(0));
+                            } catch (ClassCastException e) {
+                            }
 
-                            //System.out.println("Je dois update "+obj.get_id()+" avec "+a.get(0));
+                            System.out.println("Je dois update " + obj.get_id() + " avec " + a.get(0));
                             obj.update(init.getX(),init.getY(),a.get(0));
 
                         }

@@ -16,7 +16,7 @@ public class CercleTrans extends Cercle {
     vecteur v;
 
     /**
-     *  Instancie un nouveau cercle qui sera le symétrique du cercle selectionné par rapport à un vecteur.
+     *  Instancie un nouveau cercle qui sera le tranlaté du cercle selectionné par rapport à un vecteur.
      * Ce nouveau cercle ne sera pas déplacable.
      *
      * @param c le cercle C a transposé

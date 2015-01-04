@@ -4,10 +4,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
+import java.io.*;
 import java.util.LinkedList;
 
 /**
@@ -273,27 +270,50 @@ public class Menu extends JMenuBar implements ActionListener{
         }
         if (e.getActionCommand() == "Enregistrer") {
             try {
-                FileOutputStream fos = new FileOutputStream("figure.txt");
+                FileDialog fd = new FileDialog((Frame) null, "Enregistrement", FileDialog.SAVE);
+                fd.setDirectory("./");
+                fd.setFile("*.geo");
+                fd.setFilenameFilter(new FilenameFilter() {
+                    public boolean accept(File dir, String name) {
+                        return (name.endsWith(".geo"));
+                    }
+                });
+                fd.setLocation(50, 50);
+                fd.setVisible(true);
+                String st = fd.getDirectory() +
+                        System.getProperty("file.separator") + fd.getFile();
+                FileOutputStream fos = new FileOutputStream(st);
                 ObjectOutputStream oos = new ObjectOutputStream(fos);
                 oos.writeObject(canvas.get_formes());
                 oos.flush();
                 oos.close();
                 fos.close();
-                canvas.G.save("graphe.txt");
+                canvas.G.save(st + ".grp");
             } catch (Exception ex) {
                 System.out.println("");
             }
         }
         if (e.getActionCommand() == "Ouvrir") {
-            forme f;
+
             try {
-                ObjectInputStream oi = new ObjectInputStream(new FileInputStream("figure.txt"));
+                FileDialog fileDialog = new FileDialog((Frame) null, "Choississez votre fichier", FileDialog.LOAD);
+
+                fileDialog.setFilenameFilter(new FilenameFilter() {
+                    public boolean accept(File dir, String name) {
+                        return (name.endsWith(".geo"));
+                    }
+                });
+                fileDialog.setDirectory("./");
+                fileDialog.setLocation(50, 50);
+                fileDialog.setVisible(true);
+                String st = fileDialog.getDirectory() + fileDialog.getFile();
+                ObjectInputStream oi = new ObjectInputStream(new FileInputStream(st));
                 Object o = oi.readObject();
                 canvas.formes = (LinkedList<forme>) o;
                 oi.close();
-                canvas.G = new Graph("graphe.txt");
+                canvas.G = new Graph(st + ".grp");
                 canvas.G.toString();
-                canvas.id_figure = canvas.G.V();
+                canvas.id_figure = canvas.G.V() - 1;
                 canvas.repaint();
             } catch (Exception exc) {
             }

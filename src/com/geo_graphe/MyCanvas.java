@@ -28,10 +28,10 @@ public class MyCanvas extends JPanel implements Printable {
         this.setSize(800, 600);
         this.setPreferredSize(new Dimension(800, 600));
         mode = "Deplacer";
-        R = new Repere(-20, 10, -10, 10, this.getPreferredSize(), ++this.id_figure);
-        R.setVisible(true);
-        O = new Pt(R.getOrigine(), 0);
+        O = new Pt(-10, -10, 0);
         this.addForme(O);
+        R = new Repere(-20, 10, -10, 10, this.getPreferredSize(), O, ++this.id_figure);
+        R.setVisible(true);
         this.addForme(R);
         G.addEdge(O.get_id(), R.get_id());
         color = Color.BLACK;
@@ -47,7 +47,7 @@ public class MyCanvas extends JPanel implements Printable {
         Pt pp1 = new Pt(-10, -10, ++this.id_figure);
         Pt pp2 = new Pt(-10, -10, ++this.id_figure);
 
-        Lagrange lagrange = new Lagrange(pts, 4, +this.id_figure);
+        Lagrange lagrange = new Lagrange(pts, 4, ++this.id_figure);
 
 
         this.addForme(test);
@@ -148,11 +148,11 @@ public class MyCanvas extends JPanel implements Printable {
 		formes.clear();
         G = new Graph(0);
         id_figure = 0;
-        mode = "Deplacer";
-        R = new Repere(-10, 10, -10, 10, this.getPreferredSize(), ++this.id_figure);
-        R.setVisible(true);
-        O = new Pt(R.getOrigine(), 0);
+        O = new Pt(-10, -10, 0);
         this.addForme(O);
+        mode = "Deplacer";
+        R = new Repere(-10, 10, -10, 10, this.getPreferredSize(), O, ++this.id_figure);
+        R.setVisible(true);
         this.addForme(R);
         G.addEdge(O.get_id(), R.get_id());
         repaint();

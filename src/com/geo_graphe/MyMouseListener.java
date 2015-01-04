@@ -1176,11 +1176,11 @@ public class MyMouseListener implements MouseListener,MouseMotionListener {
                             forme obj=canvas.get_formes().get(a.get(1));
                             try {
                                 Pt init = (Pt) canvas.get_formes().get(a.get(0));
+                                System.out.println("Je dois update " + obj.get_id() + " avec " + a.get(0));
+                                obj.update(init.getX(), init.getY(), a.get(0));
                             } catch (ClassCastException e) {
                             }
 
-                            System.out.println("Je dois update " + obj.get_id() + " avec " + a.get(0));
-                            obj.update(init.getX(),init.getY(),a.get(0));
 
                         }
 

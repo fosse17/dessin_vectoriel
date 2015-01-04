@@ -19,12 +19,13 @@ public class Repere implements forme, Serializable {
 		visible=false;
 	}
 
-	Repere(int xmin, int xmax, int ymin, int ymax, Dimension d,int i)
+	Repere(int xmin, int xmax, int ymin, int ymax, Dimension d, Pt origine, int i)
 	{
 		l=d.width;h=d.height;
 		e_x=d.width/(xmax-xmin);
 		e_y=d.height/(ymax-ymin);
-		origine=new Pt(-e_x*xmin,e_y*ymax);//a modifier
+		this.origine = origine;
+		this.origine.set_coord(-e_x * xmin, e_y * ymax);//a modifier
 		//System.out.println(origine);
 		visible=false;
         this.id=i;
@@ -69,7 +70,7 @@ public class Repere implements forme, Serializable {
 
     @Override
 	public void set_id(int i) {
-		this.id = 0;// par defaut methode a modifier
+		this.id = i;// par defaut methode a modifier
 	}
 
     @Override

@@ -1,11 +1,27 @@
 package com.geo_graphe;
 
 
+/**
+ * Création d'un symétrique d'un point par rapport à une droite
+ */
 public class PtSymAxiale extends Pt {
 
+    /**
+     * Un point A.
+     */
     Pt A;
+    /**
+     * Une droite d.
+     */
     Droite d;
 
+    /**
+     * Instancie un nouveau point qui est le symétrique d'un point d'origine par rapport à une droite
+     *
+     * @param A the a
+     * @param d the d
+     * @param i the i
+     */
     public PtSymAxiale(Pt A, Droite d, int i) {
         super(0, 0, i);
         this.A = A;

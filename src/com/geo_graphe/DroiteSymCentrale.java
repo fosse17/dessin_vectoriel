@@ -1,9 +1,27 @@
 package com.geo_graphe;
 
+/**
+ * La classe DroiteSymCentrale permet de créer le symétrique d'une droite par rapport à un point
+ */
 public class DroiteSymCentrale extends Droite {
+    /**
+     * La droite d
+     */
     Droite d;
+    /**
+     * Un point O
+     */
     Pt O;
 
+    /**
+     * Instancie une nouvelle droite qui est le symétrique de la droite d'origine par rapport à un point..
+     *
+     * @param d the d
+     * @param O the o
+     * @param A the a
+     * @param B the b
+     * @param id the id
+     */
     DroiteSymCentrale(Droite d, Pt O, Pt A, Pt B, int id) {
         super(d.P[0], d.P[1], id);
         Pt X = new PtSymCentrale(d.P[0], O, -1);

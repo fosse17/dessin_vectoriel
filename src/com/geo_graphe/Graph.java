@@ -6,7 +6,14 @@ import java.io.FileWriter;
 import java.io.PrintWriter;
 import java.util.LinkedList;
 
+/**
+ * La classe Graph permet de créer le graphique permettant de sauvegarder et d'ouvrir les fichiers. On sauvegarde à l'intérieur d'un graphe
+ * les arêtes reliant les sommets.
+ */
 class Graph {
+    /**
+     * The Adj.
+     */
     LinkedList<Integer>[] adj;
     private int V;
     private int E;
@@ -15,8 +22,8 @@ class Graph {
      * Creation d'un graphe vide avec V sommets sans aretes
      * param V le nombre de sommets
      *
-     * @throws java.lang.IllegalArgumentException
-     *          si <tt>V</tt> < 0
+     * @param V the v
+     * @throws IllegalArgumentException           si <tt>V</tt> < 0
      */
     public Graph(int V) {
         if (V < 0) throw new IllegalArgumentException("Le nombre d'aretes ne peut pas être negatif.");
@@ -32,8 +39,9 @@ class Graph {
     /**
      * Initialisation d'un graphe suivant un fichier au format pfg
      *
-     * @throws java.lang.IndexOutOfBoundsException
-     * @throws java.lang.IllegalArgumentException
+     * @param s the s
+     * @throws IndexOutOfBoundsException
+     * @throws IllegalArgumentException
      */
     public Graph(String s) {
 
@@ -74,6 +82,9 @@ class Graph {
        // System.out.println(this.toString());
     }
 
+    /**
+     * Add _ vertex.
+     */
     public void add_vertex()
     {
 
@@ -82,6 +93,11 @@ class Graph {
 
     }
 
+    /**
+     * Save void.
+     *
+     * @param url the url
+     */
     public void save(String url) {
         try {
             PrintWriter fichier = new PrintWriter(new FileWriter(url));
@@ -133,8 +149,7 @@ class Graph {
      *
      * @param v un sommet
      * @param w un autre sommet
-     * @throws java.lang.IndexOutOfBoundsException
-     *
+     * @throws IndexOutOfBoundsException
      */
     public void addEdge(int v, int w) {
         validateVertex(v);
@@ -144,6 +159,12 @@ class Graph {
     }
 
 
+    /**
+     * Adj iterable.
+     *
+     * @param v the v
+     * @return the iterable
+     */
     public Iterable<Integer> adj(int v) {
         validateVertex(v);
         return adj[v];

@@ -1,7 +1,7 @@
 package com.geo_graphe;
 
 /**
- * The type Droite sym axiale.
+ * La classe DroiteSymAxiale permet de créer le symétrique d'une droite par raport à une autre droite
  */
 public class DroiteSymAxiale extends Droite {
     /**

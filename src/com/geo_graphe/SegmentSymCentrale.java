@@ -1,12 +1,30 @@
 package com.geo_graphe;
 
 
+/**
+ * La classe SegmentSymCentrale permet de faire le symétrique d'un cercle par rapport à un point
+ */
 public class SegmentSymCentrale extends Segment {
 
+    /**
+     *Un segment S
+     */
     Segment s;
+    /**
+     * Un point O
+     */
     Pt O;
 
 
+    /**
+     * Instancie un segment symétrique du segment d'origine par rapport à un point
+     *
+     * @param s the s
+     * @param O the o
+     * @param A the a
+     * @param B the b
+     * @param id the id
+     */
     public SegmentSymCentrale(Segment s, Pt O, Pt A, Pt B, int id) {
         super(s.P[0], s.P[1], id);
         Pt X = new PtSymCentrale(s.P[0], O, -1);

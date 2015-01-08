@@ -1,19 +1,42 @@
 package com.geo_graphe;
 
+
 /**
- * Created with IntelliJ IDEA.
- * User: Stephane
- * Date: 08/12/14
- * Time: 19:44
- * To change this template use File | Settings | File Templates.
+ * La classe PtSegment permet de créer un point sur un segment
  */
 public class PtSegment extends Pt {
 
+    /**
+     * Un segment d
+     */
     Segment d;
-    int ABx,ABy;
-    double dx,dy;
+    /**
+     * The A bx.
+     */
+    int ABx, /**
+     * The A by.
+     */
+    ABy;
+    /**
+     * The Dx.
+     */
+    double dx, /**
+     * The Dy.
+     */
+    dy;
+    /**
+     * The T.
+     */
     double t;
 
+    /**
+     * Instancie un nouveau point sur un segment
+     *
+     * @param d1 the d 1
+     * @param a the a
+     * @param b the b
+     * @param i the i
+     */
     PtSegment(Segment d1,int a, int b, int i) {
         super(a, b, i);
         this.d=d1;
@@ -30,6 +53,12 @@ public class PtSegment extends Pt {
         this.set_coord((int)(d.P[0].getX()+t*ABx),(int)(d.P[0].getY()+t*ABy));
     }
 
+    /**
+     * Modifie la position du point courant sur le segment
+     *
+     * @param a the a
+     * @param b the b
+     */
     public void updatepos(int a,int b)
     {
         dx=(double)(a-d.P[0].getX());
@@ -43,6 +72,12 @@ public class PtSegment extends Pt {
         this.set_coord((int)(d.P[0].getX()+t*ABx),(int)(d.P[0].getY()+t*ABy));
     }
 
+    /**
+     * Modifie la position d'un point sur un segment
+     * @param a
+     * @param b
+     * @param id
+     */
     public void update(int a,int b,int id)
     {
         //d.update(a,b,id);

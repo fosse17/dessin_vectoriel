@@ -6,11 +6,26 @@ import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
 import java.util.LinkedList;
 
+/**
+ * La classe MyMouseListener permet de gérer tout les événements dans les menus.
+ */
 public class MyMouseListener implements MouseListener,MouseMotionListener {
-	
-	MyCanvas canvas;
+
+    /**
+     * The Canvas.
+     */
+    MyCanvas canvas;
+    /**
+     * The Mode.
+     */
     String mode;
+    /**
+     * The Sous _ mode.
+     */
     String sous_mode;
+    /**
+     * The F.
+     */
     forme f = null;
     private Triangle T;
     private Cercle C;
@@ -51,7 +66,12 @@ public class MyMouseListener implements MouseListener,MouseMotionListener {
     private int nb_click;//num1 est utile pour les triangles et pour les barycentres, milieu
     private BreadthFirstPaths Bfs;
 
-	MyMouseListener(MyCanvas canvas)
+    /**
+     * Instantiates a new My mouse listener.
+     *
+     * @param canvas the canvas
+     */
+    MyMouseListener(MyCanvas canvas)
 	{
 		this.canvas = canvas;
 		this.canvas.addMouseListener(this);
@@ -61,8 +81,13 @@ public class MyMouseListener implements MouseListener,MouseMotionListener {
         nb_click=0;
 		
 	}
-	
-	public MyCanvas getCanvas() {
+
+    /**
+     * Gets canvas.
+     *
+     * @return the canvas
+     */
+    public MyCanvas getCanvas() {
 		return canvas;
 	}
 	
@@ -76,19 +101,37 @@ public class MyMouseListener implements MouseListener,MouseMotionListener {
 			rightClickAction(e);
 		}
 	}
-	
-	protected void rightClickAction(MouseEvent e) {
+
+    /**
+     * Right click action.
+     *
+     * @param e the e
+     */
+    protected void rightClickAction(MouseEvent e) {
 
 		
 	}
 
-	protected void leftClickAction(MouseEvent e) {
+    /**
+     * Left click action.
+     *
+     * @param e the e
+     */
+    protected void leftClickAction(MouseEvent e) {
         //System.out.println(e.getSource());
 
 		}
 
 
-	 public Pt assign(int x,int y,int except)
+    /**
+     * Assign pt.
+     *
+     * @param x the x
+     * @param y the y
+     * @param except the except
+     * @return the pt
+     */
+    public Pt assign(int x,int y,int except)
      {
          for(forme p:canvas.get_formes())
          {

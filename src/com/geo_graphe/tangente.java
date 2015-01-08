@@ -2,14 +2,14 @@ package com.geo_graphe;
 
 
 /**
- * The type Tangente.
+ * La classe Tangente. pour créer un tangente à un cercle
  */
 class tangente extends Droite {
 
     private Cercle c;
 
     /**
-     * Instantiates a new Tangente.
+     * Instancie une nouvelle tangente
      *
      * @param c the c
      * @param A the a

@@ -1,12 +1,30 @@
 package com.geo_graphe;
 
 
+/**
+ * La classe SegmentTrans pour créer la transposée d'un segment.
+ */
 public class SegmentTrans extends Segment {
 
+    /**
+     * The S.
+     */
     Segment s;
+    /**
+     * The V.
+     */
     vecteur v;
 
 
+    /**
+     * Instancie une nouveau segment transposé du segment d'origine
+     *
+     * @param s the s
+     * @param v the v
+     * @param A the a
+     * @param B the b
+     * @param id the id
+     */
     public SegmentTrans(Segment s, vecteur v, Pt A, Pt B, int id) {
         super(s.P[0], s.P[1], id);
         Pt X = new PtTrans(s.P[0], v, -1);

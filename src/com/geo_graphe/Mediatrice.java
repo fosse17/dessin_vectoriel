@@ -1,13 +1,31 @@
 package com.geo_graphe;
 
+
 /**
- * Created by Stephane on 12/12/14.
+ * La classe Mediatrice permet de créer une médiatrice d'un segment
  */
 public class Mediatrice extends Droite {
 
-    //tes
-    Pt A,B,mil;
+    /**
+     * Le point A
+     */
+    Pt A, /**
+     * Le point B
+     */
+    B, /**
+     * Le Milieu
+     */
+    mil;
 
+    /**
+     * Instancie une nouvelle médiatrice
+     *
+     * @param A the a
+     * @param B the b
+     * @param med1 the med 1
+     * @param med2 the med 2
+     * @param id the id
+     */
     Mediatrice(Pt A, Pt B, Pt med1, Pt med2, int id) {
         super(med1,med2,id);
         Pt[] tab=new Pt[2];

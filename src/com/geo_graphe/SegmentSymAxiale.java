@@ -1,11 +1,29 @@
 package com.geo_graphe;
 
 
+/**
+ * La classe SegmentSymAxiale permet de faire le symétrique d'un segment par rapport à une droite
+ */
 public class SegmentSymAxiale extends Segment {
 
+    /**
+     * Un segment s
+     */
     Segment s;
+    /**
+     * Une droite Axe
+     */
     Droite axe;
 
+    /**
+     * Instancie un nouveau segment symétrique du segment d'origine par rapport à une droite
+     *
+     * @param s the s
+     * @param axe the axe
+     * @param A the a
+     * @param B the b
+     * @param id the id
+     */
     public SegmentSymAxiale(Segment s, Droite axe, Pt A, Pt B, int id) {
         super(A, B, id);
         Pt X = new PtSymAxiale(s.P[0], axe, -1);

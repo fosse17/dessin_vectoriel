@@ -2,14 +2,30 @@ package com.geo_graphe;
 
 import java.awt.*;
 
+/**
+ * Classe de création d'un rectangle
+ */
 public class Rectangl extends Forme2D implements forme {
 
-	
-	Rectangl(Pt A, Pt B,int id)
+
+    /**
+     * Instancie un nouveau rectangle
+     *
+     * @param A the a
+     * @param B the b
+     * @param id the id
+     */
+    Rectangl(Pt A, Pt B,int id)
 	{
 		super(A,B,id);
 	}
 
+    /**
+     * Updade _ end.
+     *
+     * @param x the x
+     * @param y the y
+     */
     public void updade_end(int x,int y)
     {
         super.update_end(x,y);
@@ -38,17 +54,17 @@ public class Rectangl extends Forme2D implements forme {
 
     @Override
     public Color get_couleur() {
-        return super.couleur;  //To change body of implemented methods use File | Settings | File Templates.
+        return super.couleur;
     }
 
     @Override
     public boolean is_movable() {
-        return true;  //To change body of implemented methods use File | Settings | File Templates.
+        return true;
     }
 
     @Override
     public void set_movable(Boolean c) {
-        //pas impleùenter pour une droite
+
     }
 
     @Override

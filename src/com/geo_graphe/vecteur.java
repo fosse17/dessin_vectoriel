@@ -3,10 +3,20 @@ package com.geo_graphe;
 import java.awt.*;
 import java.awt.geom.AffineTransform;
 
+/**
+ * Création d'un vecteur pour faire les translations
+ */
 public class vecteur extends Segment {
 
     private final int ARR_SIZE = 6;
 
+    /**
+     * Instancie un nouveau vecteur
+     *
+     * @param A the a
+     * @param B the b
+     * @param id the id
+     */
     public vecteur(Pt A, Pt B, int id) {
         super(A, B, id);
     }

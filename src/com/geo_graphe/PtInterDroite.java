@@ -1,7 +1,7 @@
 package com.geo_graphe;
 
 /**
- * Created by Stephane on 09/12/14.
+ * Classe PtInterDroite permet la création d'un point à l'intersection de deux droites
  */
 public class PtInterDroite extends Pt {
 
@@ -18,6 +18,9 @@ public class PtInterDroite extends Pt {
 
     }
 
+    /**
+     * Création du point
+     */
     public void create()
     {
         int[] t1=d.coeff();
@@ -35,6 +38,12 @@ public class PtInterDroite extends Pt {
         }
     }
 
+    /**
+     * Modifie la position du point si on bouge les droites
+     * @param x
+     * @param y
+     * @param id
+     */
     public void update(int x,int y,int id)
     {
         d.update(x, y, id);

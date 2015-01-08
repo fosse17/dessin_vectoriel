@@ -3,11 +3,29 @@ package com.geo_graphe;
 import java.awt.*;
 
 
+/**
+ * La classe PolyRegulierSymCentrale permet de créer le symétrique d'un polygone régulier par rapport à un point.
+ */
 public class PolyRegulierSymCentrale extends PolyRegulier {
 
+    /**
+     * Un polygone régulier
+     */
     PolyRegulier poly;
+    /**
+     * Un point O
+     */
     Pt O;
 
+    /**
+     * Instancie un nouveau polygone régulier
+     *
+     * @param poly the poly
+     * @param O the o
+     * @param A the a
+     * @param B the b
+     * @param id the id
+     */
     public PolyRegulierSymCentrale(PolyRegulier poly, Pt O, Pt A, Pt B, int id) {
         super(A, B, poly.nbcote, id);
         P[0].set_movable(false);

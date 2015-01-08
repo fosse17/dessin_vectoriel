@@ -1,7 +1,7 @@
 package com.geo_graphe;
 
 /**
- * Transposé d'une droite
+ * La classe DroiteTrans permet de créer la transposé d'une droite par rapport à un vecteur
  */
 public class DroiteTrans extends Droite {
 

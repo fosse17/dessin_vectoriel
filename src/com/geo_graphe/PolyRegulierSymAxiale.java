@@ -3,13 +3,28 @@ package com.geo_graphe;
 import java.awt.*;
 
 /**
- * Created by Stephane on 28/12/14.
+ * Le symétrie par rapport à une droite d'un polygone Régulier
  */
 public class PolyRegulierSymAxiale extends PolyRegulier {
+    /**
+     * Un Polygone
+     */
     PolyRegulier poly;
+    /**
+     * L'axe de symétrie
+     */
     Droite axe;
 
 
+    /**
+     * Instancie un nouveau Polygone
+     *
+     * @param poly the poly
+     * @param axe the axe
+     * @param A the a
+     * @param B the b
+     * @param id the id
+     */
     public PolyRegulierSymAxiale(PolyRegulier poly, Droite axe, Pt A, Pt B, int id) {
         super(A, B, poly.nbcote, id);
         P[0].set_movable(false);

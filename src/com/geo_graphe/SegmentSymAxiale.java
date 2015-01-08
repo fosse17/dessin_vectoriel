@@ -1,8 +1,6 @@
 package com.geo_graphe;
 
-/**
- * Created by Stephane on 27/12/14.
- */
+
 public class SegmentSymAxiale extends Segment {
 
     Segment s;

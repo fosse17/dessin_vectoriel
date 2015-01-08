@@ -35,7 +35,7 @@ public class PtSegment extends Pt {
         dx=(double)(a-d.P[0].getX());
 
         dy=(double)(b-d.P[0].getY());
-        System.out.println("dx.... :"+(dx*dx+dy*dy));
+        //System.out.println("dx.... :"+(dx*dx+dy*dy));
         t = (dx * dx + dy * dy) / (double)(ABx * ABx + ABy * ABy);
         t=Math.sqrt(t);
         if(t<0) t=0;

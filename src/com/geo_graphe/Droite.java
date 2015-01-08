@@ -3,7 +3,7 @@ package com.geo_graphe;
 import java.awt.*;
 
 /**
- * The type Droite.
+ * La classe permettant de construire une droite.
  */
 public class Droite extends Forme2D implements forme {
     private Color over=Color.BLUE;//si l'on passe à coté d'une droite, elle devient bleu.

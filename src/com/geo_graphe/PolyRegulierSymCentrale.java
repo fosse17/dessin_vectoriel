@@ -2,9 +2,7 @@ package com.geo_graphe;
 
 import java.awt.*;
 
-/**
- * Created by Stephane on 26/12/14.
- */
+
 public class PolyRegulierSymCentrale extends PolyRegulier {
 
     PolyRegulier poly;

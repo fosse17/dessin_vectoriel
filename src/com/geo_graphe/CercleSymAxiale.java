@@ -1,7 +1,7 @@
 package com.geo_graphe;
 
 /**
- * The type Cercle sym axiale.
+ * La Symétrie d'un cercle par rapport à une droite.
  */
 public class CercleSymAxiale extends Cercle {
 

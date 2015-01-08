@@ -1,7 +1,7 @@
 package com.geo_graphe;
 
 /**
- * Created by Stephane on 22/12/14.
+ * Transposé d'une droite
  */
 public class DroiteTrans extends Droite {
 

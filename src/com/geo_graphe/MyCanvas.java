@@ -8,6 +8,9 @@ import java.awt.print.PrinterException;
 import java.awt.print.PrinterJob;
 import java.util.LinkedList;
 
+/**
+ * Définit la zone de dessin et le repère.
+ */
 public class MyCanvas extends JPanel implements Printable {
 
 	protected LinkedList<forme> formes = new LinkedList<forme>();
@@ -20,7 +23,7 @@ public class MyCanvas extends JPanel implements Printable {
 
     /**
      * Constructeur de la classe MyCanvas.
-     * Définit la zone de dessin et le repère.
+     *
      */
     MyCanvas() {
 
@@ -37,7 +40,7 @@ public class MyCanvas extends JPanel implements Printable {
         color = Color.BLACK;
 
         //classe de constructeur
-        Pt test = new Pt(300, 100, ++this.id_figure);
+        /**Pt test = new Pt(300, 100, ++this.id_figure);
         Pt p = new Pt(100, 100, ++this.id_figure);
         Pt p1 = new Pt(150, 150, ++this.id_figure);
         Pt p2 = new Pt(350, 250, ++this.id_figure);
@@ -45,23 +48,23 @@ public class MyCanvas extends JPanel implements Printable {
         Pt[] pts = {test, p, p1, p2};
 
         Pt pp1 = new Pt(-10, -10, ++this.id_figure);
-        Pt pp2 = new Pt(-10, -10, ++this.id_figure);
+        Pt pp2 = new Pt(-10, -10, ++this.id_figure);**/
 
-        Lagrange lagrange = new Lagrange(pts, 4, ++this.id_figure);
+        //Lagrange lagrange = new Lagrange(pts, 4, ++this.id_figure);
 
 
-        this.addForme(test);
-        this.addForme(p);
-        this.addForme(p1);
-        this.addForme(p2);
-        this.addForme(pp1);
-        this.addForme(pp2);
-        this.addForme(lagrange);
+        //this.addForme(test);
+        //this.addForme(p);
+        //this.addForme(p1);
+        //this.addForme(p2);
+        //this.addForme(pp1);
+        //this.addForme(pp2);
+        //this.addForme(lagrange);
 
-        G.addEdge(p.get_id(), lagrange.get_id());
-        G.addEdge(p1.get_id(), lagrange.get_id());
-        G.addEdge(test.get_id(), lagrange.get_id());
-        G.addEdge(p2.get_id(), lagrange.get_id());
+        //G.addEdge(p.get_id(), lagrange.get_id());
+        //G.addEdge(p1.get_id(), lagrange.get_id());
+        //G.addEdge(test.get_id(), lagrange.get_id());
+        //G.addEdge(p2.get_id(), lagrange.get_id());
 
     }
 
@@ -228,7 +231,8 @@ public class MyCanvas extends JPanel implements Printable {
             try {
                 pj.print(); }
             catch(PrinterException pe) {
-                System.out.println("Erreur d'impression");}
+                //System.out.println("Erreur d'impression");
+                }
     }
 
 

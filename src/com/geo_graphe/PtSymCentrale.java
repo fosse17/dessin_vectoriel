@@ -1,8 +1,6 @@
 package com.geo_graphe;
 
-/**
- * Created by Stephane on 24/12/14.
- */
+
 public class PtSymCentrale extends Pt {
 
     Pt A;

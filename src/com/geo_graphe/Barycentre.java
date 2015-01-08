@@ -3,7 +3,7 @@ package com.geo_graphe;
 import java.awt.*;
 
 /**
- * The type Barycentre.
+ * La classe Barycentre permet de créer le barycentre de plusieurs points, c'est à dire le point où les vecteurs correspondant s'annulent.
  */
 public class Barycentre extends Pt implements forme {
 
@@ -37,7 +37,7 @@ public class Barycentre extends Pt implements forme {
         }
         this.set_coord(a/nb_point, b/nb_point);
         this.setMovable(false);
-        System.out.println();
+        //System.out.println();
 
     }
 

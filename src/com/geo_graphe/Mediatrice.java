@@ -28,7 +28,7 @@ public class Mediatrice extends Droite {
         if(id==this.A.id){ this.mil.update(x,y,id);}
         if(id==this.B.id){ this.mil.update(x, y, id);}
         P[0].set_coord(mil.getX(),mil.getY());
-            System.out.print("je dois up la droite");
+            //System.out.print("je dois up la droite");
         int ABy=B.getX()-A.getX()+P[0].getY();
         int ABx=-(B.getY()-A.getY())+P[0].getX();
         P[1].set_coord(ABx,ABy);

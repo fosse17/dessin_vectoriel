@@ -1,8 +1,6 @@
 package com.geo_graphe;
 
-/**
- * Created by Stephane on 23/12/14.
- */
+
 public class SegmentTrans extends Segment {
 
     Segment s;

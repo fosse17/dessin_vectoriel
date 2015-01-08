@@ -49,29 +49,29 @@ class Graph {
                 if (num_ligne == 1) this.V = Integer.parseInt(ligne);
                 else arete.add(ligne);
             }
-            System.out.print(this.V);
+            //System.out.print(this.V);
             fichier.close();
         } catch (Exception e) {
             e.printStackTrace();
         }
-        System.out.print(arete.toString());
+        //System.out.print(arete.toString());
         //creation des listes d'adjacences
         adj = (LinkedList<Integer>[]) new LinkedList[100000000];
         for (int v = 0; v < this.V; v++) {
             adj[v] = new LinkedList<Integer>();
         }
 
-        System.out.print("eeee" + arete.size());
+        //System.out.print("eeee" + arete.size());
         //remplissage des listes d'adjacences
         for (int i = 0; i < arete.size(); i++) {
 
             String[] tab = new String[2];
             tab = (arete.get(i)).split(",");
-            System.out.print(tab[0] + " " + tab[1]);
+            //System.out.print(tab[0] + " " + tab[1]);
             this.addEdge(Integer.parseInt(tab[0]), Integer.parseInt(tab[1]));
         }
 
-        System.out.println(this.toString());
+       // System.out.println(this.toString());
     }
 
     public void add_vertex()

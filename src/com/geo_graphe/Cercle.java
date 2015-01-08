@@ -49,7 +49,7 @@ public class Cercle extends Forme2D implements forme{
         this.id=i;
         dx=P[1].getX()-P[0].getX();
         dy=P[1].getY()-P[0].getY();
-        System.out.println("vecteur  "+dx+" "+dy);
+        //System.out.println("vecteur  "+dx+" "+dy);
         rayon=(int) Math.sqrt((dx)*(dx)+(dy)*(dy));
     }
 

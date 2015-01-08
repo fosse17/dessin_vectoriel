@@ -3,11 +3,29 @@ package com.geo_graphe;
 import java.awt.*;
 
 
+/**
+ * Transposé d'un polygone régulier
+ */
 public class PolyRegulierTrans extends PolyRegulier {
 
+    /**
+     * Un polygone régulier
+     */
     PolyRegulier poly;
+    /**
+     * Un vecteur v
+     */
     vecteur v;
 
+    /**
+     *Instancie un nouveau polygone régulier
+     *
+     * @param poly the polygone
+     * @param v the v
+     * @param A the a
+     * @param B the b
+     * @param id the id
+     */
     public PolyRegulierTrans(PolyRegulier poly, vecteur v, Pt A, Pt B, int id) {
         super(A, B, poly.nbcote, id);
         P[0].set_movable(false);

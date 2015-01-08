@@ -2,9 +2,7 @@ package com.geo_graphe;
 
 import java.awt.*;
 
-/**
- * Created by Stephane on 20/12/14.
- */
+
 public class Texte implements forme{
 
     Pt A;

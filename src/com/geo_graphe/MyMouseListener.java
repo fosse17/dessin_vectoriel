@@ -167,7 +167,7 @@ public class MyMouseListener implements MouseListener,MouseMotionListener {
         }
         if(mode.equals("PtSegment"))
         {
-            System.out.println("mode point sur segment");
+            //System.out.println("mode point sur segment");
             for (forme p:canvas.get_formes())
             {
                 if(p instanceof Segment)
@@ -276,7 +276,7 @@ public class MyMouseListener implements MouseListener,MouseMotionListener {
                 nb_click++;
 
             } else {
-                System.out.println("double");
+                //System.out.println("double");
                 nb_click = 0;
                 for (int i = 0; i < lagrange.num_point; i++)
                     canvas.G.addEdge(lagrange.P[i].get_id(), lagrange.get_id());
@@ -290,7 +290,7 @@ public class MyMouseListener implements MouseListener,MouseMotionListener {
                 polygone = new Polygone(ptb, 0, ++this.canvas.id_figure);
                 if (mode.equals("Polyindef")) polygone.set_deformable(false);
                 canvas.addForme(polygone);
-                System.out.println("idpol" + polygone.get_id());
+                //System.out.println("idpol" + polygone.get_id());
 
             }
             if (nb_click == 0) {
@@ -324,7 +324,7 @@ public class MyMouseListener implements MouseListener,MouseMotionListener {
                 polygone.minus();
                 //polygone.add(init);
                 for (int i = 0; i < polygone.num_pts; i++) {
-                    System.out.println("id" + i + " :" + polygone.P[i].get_id());
+                    //System.out.println("id" + i + " :" + polygone.P[i].get_id());
                     if (!polygone.get_deformable()) polygone.P[i].set_movable(false);
                     canvas.G.addEdge(polygone.P[i].get_id(), polygone.get_id());
                     //pt2.set_coord(-10000, -10000);
@@ -422,7 +422,7 @@ public class MyMouseListener implements MouseListener,MouseMotionListener {
 
                     Drperp = new DroitePerp(D, init,pt2, ++this.canvas.id_figure);
                     canvas.addForme(Drperp);
-                    System.out.println(D.P[0].id+" "+D.P[1].id+" "+init.get_id()+" "+Drperp.get_id());
+                    //System.out.println(D.P[0].id+" "+D.P[1].id+" "+init.get_id()+" "+Drperp.get_id());
                     canvas.G.addEdge(D.P[0].id, Drperp.get_id());
                     canvas.G.addEdge(D.P[1].id, Drperp.get_id());
 
@@ -451,7 +451,7 @@ public class MyMouseListener implements MouseListener,MouseMotionListener {
                             init = (Pt) p;
                             nb_click++;
                             sous_mode = "point";
-                            System.out.println("point " + init.get_id());
+                           // System.out.println("point " + init.get_id());
                         }
                     } else if (p instanceof Cercle) {
                         if (((Cercle) p).isNear(x, y)) {
@@ -485,7 +485,7 @@ public class MyMouseListener implements MouseListener,MouseMotionListener {
                         if (((Droite) p).isNear(x, y)) {
                             D1 = (Droite) p;
                             nb_click++;
-                            System.out.println("jai la droite");
+                           // System.out.println("jai la droite");
                         }
                     }
                 }
@@ -613,7 +613,7 @@ public class MyMouseListener implements MouseListener,MouseMotionListener {
                             init = (Pt) p;
                             nb_click++;
                             sous_mode = "point";
-                            System.out.println("point " + init.get_id());
+                            //System.out.println("point " + init.get_id());
                         }
                     } else if (p instanceof Cercle) {
                         if (((Cercle) p).isNear(x, y)) {
@@ -647,7 +647,7 @@ public class MyMouseListener implements MouseListener,MouseMotionListener {
                         if (((Pt) p).isNear(x, y)) {
                             pt2 = (Pt) p;
                             nb_click++;
-                            System.out.println("jai le centre");
+                           // System.out.println("jai le centre");
                         }
                     }
                 }
@@ -761,7 +761,7 @@ public class MyMouseListener implements MouseListener,MouseMotionListener {
                             init = (Pt) p;
                             nb_click++;
                             sous_mode = "point";
-                            System.out.println("point " + init.get_id());
+                            //System.out.println("point " + init.get_id());
                         }
                     }
                     if (p instanceof Cercle) {
@@ -801,7 +801,7 @@ public class MyMouseListener implements MouseListener,MouseMotionListener {
                         if (((vecteur) p).isNear(x, y)) {
                             Vec = (vecteur) p;
                             nb_click++;
-                            System.out.println("jai le vecteur");
+                           // System.out.println("jai le vecteur");
                         }
                     }
                 }
@@ -940,7 +940,7 @@ public class MyMouseListener implements MouseListener,MouseMotionListener {
 
                     canvas.G.addEdge(Dpara.P[0].get_id(), Dpara.get_id());
                     canvas.G.addEdge(Dpara.P[1].get_id(), Dpara.get_id());
-                    System.out.print(canvas.G.toString());
+                   // System.out.print(canvas.G.toString());
 
                 }
                 nb_click=0;
@@ -966,7 +966,7 @@ public class MyMouseListener implements MouseListener,MouseMotionListener {
                 if((D != null) && (D1 != null) && (!D.paralelle(D1))) {
                     //System.out.println("je cre un point d'intersection");
                     Pinter= new PtInterDroite(D, D1, ++this.canvas.id_figure);
-                    System.out.println("x"+Pinter.getX()+" y:"+Pinter.getY());
+                   // System.out.println("x"+Pinter.getX()+" y:"+Pinter.getY());
                     canvas.addForme(Pinter);
                     canvas.G.addEdge(D.P[0].id,Pinter.id);
                     canvas.G.addEdge(D.P[1].id,Pinter.id);
@@ -982,7 +982,7 @@ public class MyMouseListener implements MouseListener,MouseMotionListener {
             if(nb_click==0) {ptb=new Pt[nb_point_total]; }
             if(nb_click<nb_point_total)
             {
-                System.out.println("je compte les points : "+nb_click);
+               // System.out.println("je compte les points : "+nb_click);
                 f=assign(x,y,-1);
                 if(f==null) {ptb[nb_click]=new Pt(x,y,++this.canvas.id_figure);canvas.addForme(ptb[nb_click]);}
                 else {
@@ -1005,7 +1005,7 @@ public class MyMouseListener implements MouseListener,MouseMotionListener {
             if(nb_click==0) {ptb=new Pt[nb_point_total]; }
             if(nb_click<nb_point_total)
             {
-                System.out.println("je compte les points : "+nb_click);
+               // System.out.println("je compte les points : "+nb_click);
                 f=assign(x,y,-1);
                 if(f==null) {ptb[nb_click]=new Pt(x,y,++this.canvas.id_figure);canvas.addForme(ptb[nb_click]);}
                 else {
@@ -1063,7 +1063,7 @@ public class MyMouseListener implements MouseListener,MouseMotionListener {
                         ptb[nb_click].set_coord(-1000,-100000);
                     }
 
-                    System.out.println("jcheck  : "+nb_click+" "+ptb[nb_click].get_id());
+                   // System.out.println("jcheck  : "+nb_click+" "+ptb[nb_click].get_id());
                     nb_click+=1;
                 }
 
@@ -1086,7 +1086,7 @@ public class MyMouseListener implements MouseListener,MouseMotionListener {
         if(mode.equals("Translate"))
         {
             init=new Pt(x,y);
-            System.out.print("translate   " + num);
+           // System.out.print("translate   " + num);
         }
         if(mode.equals("Deplacer"))
         {
@@ -1170,13 +1170,13 @@ public class MyMouseListener implements MouseListener,MouseMotionListener {
                         else ((Pt) p).set_coord(x, y);
 
 
-                        System.out.println(Bfs.path().toString());
+                       // System.out.println(Bfs.path().toString());
                         for(LinkedList<Integer>a:Bfs.path())
                         {
                             forme obj=canvas.get_formes().get(a.get(1));
                             try {
                                 Pt init = (Pt) canvas.get_formes().get(a.get(0));
-                                System.out.println("Je dois update " + obj.get_id() + " avec " + a.get(0));
+                               // System.out.println("Je dois update " + obj.get_id() + " avec " + a.get(0));
                                 obj.update(init.getX(), init.getY(), a.get(0));
                             } catch (ClassCastException e) {
                             }
@@ -1240,7 +1240,7 @@ public class MyMouseListener implements MouseListener,MouseMotionListener {
             //else C.update(x,y,pt2.get_id());
             canvas.G.addEdge(Seg.P[0].get_id(), Seg.get_id());
             canvas.G.addEdge(Seg.P[1].get_id(), Seg.get_id());
-            System.out.println("lien entre " + Seg.P[0].get_id() + " , " + Seg.P[1].get_id() + " et " + Seg.get_id());
+           // System.out.println("lien entre " + Seg.P[0].get_id() + " , " + Seg.P[1].get_id() + " et " + Seg.get_id());
         }
         if (mode.equals("Polyreg"))
         {
@@ -1278,7 +1278,7 @@ public class MyMouseListener implements MouseListener,MouseMotionListener {
             //else C.update(x,y,pt2.get_id());
             canvas.G.addEdge(D.P[0].get_id(), D.get_id());
             canvas.G.addEdge(D.P[1].get_id(), D.get_id());
-            System.out.println("lien entre " + D.P[0].get_id() + " , " + D.P[1].get_id() + " et " + D.get_id());
+            //System.out.println("lien entre " + D.P[0].get_id() + " , " + D.P[1].get_id() + " et " + D.get_id());
         }
          num=-1;
 

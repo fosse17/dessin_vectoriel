@@ -3,7 +3,9 @@ package com.geo_graphe;
 import java.util.LinkedList;
 import java.util.Stack;
 
-
+/**
+ * Le BreadthFirstPaths (ou Algorithme de parcours en largeur en Français) permet le parcours d'un graphe de manière itérative, en utilisant une file.
+ */
 public class BreadthFirstPaths {
     private static final int INFINITY = Integer.MAX_VALUE;
     private boolean[] marked;
@@ -12,8 +14,8 @@ public class BreadthFirstPaths {
     private LinkedList<LinkedList<Integer>> path;
 
     /**
-     * Calcule le plus court chemin entre le sommet d'origine <tt>s</tt>
-     * aet les autres sommet du graphe  <tt>G</tt>.
+     * Calcule le plus court chemin entre le sommet d'origine s
+     * et les autres sommets du graphe  G.
      *
      * @param G le graphe
      * @param s le sommet d'origine
@@ -55,7 +57,7 @@ public class BreadthFirstPaths {
 
     /**
      * @param v le sommet
-     * @return <tt>true</tt> isi il y a un chemin vers le sommet v et <tt>false </tt> sinon
+     * @return true si il y a un chemin vers le sommet v et false sinon
      */
     public boolean hasPathTo(int v) {
         return marked[v];
@@ -63,7 +65,7 @@ public class BreadthFirstPaths {
 
     /**
      * @param v le sommet
-     * @return tle nombre de sommet du plus court chemi vers <t>v</t>
+     * @return tle nombre de sommet du plus court chemi vers v
      */
     public int distTo(int v) {
         return distTo[v];

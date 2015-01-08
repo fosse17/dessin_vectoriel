@@ -1,8 +1,6 @@
 package com.geo_graphe;
 
-/**
- * Created by Stephane on 21/12/14.
- */
+
 public class PtTrans extends Pt {
 
     Pt A;

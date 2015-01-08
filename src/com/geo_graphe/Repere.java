@@ -4,13 +4,46 @@ import java.awt.*;
 import java.io.Serializable;
 
 
+/**
+ * La classe Repere pour créer le repere et la grille
+ */
 public class Repere implements forme, Serializable {
+	/**
+	 * Le point à l'origine
+     */
 	Pt origine;
-	int e_x,e_y,h,l;
+	/**
+	 * The E _ x.
+     */
+	int e_x, /**
+	 * The E _ y.
+	 */
+	e_y, /**
+	 * The H.
+	 */
+	h, /**
+	 * The L.
+	 */
+	l;
+	/**
+	 * Savoir si on affiche la grille ou non
+     */
 	boolean showgrille=true;
+	/**
+	 * Visible ou non
+     */
 	boolean visible;
-    int id=0;
+	/**
+	 * L'id du point du repère est 0
+     */
+	int id=0;
 
+	/**
+	 * Instancie un nouveau repère
+	 *
+	 * @param d the d
+	 * @param O the o
+     */
 	Repere(Dimension d, Pt O)
 	{
 		e_x=30;e_y=30;
@@ -19,6 +52,17 @@ public class Repere implements forme, Serializable {
 		visible=false;
 	}
 
+	/**
+	 * Instancie un nouveau repère
+	 *
+	 * @param xmin the xmin
+	 * @param xmax the xmax
+	 * @param ymin the ymin
+	 * @param ymax the ymax
+	 * @param d the d
+	 * @param origine the origine
+     * @param i the i
+     */
 	Repere(int xmin, int xmax, int ymin, int ymax, Dimension d, Pt origine, int i)
 	{
 		l=d.width;h=d.height;
@@ -32,30 +76,62 @@ public class Repere implements forme, Serializable {
 	}
 
 
+	/**
+	 * retourne l'abscisse d'un point.
+	 *
+	 * @param a the a
+	 * @return the
+     */
 	public double getabs(Point a)
 	{
 		double d= ((double)(a.x- origine.getX())/e_x);
 		return Math.round(d*100.0)/100.0;
 		
 	}
-    public double getabs(int a)
+
+	/**
+	 * Retourne l'abscisse par rapport à un entier
+	 *
+	 * @param a the a
+	 * @return the
+     */
+	public double getabs(int a)
     {
         double d= ((double)(a- origine.getX())/e_x);
         return Math.round(d*100.0)/100.0;
 
     }
-	
+
+	/**
+	 * Retourne l'ordonnée d'un point
+	 *
+	 * @param a the a
+	 * @return the
+     */
 	public double getord(Point a)
 	{
 		double d= ((double)(a.y-origine.y)/e_y);
 		return Math.round(d*100.0)/100.0;
 	}
 
-    public double getord(int a)
+	/**
+	 * Retourne l'ordonnée par rapport à un entier.
+	 *
+	 * @param a the a
+	 * @return the
+     */
+	public double getord(int a)
     {
         double d= ((double)(a-origine.y)/e_y);
         return Math.round(d*100.0)/100.0;}
 
+	/**
+	 * Convertit un point pour le faire correspondre au repère
+	 *
+	 * @param abs the abs
+	 * @param ord the ord
+	 * @return le nouveau point
+     */
 	public Pt convert(double abs,double ord)
 	{
 		int a=(int) (origine.getX() +abs*e_x);
@@ -146,30 +222,65 @@ public class Repere implements forme, Serializable {
 		}*/
 	}
 
+	/**
+	 * Gets origine.
+	 *
+	 * @return the origine
+     */
 	public Pt getOrigine() {
 		return origine;
 	}
 
+	/**
+	 * Sets origine.
+	 *
+	 * @param origine the origine
+     */
 	public void setOrigine(Pt origine) {
 		this.origine = origine;
 	}
 
+	/**
+	 * Gets e _ x.
+	 *
+	 * @return the e _ x
+     */
 	public int getE_x() {
 		return e_x;
 	}
 
+	/**
+	 * Sets e _ x.
+	 *
+	 * @param e_x the e _ x
+     */
 	public void setE_x(int e_x) {
 		this.e_x = e_x;
 	}
 
+	/**
+	 * Gets e _ y.
+	 *
+	 * @return the e _ y
+     */
 	public int getE_y() {
 		return e_y;
 	}
 
+	/**
+	 * Sets e _ y.
+	 *
+	 * @param e_y the e _ y
+     */
 	public void setE_y(int e_y) {
 		this.e_y = e_y;
 	}
-	
+
+	/**
+	 * Sets _ dimension.
+	 *
+	 * @param d the d
+     */
 	public void set_dimension(Dimension d)
 	{
 		this.l=d.width;this.h=d.height;

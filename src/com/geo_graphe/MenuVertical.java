@@ -85,7 +85,7 @@ public class MenuVertical extends JToolBar implements ActionListener{
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        System.out.println(e.getActionCommand());
+        //System.out.println(e.getActionCommand());
         canvas.setMode(e.getActionCommand());
         if (e.getActionCommand().equals("Color"))
         {
@@ -127,7 +127,7 @@ public class MenuVertical extends JToolBar implements ActionListener{
                 fos.close();
                 canvas.G.save("graphe.txt");
             } catch (Exception ex) {
-                System.out.println("");
+                //System.out.println("");
             }
         }
         if (e.getActionCommand() == "Restore") {

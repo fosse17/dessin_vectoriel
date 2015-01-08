@@ -25,7 +25,7 @@ public class PtInterDroite extends Pt {
         int delta=t1[0]*t2[1]-t1[1]*t2[0];
         if(delta==0)   //les droite sont parallele
         {
-            //System.out.print("allllllllerttttttttt");
+            //System.out.print("allllllller !");
         }
         else
         {
